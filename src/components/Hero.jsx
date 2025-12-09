@@ -77,8 +77,7 @@ const Hero = () => {
               {/* CTA Button */}
               <motion.a
                 href="#rezerwacja"
-                className="w-full sm:w-auto px-8 py-3 md:py-3.5 rounded-full text-white font-light text-sm md:text-base tracking-[0.1em] uppercase shadow-lg text-center"
-                style={{ backgroundColor: '#C86B46', fontFamily: 'Playfair Display, serif', letterSpacing: '0.15em' }}
+                className="btn-primary w-full sm:w-auto px-8 py-3 md:py-3.5 text-center"
                 whileHover={{ 
                   scale: 1.05,
                   backgroundColor: '#E08D6D',

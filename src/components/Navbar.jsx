@@ -1,22 +1,51 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const Navbar = () => {
   const [hoveredLink, setHoveredLink] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   const navLinks = [
-    { name: 'Zabiegi', href: '#zabiegi' },
-    { name: 'Spa', href: '#spa' },
-    { name: 'Vouchery', href: '#vouchery' },
-    { name: 'Kontakt', href: '#kontakt' },
+    { name: 'O nas', href: '#o-nas' },
+    { name: 'Oferta', href: '#oferta' },
+    { name: 'Cennik', href: '#cennik' },
   ];
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const heroHeight = window.innerHeight;
+
+      // Always show navbar at the top
+      if (currentScrollY < 50) {
+        setIsVisible(true);
+      }
+      // Hide navbar when scrolling down past hero section
+      else if (currentScrollY > heroHeight * 0.9 && currentScrollY > lastScrollY) {
+        setIsVisible(false);
+      }
+      // Show navbar when scrolling up
+      else if (currentScrollY < lastScrollY) {
+        setIsVisible(true);
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
 
   return (
     <motion.nav
       initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
+      animate={{ 
+        y: isVisible ? 0 : -100,
+        opacity: isVisible ? 1 : 0
+      }}
+      transition={{ duration: 0.3, ease: 'easeInOut' }}
       className="fixed top-0 left-0 right-0 z-50 px-6 py-4"
     >
       <div className="max-w-7xl mx-auto">
@@ -133,8 +162,7 @@ const Navbar = () => {
               {/* CTA Button */}
               <motion.a
                 href="#rezerwacja"
-                className="px-6 py-2.5 rounded-full text-white font-light text-sm tracking-[0.1em] uppercase shadow-md"
-                style={{ backgroundColor: '#C86B46', fontFamily: 'Playfair Display, serif', letterSpacing: '0.15em' }}
+                className="btn-primary"
                 whileHover={{ 
                   scale: 1.05,
                   backgroundColor: '#E08D6D',
@@ -252,8 +280,7 @@ const Navbar = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: 0.6 }}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block w-full px-6 py-4 rounded-full text-white font-light text-sm tracking-[0.1em] uppercase shadow-md text-center"
-                    style={{ backgroundColor: '#C86B46', fontFamily: 'Playfair Display, serif', letterSpacing: '0.15em' }}
+                    className="btn-primary block w-full text-center py-4"
                     whileTap={{ scale: 0.95 }}
                   >
                     Rezerwacja

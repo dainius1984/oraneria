@@ -23,3 +23,43 @@
     font-family: 'Playfair Display', serif;
   }
 }
+
+@layer components {
+  /* Reusable Button Styles */
+  .btn-primary {
+    @apply px-6 py-2.5 rounded-full text-white font-light text-sm tracking-[0.1em] uppercase shadow-md;
+    background-color: #C86B46;
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 0.15em;
+  }
+
+  .btn-outline {
+    @apply px-6 py-2.5 rounded-full font-light text-sm tracking-[0.1em] uppercase border-2 transition-all;
+    border-color: #C86B46;
+    color: #C86B46;
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 0.15em;
+  }
+
+  .btn-outline:hover {
+    background-color: #C86B46;
+    color: white;
+  }
+
+  /* Section Title */
+  .section-title {
+    @apply text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-4;
+    color: #2F4F4F;
+    font-family: 'Playfair Display', serif;
+  }
+
+  /* Checkmark List Item */
+  .checkmark-item {
+    @apply flex items-center gap-3 text-gray-700;
+  }
+
+  .checkmark-item svg {
+    @apply flex-shrink-0;
+    color: #C86B46;
+  }
+}

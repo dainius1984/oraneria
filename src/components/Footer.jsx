@@ -12,10 +12,15 @@ const Footer = () => {
 
   const contactInfo = {
     phone: '+48 794 777 412',
+    address: {
+      street: 'ul. Ślężna 189/191 LU 2',
+      city: '53-110 Wrocław'
+    },
     hours: {
       weekdays: 'poniedziałek – piątek: 08:00 – 21:00',
       saturday: 'sobota: 08:00 – 14:00'
-    }
+    },
+    mapUrl: 'https://maps.app.goo.gl/L49coh5mvugD25PF6'
   };
 
   return (
@@ -84,9 +89,9 @@ const Footer = () => {
             >
               Kontakt
             </h3>
-            <div className="space-y-3 text-sm text-gray-300">
+            <div className="space-y-4 text-sm text-gray-300">
               <div>
-                <p className="font-medium mb-1">Telefon</p>
+                <p className="font-medium mb-1 text-white">Telefon</p>
                 <a 
                   href={`tel:${contactInfo.phone.replace(/\s/g, '')}`}
                   className="hover:text-[#C86B46] transition-colors"
@@ -95,7 +100,20 @@ const Footer = () => {
                 </a>
               </div>
               <div>
-                <p className="font-medium mb-1">Godziny otwarcia</p>
+                <p className="font-medium mb-1 text-white">Adres</p>
+                <p>{contactInfo.address.street}</p>
+                <p>{contactInfo.address.city}</p>
+                <a
+                  href={contactInfo.mapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#C86B46] hover:underline mt-2 inline-block"
+                >
+                  Zobacz na mapie →
+                </a>
+              </div>
+              <div>
+                <p className="font-medium mb-1 text-white">Godziny otwarcia</p>
                 <p>{contactInfo.hours.weekdays}</p>
                 <p>{contactInfo.hours.saturday}</p>
               </div>

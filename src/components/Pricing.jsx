@@ -123,7 +123,7 @@ const Pricing = () => {
   };
 
   return (
-    <section id="cennik" className="w-full bg-[#FFFAF5] py-16 md:py-24 px-4 md:px-8">
+    <section id="cennik" className="w-full bg-[#FFFAF5] pt-24 md:pt-32 pb-16 md:pb-24 px-4 md:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
@@ -134,7 +134,7 @@ const Pricing = () => {
           className="text-center mb-12 md:mb-16"
         >
           <h1 
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#2F4F4F] mb-4"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#2F4F4F] mb-4 md:mb-6"
             style={{ fontFamily: 'Playfair Display, serif' }}
           >
             Cennik Usług
@@ -150,7 +150,7 @@ const Pricing = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="sticky top-16 md:top-24 z-40 mb-8 bg-[#FFFAF5] py-4 -mx-4 md:-mx-8 px-4 md:px-8"
+          className="sticky top-16 md:top-24 z-40 mb-8 md:mb-10 bg-[#FFFAF5] py-4 md:py-6 -mx-4 md:-mx-8 px-4 md:px-8"
         >
           <div className="overflow-x-auto scrollbar-hide">
             <div className="flex gap-2 md:gap-4 min-w-max pb-2">
@@ -181,7 +181,7 @@ const Pricing = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mb-8 md:mb-12"
+          className="mb-10 md:mb-14"
         >
           <div className="relative max-w-md mx-auto">
             <input
@@ -215,7 +215,7 @@ const Pricing = () => {
               <div
                 key={category}
                 id={`category-${category}`}
-                className="scroll-mt-32"
+                className="scroll-mt-24 md:scroll-mt-32"
               >
                 {Object.keys(categoryFilteredData).length === 0 && searchQuery ? (
                   <div className="text-center py-12">

@@ -1,17 +1,51 @@
 /**
- * Hide Booksy floating widget after it loads
- * This ensures the widget is hidden even if CSS doesn't catch it
+ * Hide Booksy floating widget button (but keep widget container functional)
+ * We only hide the visible floating button, not the widget container itself
+ * This allows our custom buttons to trigger the widget dialog
  */
 export const hideBooksyWidget = () => {
-  // Function to hide Booksy elements
-  const hideBooksyElements = () => {
-    // Find all possible Booksy widget elements
+  // Function to hide only the floating button, not the widget container
+  const hideFloatingButton = () => {
+    // Find the widget container
+    const widgetContainer = document.querySelector('.booksy-widget-container');
+    
+    if (widgetContainer) {
+      // Hide only the visible floating button, but keep the container functional
+      // The button inside can still be triggered programmatically
+      const style = window.getComputedStyle(widgetContainer);
+      
+      // If the container is positioned fixed at the bottom, hide it visually
+      // but keep it in the DOM so we can trigger it
+      if (style.position === 'fixed' || style.position === 'absolute') {
+        const bottom = parseInt(style.bottom) || 0;
+        if (bottom >= 0) {
+          // Hide visually but keep functional
+          widgetContainer.style.opacity = '0';
+          widgetContainer.style.pointerEvents = 'none';
+          widgetContainer.style.visibility = 'hidden';
+          // But don't set display: none so we can still click the button inside
+        }
+      }
+    }
+
+    // Also hide any standalone floating buttons
+    const floatingButtons = document.querySelectorAll('.booksy-widget-button');
+    floatingButtons.forEach(button => {
+      const container = button.closest('.booksy-widget-container');
+      const containerStyle = container ? window.getComputedStyle(container) : null;
+      
+      // If it's in a fixed container at bottom, hide it visually
+      if (containerStyle && 
+          (containerStyle.position === 'fixed' || containerStyle.position === 'absolute') &&
+          parseInt(containerStyle.bottom) >= 0) {
+        button.style.opacity = '0';
+        button.style.pointerEvents = 'none';
+        button.style.visibility = 'hidden';
+      }
+    });
+
+    // Hide any other floating Booksy elements (like iframes)
     const selectors = [
-      '[id*="booksy"]',
-      '[id*="Booksy"]',
-      '[class*="booksy-widget"]',
-      '[class*="booksy-button"]',
-      '[class*="BooksyWidget"]',
       'iframe[src*="booksy.com"]',
       '[data-booksy-widget]'
     ];
@@ -20,37 +54,18 @@ export const hideBooksyWidget = () => {
       try {
         const elements = document.querySelectorAll(selector);
         elements.forEach(el => {
-          // Always exclude our custom buttons
-          if (el && 
-              !el.classList.contains('booksy-business-link') &&
-              !el.closest('.booksy-business-link') &&
-              !el.matches('.booksy-business-link')) {
+          // Only hide if it's positioned fixed at bottom
+          const style = window.getComputedStyle(el);
+          if ((style.position === 'fixed' || style.position === 'absolute') &&
+              parseInt(style.bottom) >= 0) {
             el.style.display = 'none';
             el.style.visibility = 'hidden';
             el.style.opacity = '0';
-            el.style.height = '0';
-            el.style.width = '0';
             el.style.pointerEvents = 'none';
           }
         });
       } catch (e) {
         // Ignore errors
-      }
-    });
-
-    // Also check for fixed positioned elements at bottom (common for floating widgets)
-    const allDivs = document.querySelectorAll('div');
-    allDivs.forEach(div => {
-      const style = window.getComputedStyle(div);
-      if (
-        (style.position === 'fixed' || style.position === 'absolute') &&
-        (style.bottom !== 'auto' && parseInt(style.bottom) >= 0) &&
-        (div.textContent?.toLowerCase().includes('booksy') || 
-         div.id?.toLowerCase().includes('booksy') ||
-         div.className?.toLowerCase().includes('booksy'))
-      ) {
-        div.style.display = 'none';
-        div.style.visibility = 'hidden';
       }
     });
   };

@@ -1,14 +1,15 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const quickLinks = [
-    { name: 'Zabiegi', href: '#zabiegi' },
-    { name: 'O Nas', href: '#o-nas' },
-    { name: 'Vouchery', href: '#vouchery' },
-    { name: 'Cennik', href: '#cennik' },
-    { name: 'Kontakt', href: '#kontakt' },
+    { name: 'Zabiegi', href: '/#oferta', isHash: true },
+    { name: 'O Nas', href: '/o-nas', isHash: false },
+    { name: 'Vouchery', href: '/#vouchery', isHash: true },
+    { name: 'Cennik', href: '/cennik', isHash: false },
+    { name: 'Kontakt', href: '/#kontakt', isHash: true },
   ];
 
   const contactInfo = {
@@ -61,12 +62,21 @@ const Footer = () => {
             <ul className="space-y-2">
               {quickLinks.map((link) => (
                 <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="text-orange-50/80 hover:text-[#C86B46] transition-colors duration-300 text-sm md:text-base"
-                  >
-                    {link.name}
-                  </a>
+                  {link.isHash ? (
+                    <a
+                      href={link.href}
+                      className="text-orange-50/80 hover:text-[#C86B46] transition-colors duration-300 text-sm md:text-base"
+                    >
+                      {link.name}
+                    </a>
+                  ) : (
+                    <Link
+                      to={link.href}
+                      className="text-orange-50/80 hover:text-[#C86B46] transition-colors duration-300 text-sm md:text-base"
+                    >
+                      {link.name}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>

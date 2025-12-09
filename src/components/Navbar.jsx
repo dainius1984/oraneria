@@ -1,16 +1,18 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
   const [hoveredLink, setHoveredLink] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const location = useLocation();
 
   const navLinks = [
-    { name: 'O nas', href: '#o-nas' },
-    { name: 'Oferta', href: '#oferta' },
-    { name: 'Cennik', href: '#cennik' },
+    { name: 'O nas', href: '/o-nas' },
+    { name: 'Oferta', href: '/#oferta' },
+    { name: 'Cennik', href: '/cennik' },
   ];
 
   useEffect(() => {
@@ -68,68 +70,131 @@ const Navbar = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="flex-shrink-0"
             >
-              <a href="/" className="flex items-center" onClick={() => setMobileMenuOpen(false)}>
+              <Link to="/" className="flex items-center" onClick={() => setMobileMenuOpen(false)}>
                 <img 
                   src="/img/logo/logo.png" 
                   alt="Oranżeria Logo" 
                   className="h-10 md:h-12 w-auto"
                 />
-              </a>
+              </Link>
             </motion.div>
 
             {/* Navigation Links */}
             <div className="hidden md:flex items-center space-x-8 flex-1 justify-center">
-              {navLinks.map((link, index) => (
-                <motion.a
-                  key={link.name}
-                  href={link.href}
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                  className="relative text-[#2F4F4F] font-light text-sm tracking-[0.1em] uppercase px-2 py-2 cursor-pointer transition-colors hover:text-[#C86B46]"
-                  style={{ fontFamily: 'Playfair Display, serif', letterSpacing: '0.15em' }}
-                  onMouseEnter={() => setHoveredLink(link.name)}
-                  onMouseLeave={() => setHoveredLink(null)}
-                >
-                  {link.name}
-                  {hoveredLink === link.name && (
-                    <motion.div
-                      layoutId="hoverShape"
-                      className="absolute bottom-0 left-0 right-0 h-2"
-                      initial={false}
-                      transition={{ 
-                        type: 'spring', 
-                        stiffness: 500, 
-                        damping: 40,
-                        mass: 0.5
-                      }}
-                    >
-                      <motion.svg
-                        viewBox="0 0 120 25"
-                        className="w-full h-full"
-                        preserveAspectRatio="none"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 0.25, ease: 'easeOut' }}
+              {navLinks.map((link, index) => {
+                const isHashLink = link.href.startsWith('/#');
+                const handleClick = (e) => {
+                  if (isHashLink && location.pathname !== '/') {
+                    e.preventDefault();
+                    window.location.href = link.href;
+                  }
+                };
+                
+                return (
+                  <motion.div
+                    key={link.name}
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+                    className="relative"
+                  >
+                    {isHashLink ? (
+                      <a
+                        href={link.href}
+                        onClick={handleClick}
+                        className="relative text-[#2F4F4F] font-light text-sm tracking-[0.1em] uppercase px-2 py-2 cursor-pointer transition-colors hover:text-[#C86B46] block"
+                        style={{ fontFamily: 'Playfair Display, serif', letterSpacing: '0.15em' }}
+                        onMouseEnter={() => setHoveredLink(link.name)}
+                        onMouseLeave={() => setHoveredLink(null)}
                       >
-                        <motion.path
-                          d="M 0,20 Q 20,8 40,12 Q 60,16 80,10 Q 100,4 120,12 L 120,25 L 0,25 Z"
-                          fill="#C86B46"
-                          initial={{ pathLength: 0, opacity: 0 }}
-                          animate={{ pathLength: 1, opacity: 0.85 }}
-                          transition={{ 
-                            pathLength: { 
-                              duration: 0.5, 
-                              ease: [0.43, 0.13, 0.23, 0.96] 
-                            },
-                            opacity: { duration: 0.2 }
-                          }}
-                        />
-                      </motion.svg>
-                    </motion.div>
-                  )}
-                </motion.a>
-              ))}
+                        {link.name}
+                        {hoveredLink === link.name && (
+                          <motion.div
+                            layoutId="hoverShape"
+                            className="absolute bottom-0 left-0 right-0 h-2"
+                            initial={false}
+                            transition={{ 
+                              type: 'spring', 
+                              stiffness: 500, 
+                              damping: 40,
+                              mass: 0.5
+                            }}
+                          >
+                            <motion.svg
+                              viewBox="0 0 120 25"
+                              className="w-full h-full"
+                              preserveAspectRatio="none"
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              transition={{ duration: 0.25, ease: 'easeOut' }}
+                            >
+                              <motion.path
+                                d="M 0,20 Q 20,8 40,12 Q 60,16 80,10 Q 100,4 120,12 L 120,25 L 0,25 Z"
+                                fill="#C86B46"
+                                initial={{ pathLength: 0, opacity: 0 }}
+                                animate={{ pathLength: 1, opacity: 0.85 }}
+                                transition={{ 
+                                  pathLength: { 
+                                    duration: 0.5, 
+                                    ease: [0.43, 0.13, 0.23, 0.96] 
+                                  },
+                                  opacity: { duration: 0.2 }
+                                }}
+                              />
+                            </motion.svg>
+                          </motion.div>
+                        )}
+                      </a>
+                    ) : (
+                      <Link
+                        to={link.href}
+                        className="relative text-[#2F4F4F] font-light text-sm tracking-[0.1em] uppercase px-2 py-2 cursor-pointer transition-colors hover:text-[#C86B46] block"
+                        style={{ fontFamily: 'Playfair Display, serif', letterSpacing: '0.15em' }}
+                        onMouseEnter={() => setHoveredLink(link.name)}
+                        onMouseLeave={() => setHoveredLink(null)}
+                      >
+                        {link.name}
+                        {hoveredLink === link.name && (
+                          <motion.div
+                            layoutId="hoverShape"
+                            className="absolute bottom-0 left-0 right-0 h-2"
+                            initial={false}
+                            transition={{ 
+                              type: 'spring', 
+                              stiffness: 500, 
+                              damping: 40,
+                              mass: 0.5
+                            }}
+                          >
+                            <motion.svg
+                              viewBox="0 0 120 25"
+                              className="w-full h-full"
+                              preserveAspectRatio="none"
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              transition={{ duration: 0.25, ease: 'easeOut' }}
+                            >
+                              <motion.path
+                                d="M 0,20 Q 20,8 40,12 Q 60,16 80,10 Q 100,4 120,12 L 120,25 L 0,25 Z"
+                                fill="#C86B46"
+                                initial={{ pathLength: 0, opacity: 0 }}
+                                animate={{ pathLength: 1, opacity: 0.85 }}
+                                transition={{ 
+                                  pathLength: { 
+                                    duration: 0.5, 
+                                    ease: [0.43, 0.13, 0.23, 0.96] 
+                                  },
+                                  opacity: { duration: 0.2 }
+                                }}
+                              />
+                            </motion.svg>
+                          </motion.div>
+                        )}
+                      </Link>
+                    )}
+                  </motion.div>
+                );
+              })}
             </div>
 
             {/* Desktop: Social Media & CTA */}
@@ -236,20 +301,44 @@ const Navbar = () => {
               >
                 <div className="px-6 py-8 space-y-6">
                   {/* Mobile Navigation Links */}
-                  {navLinks.map((link, index) => (
-                    <motion.a
-                      key={link.name}
-                      href={link.href}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.4, delay: index * 0.1 }}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="block text-[#2F4F4F] font-light text-lg tracking-[0.1em] uppercase py-3 border-b border-orange-100/30 transition-colors hover:text-[#C86B46]"
-                      style={{ fontFamily: 'Playfair Display, serif', letterSpacing: '0.15em' }}
-                    >
-                      {link.name}
-                    </motion.a>
-                  ))}
+                  {navLinks.map((link, index) => {
+                    const isHashLink = link.href.startsWith('/#');
+                    const handleClick = () => {
+                      setMobileMenuOpen(false);
+                      if (isHashLink && location.pathname !== '/') {
+                        window.location.href = link.href;
+                      }
+                    };
+                    
+                    return (
+                      <motion.div
+                        key={link.name}
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.4, delay: index * 0.1 }}
+                      >
+                        {isHashLink ? (
+                          <a
+                            href={link.href}
+                            onClick={handleClick}
+                            className="block text-[#2F4F4F] font-light text-lg tracking-[0.1em] uppercase py-3 border-b border-orange-100/30 transition-colors hover:text-[#C86B46]"
+                            style={{ fontFamily: 'Playfair Display, serif', letterSpacing: '0.15em' }}
+                          >
+                            {link.name}
+                          </a>
+                        ) : (
+                          <Link
+                            to={link.href}
+                            onClick={handleClick}
+                            className="block text-[#2F4F4F] font-light text-lg tracking-[0.1em] uppercase py-3 border-b border-orange-100/30 transition-colors hover:text-[#C86B46]"
+                            style={{ fontFamily: 'Playfair Display, serif', letterSpacing: '0.15em' }}
+                          >
+                            {link.name}
+                          </Link>
+                        )}
+                      </motion.div>
+                    );
+                  })}
 
                   {/* Mobile Social Media */}
                   <div className="flex items-center gap-5 pt-4 border-t border-orange-100/30">

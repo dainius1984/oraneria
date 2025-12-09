@@ -1,22 +1,23 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar.jsx';
-import Hero from './components/Hero.jsx';
-import TreatmentFinder from './components/TreatmentFinder.jsx';
-import Bestsellers from './components/Bestsellers.jsx';
-import Contact from './components/Contact.jsx';
-import AboutUs from './components/AboutUs.jsx';
 import Footer from './components/Footer.jsx';
+import Home from './pages/Home.jsx';
+import AboutUs from './components/AboutUs.jsx';
+import Pricing from './components/Pricing.jsx';
 
 function App() {
   return (
-    <div className="min-h-screen">
-      <Navbar />
-      <Hero />
-      <TreatmentFinder />
-      <Bestsellers />
-      <AboutUs />
-      <Contact />
-      <Footer />
-    </div>
+    <Router>
+      <div className="min-h-screen">
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/o-nas" element={<AboutUs />} />
+          <Route path="/cennik" element={<Pricing />} />
+        </Routes>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 

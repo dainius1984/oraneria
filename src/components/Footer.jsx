@@ -3,72 +3,67 @@ import { motion } from 'framer-motion';
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
-  const footerLinks = [
-    { name: 'O nas', href: '#o-nas' },
-    { name: 'Oferta', href: '#oferta' },
+  const quickLinks = [
+    { name: 'Zabiegi', href: '#zabiegi' },
+    { name: 'O Nas', href: '#o-nas' },
+    { name: 'Vouchery', href: '#vouchery' },
     { name: 'Cennik', href: '#cennik' },
-    { name: 'Rezerwacja', href: 'https://booksy.com/pl-pl/dl/show-business/263937', external: true },
+    { name: 'Kontakt', href: '#kontakt' },
   ];
 
   const contactInfo = {
-    phone: '+48 794 777 412',
     address: {
       street: 'ul. Ślężna 189/191 LU 2',
       city: '53-110 Wrocław'
     },
-    hours: {
-      weekdays: 'poniedziałek – piątek: 08:00 – 21:00',
-      saturday: 'sobota: 08:00 – 14:00'
-    },
-    mapUrl: 'https://maps.app.goo.gl/L49coh5mvugD25PF6'
+    phone: '+48 794 777 412',
+    email: 'kontakt@oranzeria.pl' // Placeholder - update with actual email
   };
 
   return (
-    <footer className="w-full bg-[#2F4F4F] text-white">
+    <footer className="w-full bg-[#2F4F4F] text-orange-50">
+      {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-12 md:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-8">
-          {/* Logo & Description */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-8">
+          {/* Column 1: Brand */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="flex flex-col"
+            className="text-center md:text-left"
           >
-            <a href="/" className="mb-4 inline-block">
-              <img 
-                src="/img/logo/logo.png" 
-                alt="Oranżeria Logo" 
-                className="h-12 w-auto brightness-0 invert"
-              />
-            </a>
-            <p className="text-gray-300 text-sm leading-relaxed">
-              Twoje miejsce beauty, gdzie nowoczesna kosmetologia spotyka energię natury.
+            <h2 
+              className="text-3xl md:text-4xl font-bold mb-3 text-orange-50"
+              style={{ fontFamily: 'Playfair Display, serif' }}
+            >
+              ORANŻERIA
+            </h2>
+            <p className="text-sm md:text-base text-orange-50/80 leading-relaxed">
+              Naturalne piękno w Twoim rytmie.
             </p>
           </motion.div>
 
-          {/* Navigation Links */}
+          {/* Column 2: Quick Links */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="flex flex-col"
+            className="text-center md:text-left"
           >
             <h3 
-              className="text-lg font-bold mb-4"
+              className="text-lg font-bold mb-4 text-[#C86B46]"
               style={{ fontFamily: 'Playfair Display, serif' }}
             >
-              Nawigacja
+              Szybkie Linki
             </h3>
             <ul className="space-y-2">
-              {footerLinks.map((link, index) => (
+              {quickLinks.map((link) => (
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    target={link.external ? "_blank" : undefined}
-                    rel={link.external ? "noopener noreferrer" : undefined}
-                    className={`text-gray-300 hover:text-[#C86B46] transition-colors text-sm ${link.external ? 'booksy-business-link' : ''}`}
+                    className="text-orange-50/80 hover:text-[#C86B46] transition-colors duration-300 text-sm md:text-base"
                   >
                     {link.name}
                   </a>
@@ -77,62 +72,64 @@ const Footer = () => {
             </ul>
           </motion.div>
 
-          {/* Contact Info */}
+          {/* Column 3: Contact */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex flex-col"
+            className="text-center md:text-left"
           >
             <h3 
-              className="text-lg font-bold mb-4"
+              className="text-lg font-bold mb-4 text-[#C86B46]"
               style={{ fontFamily: 'Playfair Display, serif' }}
             >
               Kontakt
             </h3>
-            <div className="space-y-4 text-sm text-gray-300">
+            <div className="space-y-3 text-sm md:text-base text-orange-50/80">
               <div>
-                <p className="font-medium mb-1 text-white">Telefon</p>
+                <p className="mb-1">{contactInfo.address.street}</p>
+                <p>{contactInfo.address.city}</p>
+              </div>
+              <div>
                 <a 
                   href={`tel:${contactInfo.phone.replace(/\s/g, '')}`}
-                  className="hover:text-[#C86B46] transition-colors"
+                  className="hover:text-[#C86B46] transition-colors duration-300"
                 >
                   {contactInfo.phone}
                 </a>
               </div>
               <div>
-                <p className="font-medium mb-1 text-white">Adres</p>
-                <p>{contactInfo.address.street}</p>
-                <p>{contactInfo.address.city}</p>
-                <a
-                  href={contactInfo.mapUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[#C86B46] hover:underline mt-2 inline-block"
+                <a 
+                  href={`mailto:${contactInfo.email}`}
+                  className="hover:text-[#C86B46] transition-colors duration-300"
                 >
-                  Zobacz na mapie →
+                  {contactInfo.email}
                 </a>
-              </div>
-              <div>
-                <p className="font-medium mb-1 text-white">Godziny otwarcia</p>
-                <p>{contactInfo.hours.weekdays}</p>
-                <p>{contactInfo.hours.saturday}</p>
               </div>
             </div>
           </motion.div>
-        </div>
 
-        {/* Social Media & Copyright */}
-        <div className="border-t border-gray-600 pt-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            {/* Social Media */}
-            <div className="flex items-center gap-4">
+          {/* Column 4: Socials & Legal */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-center md:text-left"
+          >
+            <h3 
+              className="text-lg font-bold mb-4 text-[#C86B46]"
+              style={{ fontFamily: 'Playfair Display, serif' }}
+            >
+              Śledź Nas
+            </h3>
+            <div className="flex items-center gap-4 mb-6 justify-center md:justify-start">
               <motion.a
                 href="https://www.instagram.com/oranzeria_wroclaw/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-300 hover:text-[#C86B46] transition-all p-2 rounded-full hover:bg-white/10"
+                className="text-orange-50/80 hover:text-[#C86B46] transition-colors duration-300"
                 whileHover={{ scale: 1.15 }}
                 whileTap={{ scale: 0.95 }}
                 aria-label="Instagram"
@@ -145,7 +142,7 @@ const Footer = () => {
                 href="https://www.facebook.com/salon.oranzeria/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-300 hover:text-[#C86B46] transition-all p-2 rounded-full hover:bg-white/10"
+                className="text-orange-50/80 hover:text-[#C86B46] transition-colors duration-300"
                 whileHover={{ scale: 1.15 }}
                 whileTap={{ scale: 0.95 }}
                 aria-label="Facebook"
@@ -155,17 +152,35 @@ const Footer = () => {
                 </svg>
               </motion.a>
             </div>
-
-            {/* Copyright */}
-            <p className="text-gray-400 text-sm text-center md:text-right">
-              © {currentYear} Oranżeria. Wszelkie prawa zastrzeżone.
-            </p>
-          </div>
+            <div className="space-y-2 text-sm text-orange-50/60">
+              <a
+                href="#polityka-prywatnosci"
+                className="block hover:text-[#C86B46] transition-colors duration-300"
+              >
+                Polityka Prywatności
+              </a>
+              <a
+                href="#regulamin"
+                className="block hover:text-[#C86B46] transition-colors duration-300"
+              >
+                Regulamin
+              </a>
+            </div>
+          </motion.div>
         </div>
+      </div>
+
+      {/* Top Border */}
+      <div className="border-t border-[#C86B46]/30" />
+
+      {/* Copyright */}
+      <div className="max-w-7xl mx-auto px-4 md:px-8 py-6">
+        <p className="text-center text-sm text-orange-50/60">
+          © {currentYear} Salon Oranżeria. Realizacja: Oranżeria
+        </p>
       </div>
     </footer>
   );
 };
 
 export default Footer;
-

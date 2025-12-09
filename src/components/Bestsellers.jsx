@@ -74,15 +74,21 @@ const Bestsellers = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.8, delay: index * 0.2 + 0.2 }}
-                className="w-full md:w-1/2"
+                className="w-full md:w-1/2 h-full flex items-center"
               >
-                <div className="relative overflow-hidden rounded-2xl shadow-xl">
+                <div className="relative w-full overflow-hidden rounded-2xl shadow-xl">
                   <img
                     src={feature.image}
                     alt={feature.title}
-                    className="w-full h-[300px] md:h-[500px] object-cover"
+                    className="w-full h-full min-h-[300px] md:min-h-[400px] object-cover rounded-2xl"
+                    onError={(e) => {
+                      // Fallback to placeholder if image fails to load
+                      e.target.src = index === 0 
+                        ? 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=800&h=600&fit=crop'
+                        : 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800&h=600&fit=crop';
+                    }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl" />
                 </div>
               </motion.div>
 
@@ -92,7 +98,7 @@ const Bestsellers = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.8, delay: index * 0.2 + 0.3 }}
-                className="w-full md:w-1/2 flex flex-col justify-center"
+                className="w-full md:w-1/2 flex flex-col justify-center min-h-[300px] md:min-h-[400px]"
               >
                 {/* Tag Badge */}
                 <motion.span

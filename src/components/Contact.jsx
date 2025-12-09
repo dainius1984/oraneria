@@ -40,7 +40,7 @@ const Contact = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6 }}
-            className="bg-white rounded-2xl p-8 md:p-10 shadow-lg"
+            className="bg-white/60 backdrop-blur-md rounded-2xl p-8 md:p-10 shadow-lg border border-white/50"
           >
             <h3 
               className="text-2xl md:text-3xl font-bold text-[#2F4F4F] mb-6"
@@ -133,7 +133,11 @@ const Contact = () => {
                 src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2504.1234567890123!2d17.0123456!3d51.1234567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTHCsDA3JzI0LjQiTiAxN8KwMDAnNDQuNCJF!5e0!3m2!1spl!2spl!4v1234567890123!5m2!1spl!2spl&q=${encodeURIComponent('ul. Ślężna 189/191 LU 2, 53-110 Wrocław')}`}
                 width="100%"
                 height="100%"
-                style={{ border: 0, minHeight: '400px' }}
+                style={{ 
+                  border: 0, 
+                  minHeight: '400px',
+                  filter: 'sepia(20%) contrast(90%) opacity(90%)'
+                }}
                 allowFullScreen=""
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"

@@ -18,24 +18,13 @@ const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      const heroHeading = document.getElementById('hero-heading');
       
-      if (!heroHeading) {
-        // Fallback if h1 not found
-        setIsVisible(true);
-        return;
-      }
-
-      const heroHeadingRect = heroHeading.getBoundingClientRect();
-      const heroHeadingTop = heroHeadingRect.top + currentScrollY;
-      const navbarHeight = 80; // Approximate navbar height
-
-      // Always show navbar at the top
-      if (currentScrollY < 50) {
+      // Always show navbar at the very top
+      if (currentScrollY < 100) {
         setIsVisible(true);
       }
-      // Hide navbar when scrolling down and navbar reaches the h1 element
-      else if (currentScrollY + navbarHeight >= heroHeadingTop && currentScrollY > lastScrollY) {
+      // Hide navbar when scrolling down
+      else if (currentScrollY > lastScrollY && currentScrollY > 100) {
         setIsVisible(false);
       }
       // Show navbar when scrolling up
@@ -58,7 +47,7 @@ const Navbar = () => {
         opacity: isVisible ? 1 : 0
       }}
       transition={{ duration: 0.3, ease: 'easeInOut' }}
-      className="fixed top-0 left-0 right-0 z-50 px-6 py-4"
+      className="fixed top-0 left-0 right-0 z-50 px-4 md:px-6 py-3 md:py-4"
     >
       <div className="max-w-7xl mx-auto">
         <div className="bg-[#FFFAF5]/90 backdrop-blur-md rounded-2xl px-4 md:px-8 py-3 md:py-4 shadow-lg border border-orange-100/30">
@@ -297,7 +286,7 @@ const Navbar = () => {
                 animate={{ x: 0 }}
                 exit={{ x: '100%' }}
                 transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-                className="fixed top-24 right-6 left-6 bg-[#FFFAF5] rounded-2xl shadow-2xl border border-orange-100/50 z-50 md:hidden overflow-hidden"
+                className="fixed top-20 md:top-24 right-4 md:right-6 left-4 md:left-6 bg-[#FFFAF5] rounded-2xl shadow-2xl border border-orange-100/50 z-50 md:hidden overflow-hidden max-h-[calc(100vh-6rem)] overflow-y-auto"
               >
                 <div className="px-6 py-8 space-y-6">
                   {/* Mobile Navigation Links */}

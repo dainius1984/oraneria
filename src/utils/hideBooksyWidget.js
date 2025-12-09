@@ -4,7 +4,7 @@
  * This allows our custom buttons to trigger the widget dialog
  */
 export const hideBooksyWidget = () => {
-  // Function to hide only the floating button, not the widget container
+  // Function to hide only the floating button, not the widget container or dialog
   const hideFloatingButton = () => {
     // Find all widget containers
     const widgetContainers = document.querySelectorAll('.booksy-widget-container');
@@ -12,46 +12,69 @@ export const hideBooksyWidget = () => {
     widgetContainers.forEach(widgetContainer => {
       if (!widgetContainer) return;
       
+      // DON'T hide dialog containers - they need to be visible when opened
+      if (widgetContainer.classList.contains('booksy-widget-container-dialog')) {
+        return;
+      }
+      
       const style = window.getComputedStyle(widgetContainer);
       
-      // If the container is positioned fixed at the bottom (floating button), hide it
+      // Only hide if it's a floating button (fixed at bottom, small size)
       if (style.position === 'fixed' || style.position === 'absolute') {
         const bottom = parseInt(style.bottom) || 0;
         const right = parseInt(style.right) || 0;
+        const width = parseInt(style.width) || 0;
+        const height = parseInt(style.height) || 0;
         
-        // Hide floating buttons (typically at bottom-right or bottom)
-        if (bottom >= 0 && (right >= 0 || style.right === 'auto')) {
+        // Hide only small floating buttons (not dialogs which are larger)
+        // Floating buttons are typically small (less than 200px width/height)
+        if (bottom >= 0 && (right >= 0 || style.right === 'auto') && 
+            (width < 200 && height < 200)) {
           widgetContainer.style.opacity = '0';
           widgetContainer.style.pointerEvents = 'none';
           widgetContainer.style.visibility = 'hidden';
-          widgetContainer.style.display = 'none'; // Completely hide floating buttons
+          widgetContainer.style.display = 'none';
         }
       }
     });
 
-    // Hide any standalone floating buttons
+    // Hide floating buttons, but keep them functional for clicking
+    // We'll hide them visually but keep them in DOM so we can trigger them
     const floatingButtons = document.querySelectorAll('.booksy-widget-button');
     floatingButtons.forEach(button => {
       const container = button.closest('.booksy-widget-container');
+      
+      // Don't hide buttons inside dialog containers
+      if (container && container.classList.contains('booksy-widget-container-dialog')) {
+        return;
+      }
+      
       if (container) {
         const containerStyle = window.getComputedStyle(container);
+        const containerWidth = parseInt(containerStyle.width) || 0;
+        const containerHeight = parseInt(containerStyle.height) || 0;
         
-        // If it's in a fixed container at bottom, hide it completely
+        // Only hide if it's a small floating button (not a dialog)
         if ((containerStyle.position === 'fixed' || containerStyle.position === 'absolute') &&
-            parseInt(containerStyle.bottom) >= 0) {
-          button.style.display = 'none';
-          button.style.visibility = 'hidden';
+            parseInt(containerStyle.bottom) >= 0 &&
+            containerWidth < 200 && containerHeight < 200) {
+          // Hide visually but keep functional
           button.style.opacity = '0';
+          button.style.visibility = 'hidden';
           button.style.pointerEvents = 'none';
+          // Don't set display: none - keep in DOM for programmatic access
         }
       } else {
         // Standalone button, check if it's floating
         const buttonStyle = window.getComputedStyle(button);
+        const buttonWidth = parseInt(buttonStyle.width) || 0;
+        const buttonHeight = parseInt(buttonStyle.height) || 0;
+        
         if ((buttonStyle.position === 'fixed' || buttonStyle.position === 'absolute') &&
-            parseInt(buttonStyle.bottom) >= 0) {
-          button.style.display = 'none';
-          button.style.visibility = 'hidden';
+            parseInt(buttonStyle.bottom) >= 0 &&
+            buttonWidth < 200 && buttonHeight < 200) {
           button.style.opacity = '0';
+          button.style.visibility = 'hidden';
           button.style.pointerEvents = 'none';
         }
       }

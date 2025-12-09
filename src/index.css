@@ -81,27 +81,24 @@
     scrollbar-width: none;  /* Firefox */
   }
 
-  /* Hide Booksy floating widget button completely */
-  /* Hide floating containers (buttons at bottom of page) */
-  .booksy-widget-container[style*="position: fixed"],
-  .booksy-widget-container[style*="position:fixed"] {
-    display: none !important;
-    visibility: hidden !important;
+  /* Hide Booksy floating widget button, but NOT the dialog container */
+  /* Only hide small floating buttons (not dialogs) */
+  .booksy-widget-container:not(.booksy-widget-container-dialog)[style*="position: fixed"],
+  .booksy-widget-container:not(.booksy-widget-container-dialog)[style*="position:fixed"] {
+    /* Only hide if it's small (floating button, not dialog) */
     opacity: 0 !important;
+    visibility: hidden !important;
     pointer-events: none !important;
-    height: 0 !important;
-    width: 0 !important;
-    overflow: hidden !important;
+    /* Don't set display: none - keep in DOM for programmatic access */
   }
 
-  /* Hide floating buttons specifically */
-  .booksy-widget-button[style*="position: fixed"],
-  .booksy-widget-button[style*="position:fixed"],
-  .booksy-widget-button[style*="bottom"] {
-    display: none !important;
-    visibility: hidden !important;
+  /* Hide floating buttons, but keep them accessible for clicking */
+  .booksy-widget-button[style*="position: fixed"]:not(.booksy-widget-container-dialog .booksy-widget-button),
+  .booksy-widget-button[style*="position:fixed"]:not(.booksy-widget-container-dialog .booksy-widget-button) {
     opacity: 0 !important;
+    visibility: hidden !important;
     pointer-events: none !important;
+    /* Don't set display: none - keep functional */
   }
 
   /* Hide floating iframes and other floating Booksy elements */

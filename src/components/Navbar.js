@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 
 const Navbar = () => {
@@ -55,21 +55,35 @@ const Navbar = () => {
                   {hoveredLink === link.name && (
                     <motion.div
                       layoutId="hoverShape"
-                      initial={false}
                       className="absolute bottom-0 left-0 right-0 h-2"
-                      transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                      initial={false}
+                      transition={{ 
+                        type: 'spring', 
+                        stiffness: 500, 
+                        damping: 40,
+                        mass: 0.5
+                      }}
                     >
                       <motion.svg
                         viewBox="0 0 120 25"
                         className="w-full h-full"
                         preserveAspectRatio="none"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.25, ease: 'easeOut' }}
                       >
                         <motion.path
                           d="M 0,20 Q 20,8 40,12 Q 60,16 80,10 Q 100,4 120,12 L 120,25 L 0,25 Z"
                           fill="#C86B46"
                           initial={{ pathLength: 0, opacity: 0 }}
-                          animate={{ pathLength: 1, opacity: 0.8 }}
-                          transition={{ duration: 0.5, ease: 'easeOut' }}
+                          animate={{ pathLength: 1, opacity: 0.85 }}
+                          transition={{ 
+                            pathLength: { 
+                              duration: 0.5, 
+                              ease: [0.43, 0.13, 0.23, 0.96] 
+                            },
+                            opacity: { duration: 0.2 }
+                          }}
                         />
                       </motion.svg>
                     </motion.div>

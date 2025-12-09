@@ -16,14 +16,24 @@ const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      const heroHeight = window.innerHeight;
+      const heroHeading = document.getElementById('hero-heading');
+      
+      if (!heroHeading) {
+        // Fallback if h1 not found
+        setIsVisible(true);
+        return;
+      }
+
+      const heroHeadingRect = heroHeading.getBoundingClientRect();
+      const heroHeadingTop = heroHeadingRect.top + currentScrollY;
+      const navbarHeight = 80; // Approximate navbar height
 
       // Always show navbar at the top
       if (currentScrollY < 50) {
         setIsVisible(true);
       }
-      // Hide navbar when scrolling down past hero section
-      else if (currentScrollY > heroHeight * 0.9 && currentScrollY > lastScrollY) {
+      // Hide navbar when scrolling down and navbar reaches the h1 element
+      else if (currentScrollY + navbarHeight >= heroHeadingTop && currentScrollY > lastScrollY) {
         setIsVisible(false);
       }
       // Show navbar when scrolling up

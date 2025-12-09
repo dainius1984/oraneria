@@ -43,6 +43,7 @@ const Hero = () => {
         >
           {/* Headline */}
           <motion.h1
+            id="hero-heading"
             initial={{ opacity: 0, y: 30 }}
             animate={videoLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 1, delay: 0.5, ease: 'easeOut' }}

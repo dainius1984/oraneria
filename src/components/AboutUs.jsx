@@ -69,10 +69,10 @@ const AboutUs = () => {
   ];
 
   const galleryImages = [
-    { id: 1, src: '/img/7.jpg', alt: 'Recepcja' },
-    { id: 2, src: '/img/8.jpg', alt: 'Gabinet zabiegowy' },
-    { id: 3, src: '/img/9.jpg', alt: 'Detale wnętrza' },
-    { id: 4, src: '/img/10.jpg', alt: 'Strefa relaksu' }
+    { id: 1, src: '/img/469195222_17842771191380714_3063002111071437658_n.jpg', alt: 'Recepcja' },
+    { id: 2, src: '/img/469532008_17842771203380714_8774777161940506774_n.jpg', alt: 'Gabinet zabiegowy' },
+    { id: 3, src: '/img/469171614_17842771176380714_7787508925189487850_n.jpg', alt: 'Detale wnętrza' },
+    { id: 4, src: '/img/554358974_24832431279721695_407827954530258314_n.jpg', alt: 'Strefa relaksu' }
   ];
 
   return (
@@ -146,7 +146,7 @@ const AboutUs = () => {
             >
               <div className="relative overflow-hidden rounded-2xl shadow-xl">
                 <img
-                  src="/img/2.jpg"
+                  src="/img/469171614_17842771176380714_7787508925189487850_n.jpg"
                   alt="Zabieg w Oranżerii"
                   className="w-full h-[400px] md:h-[500px] object-cover"
                   onError={(e) => {

@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { openBooksyWidget } from '../utils/booksy';
 
 const Navbar = () => {
   const [hoveredLink, setHoveredLink] = useState(null);
@@ -225,15 +226,7 @@ const Navbar = () => {
 
               {/* CTA Button */}
               <motion.button
-                onClick={() => {
-                  // Trigger Booksy widget
-                  if (window.BooksyWidget) {
-                    window.BooksyWidget.open();
-                  } else {
-                    // Fallback to direct link if widget not loaded
-                    window.open('https://booksy.com/pl-pl/dl/show-business/263937', '_blank');
-                  }
-                }}
+                onClick={openBooksyWidget}
                 className="btn-primary booksy-business-link cursor-pointer"
                 whileHover={{ 
                   scale: 1.05,
@@ -373,13 +366,7 @@ const Navbar = () => {
                   <motion.button
                     onClick={() => {
                       setMobileMenuOpen(false);
-                      // Trigger Booksy widget
-                      if (window.BooksyWidget) {
-                        window.BooksyWidget.open();
-                      } else {
-                        // Fallback to direct link if widget not loaded
-                        window.open('https://booksy.com/pl-pl/dl/show-business/263937', '_blank');
-                      }
+                      openBooksyWidget();
                     }}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}

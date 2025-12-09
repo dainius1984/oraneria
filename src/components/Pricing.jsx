@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useState, useRef, useEffect } from 'react';
+import { openBooksyWidget } from '../utils/booksy';
 
 const categories = ['Twarz', 'Ciało', 'Medycyna Estetyczna', 'Rytuały SPA', 'Dodatki'];
 
@@ -272,15 +273,7 @@ const Pricing = () => {
                                 </div>
                               </div>
                               <motion.button
-                                onClick={() => {
-                                  // Trigger Booksy widget
-                                  if (window.BooksyWidget) {
-                                    window.BooksyWidget.open();
-                                  } else {
-                                    // Fallback to direct link if widget not loaded
-                                    window.open('https://booksy.com/pl-pl/dl/show-business/263937', '_blank');
-                                  }
-                                }}
+                                onClick={openBooksyWidget}
                                 className="booksy-business-link opacity-0 group-hover:opacity-100 transition-opacity duration-300 px-4 py-2 rounded-full text-white text-sm font-medium whitespace-nowrap cursor-pointer"
                                 style={{ backgroundColor: '#C86B46' }}
                                 whileHover={{ scale: 1.05 }}
@@ -347,15 +340,7 @@ const Pricing = () => {
                   Oszczędzasz {pkg.savings}
                 </div>
                 <motion.button
-                  onClick={() => {
-                    // Trigger Booksy widget
-                    if (window.BooksyWidget) {
-                      window.BooksyWidget.open();
-                    } else {
-                      // Fallback to direct link if widget not loaded
-                      window.open('https://booksy.com/pl-pl/dl/show-business/263937', '_blank');
-                    }
-                  }}
+                  onClick={openBooksyWidget}
                   className="booksy-business-link block w-full text-center px-6 py-3 rounded-full text-white font-medium cursor-pointer"
                   style={{ backgroundColor: '#C86B46' }}
                   whileHover={{ scale: 1.02, backgroundColor: '#E08D6D' }}

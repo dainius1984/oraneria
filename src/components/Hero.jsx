@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
+import { openBooksyWidget } from '../utils/booksy';
 
 const Hero = () => {
   const videoRef = useRef(null);
@@ -65,15 +66,7 @@ const Hero = () => {
 
           {/* CTA Button */}
           <motion.button
-            onClick={() => {
-              // Trigger Booksy widget
-              if (window.BooksyWidget) {
-                window.BooksyWidget.open();
-              } else {
-                // Fallback to direct link if widget not loaded
-                window.open('https://booksy.com/pl-pl/dl/show-business/263937', '_blank');
-              }
-            }}
+            onClick={openBooksyWidget}
             initial={{ opacity: 0, y: 20 }}
             animate={videoLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             className="booksy-business-link inline-block px-8 md:px-10 py-3 md:py-4 rounded-full text-white font-light text-base md:text-lg tracking-[0.1em] uppercase shadow-xl cursor-pointer"

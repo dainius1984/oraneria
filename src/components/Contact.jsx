@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { openBooksyWidget } from '../utils/booksy';
 
 const Contact = () => {
   const contactInfo = {
@@ -104,16 +105,8 @@ const Contact = () => {
 
             {/* CTA Button */}
             <motion.button
-              onClick={() => {
-                // Trigger Booksy widget
-                if (window.BooksyWidget) {
-                  window.BooksyWidget.open();
-                } else {
-                  // Fallback to direct link if widget not loaded
-                  window.open('https://booksy.com/pl-pl/dl/show-business/263937', '_blank');
-                }
-              }}
-              className="btn-primary booksy-business-link mt-8 inline-block text-center cursor-pointer"
+              onClick={openBooksyWidget}
+              className="btn-primary booksy-business-link mt-8 block md:inline-block mx-auto md:mx-0 text-center cursor-pointer"
               whileHover={{ 
                 scale: 1.05,
                 backgroundColor: '#E08D6D',

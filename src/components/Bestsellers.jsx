@@ -164,7 +164,7 @@ const Bestsellers = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.2 + 0.8 }}
-                  className="btn-outline w-fit"
+                  className="btn-outline w-fit mx-auto md:mx-0"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >

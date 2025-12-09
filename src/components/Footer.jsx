@@ -35,7 +35,7 @@ const Footer = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center md:text-left"
+            className="text-center"
           >
             <h2 
               className="text-3xl md:text-4xl font-bold mb-3 text-orange-50"
@@ -43,7 +43,7 @@ const Footer = () => {
             >
               ORANŻERIA
             </h2>
-            <div className="mb-3 flex justify-center md:justify-start">
+            <div className="mb-3 flex justify-center">
               <img 
                 src="/img/logo/logo.png" 
                 alt="Oranżeria Logo" 

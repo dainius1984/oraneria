@@ -80,4 +80,18 @@
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
   }
+
+  /* Hide Booksy floating widget button - we use custom buttons instead */
+  [id*="booksy"],
+  [id*="Booksy"],
+  [class*="booksy-widget"],
+  [class*="booksy-button"],
+  [class*="BooksyWidget"],
+  iframe[src*="booksy.com"],
+  div[data-booksy-widget],
+  a[href*="booksy.com"][target="_blank"]:not(.booksy-business-link) {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+  }
 }

@@ -81,28 +81,25 @@
     scrollbar-width: none;  /* Firefox */
   }
 
-  /* Hide Booksy floating widget button - we use custom buttons instead */
-  [id*="booksy"]:not(.booksy-business-link),
-  [id*="Booksy"]:not(.booksy-business-link),
-  [class*="booksy-widget"]:not(.booksy-business-link),
-  [class*="booksy-button"]:not(.booksy-business-link),
-  [class*="BooksyWidget"]:not(.booksy-business-link),
-  [class*="booksy"]:not(.booksy-business-link):not([class*="booksy-business"]),
-  iframe[src*="booksy.com"],
-  div[data-booksy-widget]:not(.booksy-business-link),
-  a[href*="booksy.com"][target="_blank"]:not(.booksy-business-link),
-  div[style*="position: fixed"][style*="bottom"]:not(.booksy-business-link),
-  div[style*="position:fixed"][style*="bottom"]:not(.booksy-business-link),
-  #booksy-widget-container:not(.booksy-business-link),
-  .booksy-widget-container:not(.booksy-business-link),
-  body > div:last-child[style*="position"]:not(.booksy-business-link),
-  body > div:last-child[style*="fixed"]:not(.booksy-business-link) {
+  /* Hide Booksy floating widget button visually, but keep container functional */
+  /* We only hide elements that are positioned fixed at the bottom */
+  .booksy-widget-container[style*="position: fixed"],
+  .booksy-widget-container[style*="position:fixed"],
+  .booksy-widget-container[style*="bottom"] {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    /* Don't set display: none - keep in DOM for programmatic access */
+  }
+
+  /* Hide floating iframes and other floating Booksy elements */
+  iframe[src*="booksy.com"][style*="position: fixed"],
+  iframe[src*="booksy.com"][style*="position:fixed"],
+  div[data-booksy-widget][style*="position: fixed"],
+  div[data-booksy-widget][style*="position:fixed"] {
     display: none !important;
     visibility: hidden !important;
     opacity: 0 !important;
-    height: 0 !important;
-    width: 0 !important;
-    overflow: hidden !important;
     pointer-events: none !important;
   }
 

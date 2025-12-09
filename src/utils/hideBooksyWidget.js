@@ -71,16 +71,18 @@ export const hideBooksyWidget = () => {
   };
 
   // Run immediately
-  hideBooksyElements();
+  hideFloatingButton();
 
-  // Run after a delay to catch dynamically loaded elements
-  setTimeout(hideBooksyElements, 1000);
-  setTimeout(hideBooksyElements, 3000);
+  // Run after delays to catch dynamically loaded elements
+  setTimeout(hideFloatingButton, 500);
+  setTimeout(hideFloatingButton, 1000);
+  setTimeout(hideFloatingButton, 2000);
+  setTimeout(hideFloatingButton, 3000);
 
   // Use MutationObserver to catch elements added dynamically
   if (typeof window !== 'undefined' && window.MutationObserver) {
     const observer = new MutationObserver(() => {
-      hideBooksyElements();
+      hideFloatingButton();
     });
 
     observer.observe(document.body, {

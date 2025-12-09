@@ -171,8 +171,10 @@ const Navbar = () => {
 
               {/* CTA Button */}
               <motion.a
-                href="#rezerwacja"
-                className="btn-primary"
+                href="https://booksy.com/pl-pl/dl/show-business/263937"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary booksy-business-link"
                 whileHover={{ 
                   scale: 1.05,
                   backgroundColor: '#E08D6D',
@@ -285,12 +287,14 @@ const Navbar = () => {
 
                   {/* Mobile CTA Button */}
                   <motion.a
-                    href="#rezerwacja"
+                    href="https://booksy.com/pl-pl/dl/show-business/263937"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: 0.6 }}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="btn-primary block w-full text-center py-4"
+                    className="btn-primary booksy-business-link block w-full text-center py-4"
                     whileTap={{ scale: 0.95 }}
                   >
                     Rezerwacja

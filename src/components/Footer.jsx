@@ -7,7 +7,7 @@ const Footer = () => {
     { name: 'O nas', href: '#o-nas' },
     { name: 'Oferta', href: '#oferta' },
     { name: 'Cennik', href: '#cennik' },
-    { name: 'Rezerwacja', href: '#rezerwacja' },
+    { name: 'Rezerwacja', href: 'https://booksy.com/pl-pl/dl/show-business/263937', external: true },
   ];
 
   const contactInfo = {
@@ -66,7 +66,9 @@ const Footer = () => {
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    className="text-gray-300 hover:text-[#C86B46] transition-colors text-sm"
+                    target={link.external ? "_blank" : undefined}
+                    rel={link.external ? "noopener noreferrer" : undefined}
+                    className={`text-gray-300 hover:text-[#C86B46] transition-colors text-sm ${link.external ? 'booksy-business-link' : ''}`}
                   >
                     {link.name}
                   </a>

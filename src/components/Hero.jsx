@@ -33,7 +33,7 @@ const Hero = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-[#C86B46]/20" />
 
       {/* Content Container */}
-      <div className="relative z-10 h-full flex flex-col justify-center items-center px-4 md:px-8 pt-20 pb-32">
+      <div className="relative z-10 h-full flex flex-col justify-center items-center px-4 md:px-8 pt-20 pb-20">
         {/* Main Content */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -47,7 +47,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={videoLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 1, delay: 0.5, ease: 'easeOut' }}
-            className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 drop-shadow-lg"
+            className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 md:mb-8 drop-shadow-lg"
             style={{ fontFamily: 'Playfair Display, serif' }}
           >
             Naturalne Piękno w Twoim Rytmie
@@ -58,52 +58,40 @@ const Hero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={videoLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 1, delay: 0.7, ease: 'easeOut' }}
-            className="text-lg md:text-xl lg:text-2xl text-[#FFFBF7] font-light max-w-2xl mx-auto leading-relaxed"
+            className="text-lg md:text-xl lg:text-2xl text-[#FFFBF7] font-light max-w-2xl mx-auto leading-relaxed mb-8 md:mb-10"
           >
             Odkryj miejsce, gdzie nowoczesna kosmetologia spotyka energię natury.
           </motion.p>
+
+          {/* CTA Button */}
+          <motion.a
+            href="https://booksy.com/pl-pl/dl/show-business/263937"
+            target="_blank"
+            rel="noopener noreferrer"
+            initial={{ opacity: 0, y: 20 }}
+            animate={videoLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            className="booksy-business-link inline-block px-8 md:px-10 py-3 md:py-4 rounded-full text-white font-light text-base md:text-lg tracking-[0.1em] uppercase shadow-xl"
+            style={{ 
+              backgroundColor: '#C86B46', 
+              fontFamily: 'Playfair Display, serif', 
+              letterSpacing: '0.15em' 
+            }}
+            whileHover={{ 
+              scale: 1.05,
+              backgroundColor: '#E08D6D',
+              boxShadow: '0 15px 35px rgba(200, 107, 70, 0.5)'
+            }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ 
+              opacity: { duration: 0.8, delay: 0.9, ease: 'easeOut' },
+              y: { duration: 0.8, delay: 0.9, ease: 'easeOut' },
+              default: { type: 'spring', stiffness: 400, damping: 17 }
+            }}
+          >
+            Umów Wizytę
+          </motion.a>
         </motion.div>
       </div>
-
-      {/* Glassmorphism CTA Bar */}
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        animate={videoLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-        transition={{ duration: 0.8, delay: 0.9, ease: 'easeOut' }}
-        className="absolute bottom-0 left-0 right-0 z-20 px-4 md:px-8 pb-6 md:pb-8"
-      >
-        <div className="max-w-7xl mx-auto">
-          <div className="bg-[#FFFAF5]/80 backdrop-blur-md rounded-2xl px-6 md:px-8 py-4 md:py-5 shadow-2xl border border-orange-100/50">
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-              {/* CTA Button */}
-              <motion.a
-                href="#rezerwacja"
-                className="btn-primary w-full sm:w-auto px-8 py-3 md:py-3.5 text-center"
-                whileHover={{ 
-                  scale: 1.05,
-                  backgroundColor: '#E08D6D',
-                  boxShadow: '0 10px 25px rgba(200, 107, 70, 0.4)'
-                }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-              >
-                Umów Wizytę
-              </motion.a>
-
-              {/* Promocje Link */}
-              <motion.a
-                href="#promocje"
-                className="text-[#2F4F4F] font-light text-sm md:text-base tracking-[0.1em] uppercase hover:text-[#C86B46] transition-colors cursor-pointer"
-                style={{ fontFamily: 'Playfair Display, serif', letterSpacing: '0.15em' }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Sprawdź Promocje
-              </motion.a>
-            </div>
-          </div>
-        </div>
-      </motion.div>
     </section>
   );
 };

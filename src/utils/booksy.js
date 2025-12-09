@@ -97,6 +97,14 @@ export const openBooksyWidget = (e) => {
  * Closes the Booksy widget dialog
  */
 export const closeBooksyWidget = () => {
+  // Cleanup style observer
+  import('./styleBooksyWidget.js').then(module => {
+    if (module.cleanupBooksyStyles) {
+      module.cleanupBooksyStyles();
+    }
+  }).catch(() => {
+    // Ignore import errors
+  });
   // Method 1: Try Booksy API close method first
   if (window.BooksyWidget && typeof window.BooksyWidget.close === 'function') {
     try {

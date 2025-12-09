@@ -1,16 +1,28 @@
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const quickLinks = [
-    { name: 'Zabiegi', href: '/#oferta', isHash: true },
     { name: 'O Nas', href: '/o-nas', isHash: false },
-    { name: 'Vouchery', href: '/#vouchery', isHash: true },
+    { name: 'Oferta', href: '/#oferta', isHash: true },
     { name: 'Cennik', href: '/cennik', isHash: false },
-    { name: 'Kontakt', href: '/#kontakt', isHash: true },
   ];
+
+  // Handle logo/ORANŻERIA click - always go to homepage top
+  const handleLogoClick = (e) => {
+    e.preventDefault();
+    if (location.pathname === '/') {
+      // Already on homepage, just scroll to top smoothly
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      // Navigate to homepage (ScrollToTop component will handle scrolling)
+      navigate('/');
+    }
+  };
 
   const contactInfo = {
     address: {
@@ -37,21 +49,29 @@ const Footer = () => {
             transition={{ duration: 0.6 }}
             className="text-center"
           >
-            <Link to="/" className="block">
+            <a 
+              href="/" 
+              onClick={handleLogoClick}
+              className="block cursor-pointer"
+            >
               <h2 
                 className="text-3xl md:text-4xl font-bold mb-4 text-orange-50 hover:text-[#C86B46] transition-colors duration-300"
                 style={{ fontFamily: 'Playfair Display, serif' }}
               >
                 ORANŻERIA
               </h2>
-            </Link>
-            <Link to="/" className="block mb-4 flex justify-center hover:opacity-80 transition-opacity duration-300">
+            </a>
+            <a 
+              href="/" 
+              onClick={handleLogoClick}
+              className="block mb-4 flex justify-center hover:opacity-80 transition-opacity duration-300 cursor-pointer"
+            >
               <img 
                 src="/img/logo/logo.png" 
                 alt="Oranżeria Logo" 
                 className="h-12 md:h-16 w-auto mx-auto"
               />
-            </Link>
+            </a>
             <p className="text-sm md:text-base text-orange-50/80 leading-relaxed">
               Naturalne piękno w Twoim rytmie.
             </p>

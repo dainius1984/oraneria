@@ -18,14 +18,17 @@ const Footer = () => {
       city: '53-110 Wrocław'
     },
     phone: '+48 794 777 412',
-    email: 'kontakt@oranzeria.pl' // Placeholder - update with actual email
+    email: 'kontakt@oranzeria.pl'
   };
 
   return (
     <footer className="w-full bg-[#2F4F4F] text-orange-50">
+      {/* Top Border */}
+      <div className="border-t border-[#C86B46]/30" />
+
       {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-12 md:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
           {/* Column 1: Brand */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -40,11 +43,8 @@ const Footer = () => {
             >
               ORANŻERIA
             </h2>
-            <p className="text-sm md:text-base text-orange-50/80 leading-relaxed mb-2">
-              Więcej niż salon kosmetyczny.
-            </p>
             <p className="text-sm md:text-base text-orange-50/80 leading-relaxed">
-              Twój azyl spokoju w sercu miasta.
+              Naturalne piękno w Twoim rytmie.
             </p>
           </motion.div>
 
@@ -183,11 +183,8 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Top Border */}
-      <div className="border-t border-[#C86B46]/30" />
-
       {/* Copyright */}
-      <div className="max-w-7xl mx-auto px-4 md:px-8 py-6">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 py-6 border-t border-[#C86B46]/20">
         <p className="text-center text-sm text-orange-50/60">
           © {currentYear} Salon Oranżeria. Realizacja: Oranżeria
         </p>

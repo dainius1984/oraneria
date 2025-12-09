@@ -1,12 +1,12 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
   const [hoveredLink, setHoveredLink] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const lastScrollY = useRef(0);
   const location = useLocation();
 
   const navLinks = [
@@ -24,20 +24,20 @@ const Navbar = () => {
         setIsVisible(true);
       }
       // Hide navbar when scrolling down
-      else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+      else if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
         setIsVisible(false);
       }
       // Show navbar when scrolling up
-      else if (currentScrollY < lastScrollY) {
+      else if (currentScrollY < lastScrollY.current) {
         setIsVisible(true);
       }
 
-      setLastScrollY(currentScrollY);
+      lastScrollY.current = currentScrollY;
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
+  }, []);
 
   return (
     <motion.nav

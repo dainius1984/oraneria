@@ -18,7 +18,7 @@ const Footer = () => {
       city: '53-110 Wrocław'
     },
     phone: '+48 794 777 412',
-    email: 'kontakt@oranzeria.pl'
+    email: 'kontakt@salon-oranzeria.pl'
   };
 
   return (
@@ -43,6 +43,13 @@ const Footer = () => {
             >
               ORANŻERIA
             </h2>
+            <div className="mb-3 flex justify-center md:justify-start">
+              <img 
+                src="/img/logo/logo.png" 
+                alt="Oranżeria Logo" 
+                className="h-12 md:h-16 w-auto"
+              />
+            </div>
             <p className="text-sm md:text-base text-orange-50/80 leading-relaxed">
               Naturalne piękno w Twoim rytmie.
             </p>

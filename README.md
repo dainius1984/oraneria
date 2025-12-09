@@ -1,6 +1,28 @@
-# Getting Started with Create React App
+# Oranzeria
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## GitHub Repository Setup
+
+To connect this project to a GitHub repository:
+
+1. Create a new repository on GitHub (don't initialize it with a README, .gitignore, or license)
+
+2. Add the remote repository:
+   ```bash
+   git remote add origin https://github.com/YOUR_USERNAME/oranzeria.git
+   ```
+
+3. Push your code to GitHub:
+   ```bash
+   git branch -M main
+   git push -u origin main
+   ```
+
+   Note: If your default branch is already `master`, use:
+   ```bash
+   git push -u origin master
+   ```
 
 ## Available Scripts
 

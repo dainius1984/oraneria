@@ -224,11 +224,17 @@ const Navbar = () => {
               </div>
 
               {/* CTA Button */}
-              <motion.a
-                href="https://booksy.com/pl-pl/dl/show-business/263937"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary booksy-business-link"
+              <motion.button
+                onClick={() => {
+                  // Trigger Booksy widget
+                  if (window.BooksyWidget) {
+                    window.BooksyWidget.open();
+                  } else {
+                    // Fallback to direct link if widget not loaded
+                    window.open('https://booksy.com/pl-pl/dl/show-business/263937', '_blank');
+                  }
+                }}
+                className="btn-primary booksy-business-link cursor-pointer"
                 whileHover={{ 
                   scale: 1.05,
                   backgroundColor: '#E08D6D',
@@ -238,7 +244,7 @@ const Navbar = () => {
                 transition={{ type: 'spring', stiffness: 400, damping: 17 }}
               >
                 Rezerwacja
-              </motion.a>
+              </motion.button>
             </motion.div>
 
             {/* Mobile: Hamburger Menu Button */}
@@ -364,19 +370,25 @@ const Navbar = () => {
                   </div>
 
                   {/* Mobile CTA Button */}
-                  <motion.a
-                    href="https://booksy.com/pl-pl/dl/show-business/263937"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <motion.button
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      // Trigger Booksy widget
+                      if (window.BooksyWidget) {
+                        window.BooksyWidget.open();
+                      } else {
+                        // Fallback to direct link if widget not loaded
+                        window.open('https://booksy.com/pl-pl/dl/show-business/263937', '_blank');
+                      }
+                    }}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: 0.6 }}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="btn-primary booksy-business-link block w-full text-center py-4"
+                    className="btn-primary booksy-business-link block w-full text-center py-4 cursor-pointer"
                     whileTap={{ scale: 0.95 }}
                   >
                     Rezerwacja
-                  </motion.a>
+                  </motion.button>
                 </div>
               </motion.div>
             </>

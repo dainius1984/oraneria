@@ -271,17 +271,23 @@ const Pricing = () => {
                                   </div>
                                 </div>
                               </div>
-                              <motion.a
-                                href="https://booksy.com/pl-pl/dl/show-business/263937"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="booksy-business-link opacity-0 group-hover:opacity-100 transition-opacity duration-300 px-4 py-2 rounded-full text-white text-sm font-medium whitespace-nowrap"
+                              <motion.button
+                                onClick={() => {
+                                  // Trigger Booksy widget
+                                  if (window.BooksyWidget) {
+                                    window.BooksyWidget.open();
+                                  } else {
+                                    // Fallback to direct link if widget not loaded
+                                    window.open('https://booksy.com/pl-pl/dl/show-business/263937', '_blank');
+                                  }
+                                }}
+                                className="booksy-business-link opacity-0 group-hover:opacity-100 transition-opacity duration-300 px-4 py-2 rounded-full text-white text-sm font-medium whitespace-nowrap cursor-pointer"
                                 style={{ backgroundColor: '#C86B46' }}
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                               >
                                 Rezerwuj
-                              </motion.a>
+                              </motion.button>
                             </div>
                             {/* Dotted separator line */}
                             <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent opacity-50" />
@@ -340,17 +346,23 @@ const Pricing = () => {
                 <div className="text-sm text-[#C86B46] font-medium mb-4">
                   Oszczędzasz {pkg.savings}
                 </div>
-                <motion.a
-                  href="https://booksy.com/pl-pl/dl/show-business/263937"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="booksy-business-link block w-full text-center px-6 py-3 rounded-full text-white font-medium"
+                <motion.button
+                  onClick={() => {
+                    // Trigger Booksy widget
+                    if (window.BooksyWidget) {
+                      window.BooksyWidget.open();
+                    } else {
+                      // Fallback to direct link if widget not loaded
+                      window.open('https://booksy.com/pl-pl/dl/show-business/263937', '_blank');
+                    }
+                  }}
+                  className="booksy-business-link block w-full text-center px-6 py-3 rounded-full text-white font-medium cursor-pointer"
                   style={{ backgroundColor: '#C86B46' }}
                   whileHover={{ scale: 1.02, backgroundColor: '#E08D6D' }}
                   whileTap={{ scale: 0.98 }}
                 >
                   Rezerwuj Pakiet
-                </motion.a>
+                </motion.button>
               </motion.div>
             ))}
           </div>

@@ -103,11 +103,17 @@ const Contact = () => {
             </div>
 
             {/* CTA Button */}
-            <motion.a
-              href="https://booksy.com/pl-pl/dl/show-business/263937"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary booksy-business-link mt-8 inline-block text-center"
+            <motion.button
+              onClick={() => {
+                // Trigger Booksy widget
+                if (window.BooksyWidget) {
+                  window.BooksyWidget.open();
+                } else {
+                  // Fallback to direct link if widget not loaded
+                  window.open('https://booksy.com/pl-pl/dl/show-business/263937', '_blank');
+                }
+              }}
+              className="btn-primary booksy-business-link mt-8 inline-block text-center cursor-pointer"
               whileHover={{ 
                 scale: 1.05,
                 backgroundColor: '#E08D6D',
@@ -117,7 +123,7 @@ const Contact = () => {
               transition={{ type: 'spring', stiffness: 400, damping: 17 }}
             >
               Umów Wizytę
-            </motion.a>
+            </motion.button>
           </motion.div>
 
           {/* Map Embed */}

@@ -97,15 +97,21 @@ const TreatmentFinder = () => {
               onMouseLeave={() => setHoveredCard(null)}
               onClick={() => handleCardClick(treatment.href)}
             >
-              <div className={`
-                bg-white rounded-2xl p-6 md:p-8 shadow-md 
-                transition-all duration-300 h-full
-                flex flex-col items-center justify-center
-                ${hoveredCard === treatment.id 
-                  ? 'bg-gradient-to-br from-orange-50 to-orange-100/50 shadow-xl transform scale-105' 
-                  : 'hover:shadow-lg'
-                }
-              `}>
+              <motion.div
+                className={`
+                  bg-white rounded-2xl p-6 md:p-8 shadow-md 
+                  h-full flex flex-col items-center justify-center
+                  ${hoveredCard === treatment.id 
+                    ? 'bg-gradient-to-br from-orange-50 to-orange-100/50' 
+                    : ''
+                  }
+                `}
+                whileHover={{
+                  y: -5,
+                  boxShadow: '0 10px 25px rgba(251, 146, 60, 0.25)',
+                  transition: { duration: 0.3, ease: 'easeOut' }
+                }}
+              >
                 {/* Icon */}
                 <div 
                   className={`mb-4 transition-colors duration-300 ${
@@ -142,7 +148,7 @@ const TreatmentFinder = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
                 </motion.div>
-              </div>
+              </motion.div>
             </motion.div>
           ))}
         </div>

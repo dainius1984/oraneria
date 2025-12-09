@@ -69,10 +69,10 @@ const AboutUs = () => {
   ];
 
   const galleryImages = [
-    { id: 1, src: '/img/469195222_17842771191380714_3063002111071437658_n.jpg', alt: 'Recepcja' },
-    { id: 2, src: '/img/469532008_17842771203380714_8774777161940506774_n.jpg', alt: 'Gabinet zabiegowy' },
-    { id: 3, src: '/img/469171614_17842771176380714_7787508925189487850_n.jpg', alt: 'Detale wnętrza' },
-    { id: 4, src: '/img/554358974_24832431279721695_407827954530258314_n.jpg', alt: 'Strefa relaksu' }
+    { id: 1, src: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=800&h=600&fit=crop', alt: 'Recepcja' },
+    { id: 2, src: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800&h=600&fit=crop', alt: 'Gabinet zabiegowy' },
+    { id: 3, src: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&h=600&fit=crop', alt: 'Detale wnętrza' },
+    { id: 4, src: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&h=600&fit=crop', alt: 'Strefa relaksu' }
   ];
 
   return (

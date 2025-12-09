@@ -20,7 +20,11 @@ export const hideBooksyWidget = () => {
       try {
         const elements = document.querySelectorAll(selector);
         elements.forEach(el => {
-          if (el && !el.classList.contains('booksy-business-link')) {
+          // Always exclude our custom buttons
+          if (el && 
+              !el.classList.contains('booksy-business-link') &&
+              !el.closest('.booksy-business-link') &&
+              !el.matches('.booksy-business-link')) {
             el.style.display = 'none';
             el.style.visibility = 'hidden';
             el.style.opacity = '0';

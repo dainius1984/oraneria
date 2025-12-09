@@ -6,41 +6,54 @@
 export const hideBooksyWidget = () => {
   // Function to hide only the floating button, not the widget container
   const hideFloatingButton = () => {
-    // Find the widget container
-    const widgetContainer = document.querySelector('.booksy-widget-container');
+    // Find all widget containers
+    const widgetContainers = document.querySelectorAll('.booksy-widget-container');
     
-    if (widgetContainer) {
-      // Hide only the visible floating button, but keep the container functional
-      // The button inside can still be triggered programmatically
+    widgetContainers.forEach(widgetContainer => {
+      if (!widgetContainer) return;
+      
       const style = window.getComputedStyle(widgetContainer);
       
-      // If the container is positioned fixed at the bottom, hide it visually
-      // but keep it in the DOM so we can trigger it
+      // If the container is positioned fixed at the bottom (floating button), hide it
       if (style.position === 'fixed' || style.position === 'absolute') {
         const bottom = parseInt(style.bottom) || 0;
-        if (bottom >= 0) {
-          // Hide visually but keep functional
+        const right = parseInt(style.right) || 0;
+        
+        // Hide floating buttons (typically at bottom-right or bottom)
+        if (bottom >= 0 && (right >= 0 || style.right === 'auto')) {
           widgetContainer.style.opacity = '0';
           widgetContainer.style.pointerEvents = 'none';
           widgetContainer.style.visibility = 'hidden';
-          // But don't set display: none so we can still click the button inside
+          widgetContainer.style.display = 'none'; // Completely hide floating buttons
         }
       }
-    }
+    });
 
-    // Also hide any standalone floating buttons
+    // Hide any standalone floating buttons
     const floatingButtons = document.querySelectorAll('.booksy-widget-button');
     floatingButtons.forEach(button => {
       const container = button.closest('.booksy-widget-container');
-      const containerStyle = container ? window.getComputedStyle(container) : null;
-      
-      // If it's in a fixed container at bottom, hide it visually
-      if (containerStyle && 
-          (containerStyle.position === 'fixed' || containerStyle.position === 'absolute') &&
-          parseInt(containerStyle.bottom) >= 0) {
-        button.style.opacity = '0';
-        button.style.pointerEvents = 'none';
-        button.style.visibility = 'hidden';
+      if (container) {
+        const containerStyle = window.getComputedStyle(container);
+        
+        // If it's in a fixed container at bottom, hide it completely
+        if ((containerStyle.position === 'fixed' || containerStyle.position === 'absolute') &&
+            parseInt(containerStyle.bottom) >= 0) {
+          button.style.display = 'none';
+          button.style.visibility = 'hidden';
+          button.style.opacity = '0';
+          button.style.pointerEvents = 'none';
+        }
+      } else {
+        // Standalone button, check if it's floating
+        const buttonStyle = window.getComputedStyle(button);
+        if ((buttonStyle.position === 'fixed' || buttonStyle.position === 'absolute') &&
+            parseInt(buttonStyle.bottom) >= 0) {
+          button.style.display = 'none';
+          button.style.visibility = 'hidden';
+          button.style.opacity = '0';
+          button.style.pointerEvents = 'none';
+        }
       }
     });
 
@@ -54,7 +67,7 @@ export const hideBooksyWidget = () => {
       try {
         const elements = document.querySelectorAll(selector);
         elements.forEach(el => {
-          // Only hide if it's positioned fixed at bottom
+          // Only hide if it's positioned fixed at bottom (floating)
           const style = window.getComputedStyle(el);
           if ((style.position === 'fixed' || style.position === 'absolute') &&
               parseInt(style.bottom) >= 0) {
@@ -66,6 +79,33 @@ export const hideBooksyWidget = () => {
         });
       } catch (e) {
         // Ignore errors
+      }
+    });
+
+    // Hide any fixed positioned divs at the bottom that contain "rezerwuj" or "booksy"
+    const allDivs = document.querySelectorAll('div');
+    allDivs.forEach(div => {
+      // Skip our custom buttons
+      if (div.classList.contains('booksy-business-link') || 
+          div.querySelector('.booksy-business-link')) {
+        return;
+      }
+      
+      const style = window.getComputedStyle(div);
+      const text = div.textContent?.toLowerCase() || '';
+      const className = div.className?.toLowerCase() || '';
+      
+      // Hide floating elements at bottom that are Booksy-related
+      if ((style.position === 'fixed' || style.position === 'absolute') &&
+          parseInt(style.bottom) >= 0 &&
+          (text.includes('rezerwuj') || 
+           text.includes('booksy') ||
+           className.includes('booksy') ||
+           className.includes('rezerw'))) {
+        div.style.display = 'none';
+        div.style.visibility = 'hidden';
+        div.style.opacity = '0';
+        div.style.pointerEvents = 'none';
       }
     });
   };

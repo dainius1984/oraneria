@@ -17,14 +17,10 @@ export const openBooksyWidget = (e) => {
   if (booksyButton) {
     try {
       booksyButton.click();
-      // Set up click-outside handler and apply styles after opening
+      // Set up click-outside handler after opening (no aggressive styling)
       setTimeout(() => {
         setupClickOutsideHandler();
-        // Import and apply theme styles
-        import('./styleBooksyWidget.js').then(module => {
-          module.styleBooksyWidget();
-        });
-      }, 100);
+      }, 200);
       return;
     } catch (error) {
       console.log('Booksy button click failed:', error);
@@ -37,10 +33,7 @@ export const openBooksyWidget = (e) => {
       window.BooksyWidget.open();
       setTimeout(() => {
         setupClickOutsideHandler();
-        import('./styleBooksyWidget.js').then(module => {
-          module.styleBooksyWidget();
-        });
-      }, 100);
+      }, 200);
       return;
     } catch (error) {
       console.log('BooksyWidget.open() failed:', error);
@@ -53,10 +46,7 @@ export const openBooksyWidget = (e) => {
       window.Booksy.open();
       setTimeout(() => {
         setupClickOutsideHandler();
-        import('./styleBooksyWidget.js').then(module => {
-          module.styleBooksyWidget();
-        });
-      }, 100);
+      }, 200);
       return;
     } catch (error) {
       console.log('Booksy.open() failed:', error);
@@ -72,10 +62,7 @@ export const openBooksyWidget = (e) => {
         button.click();
         setTimeout(() => {
           setupClickOutsideHandler();
-          import('./styleBooksyWidget.js').then(module => {
-            module.styleBooksyWidget();
-          });
-        }, 100);
+        }, 200);
         return;
       } catch (error) {
         console.log('Widget container button click failed:', error);
@@ -97,14 +84,6 @@ export const openBooksyWidget = (e) => {
  * Closes the Booksy widget dialog
  */
 export const closeBooksyWidget = () => {
-  // Cleanup style observer
-  import('./styleBooksyWidget.js').then(module => {
-    if (module.cleanupBooksyStyles) {
-      module.cleanupBooksyStyles();
-    }
-  }).catch(() => {
-    // Ignore import errors
-  });
   // Method 1: Try Booksy API close method first
   if (window.BooksyWidget && typeof window.BooksyWidget.close === 'function') {
     try {

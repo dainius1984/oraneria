@@ -17,8 +17,14 @@ export const openBooksyWidget = (e) => {
   if (booksyButton) {
     try {
       booksyButton.click();
-      // Set up click-outside handler after opening
-      setTimeout(() => setupClickOutsideHandler(), 100);
+      // Set up click-outside handler and apply styles after opening
+      setTimeout(() => {
+        setupClickOutsideHandler();
+        // Import and apply theme styles
+        import('./styleBooksyWidget.js').then(module => {
+          module.styleBooksyWidget();
+        });
+      }, 100);
       return;
     } catch (error) {
       console.log('Booksy button click failed:', error);
@@ -29,7 +35,12 @@ export const openBooksyWidget = (e) => {
   if (window.BooksyWidget && typeof window.BooksyWidget.open === 'function') {
     try {
       window.BooksyWidget.open();
-      setTimeout(() => setupClickOutsideHandler(), 100);
+      setTimeout(() => {
+        setupClickOutsideHandler();
+        import('./styleBooksyWidget.js').then(module => {
+          module.styleBooksyWidget();
+        });
+      }, 100);
       return;
     } catch (error) {
       console.log('BooksyWidget.open() failed:', error);
@@ -40,7 +51,12 @@ export const openBooksyWidget = (e) => {
   if (window.Booksy && typeof window.Booksy.open === 'function') {
     try {
       window.Booksy.open();
-      setTimeout(() => setupClickOutsideHandler(), 100);
+      setTimeout(() => {
+        setupClickOutsideHandler();
+        import('./styleBooksyWidget.js').then(module => {
+          module.styleBooksyWidget();
+        });
+      }, 100);
       return;
     } catch (error) {
       console.log('Booksy.open() failed:', error);
@@ -54,7 +70,12 @@ export const openBooksyWidget = (e) => {
     if (button) {
       try {
         button.click();
-        setTimeout(() => setupClickOutsideHandler(), 100);
+        setTimeout(() => {
+          setupClickOutsideHandler();
+          import('./styleBooksyWidget.js').then(module => {
+            module.styleBooksyWidget();
+          });
+        }, 100);
         return;
       } catch (error) {
         console.log('Widget container button click failed:', error);
@@ -76,18 +97,7 @@ export const openBooksyWidget = (e) => {
  * Closes the Booksy widget dialog
  */
 export const closeBooksyWidget = () => {
-  // Try to find and click the close button
-  const closeButton = document.querySelector('.booksy-widget-container-dialog [class*="close"], .booksy-widget-container-dialog button[aria-label*="close" i], .booksy-widget-container-dialog [class*="Close"]');
-  if (closeButton) {
-    try {
-      closeButton.click();
-      return;
-    } catch (error) {
-      console.log('Close button click failed:', error);
-    }
-  }
-
-  // Try Booksy API close method
+  // Method 1: Try Booksy API close method first
   if (window.BooksyWidget && typeof window.BooksyWidget.close === 'function') {
     try {
       window.BooksyWidget.close();
@@ -97,17 +107,55 @@ export const closeBooksyWidget = () => {
     }
   }
 
-  // Try to find the overlay/backdrop and click it
-  const overlay = document.querySelector('.booksy-widget-container-dialog, [class*="booksy"][class*="overlay"], [class*="booksy"][class*="backdrop"]');
-  if (overlay) {
-    // Hide the dialog by removing it or hiding it
-    const dialog = document.querySelector('.booksy-widget-container-dialog');
-    if (dialog) {
-      dialog.style.display = 'none';
-      dialog.style.visibility = 'hidden';
-      dialog.style.opacity = '0';
+  // Method 2: Try alternative API
+  if (window.Booksy && typeof window.Booksy.close === 'function') {
+    try {
+      window.Booksy.close();
+      return;
+    } catch (error) {
+      console.log('Booksy.close() failed:', error);
     }
   }
+
+  // Method 3: Try to find and click the close button
+  const closeSelectors = [
+    '.booksy-widget-container-dialog [class*="close"]',
+    '.booksy-widget-container-dialog button[aria-label*="close" i]',
+    '.booksy-widget-container-dialog [class*="Close"]',
+    '[class*="booksy"] [class*="close-button"]',
+    '[class*="booksy"] [class*="close-btn"]',
+    '[class*="booksy"] button[aria-label*="zamknij" i]',
+    '[class*="booksy"] button[aria-label*="Close" i]'
+  ];
+
+  for (const selector of closeSelectors) {
+    const closeButton = document.querySelector(selector);
+    if (closeButton) {
+      try {
+        closeButton.click();
+        return;
+      } catch (error) {
+        console.log(`Close button click failed for ${selector}:`, error);
+      }
+    }
+  }
+
+  // Method 4: Hide the dialog manually
+  const dialog = document.querySelector('.booksy-widget-container-dialog');
+  if (dialog) {
+    dialog.style.display = 'none';
+    dialog.style.visibility = 'hidden';
+    dialog.style.opacity = '0';
+    dialog.style.pointerEvents = 'none';
+  }
+
+  // Also hide any Booksy overlays
+  const overlays = document.querySelectorAll('[class*="booksy"][class*="overlay"], [class*="booksy"][class*="backdrop"], [class*="booksy"][class*="modal"]');
+  overlays.forEach(overlay => {
+    overlay.style.display = 'none';
+    overlay.style.visibility = 'hidden';
+    overlay.style.opacity = '0';
+  });
 };
 
 /**
@@ -133,18 +181,49 @@ const setupClickOutsideHandler = () => {
     // Check if click/touch is outside the Booksy widget
     const widgetDialog = document.querySelector('.booksy-widget-container-dialog');
     const widgetContainer = document.querySelector('.booksy-widget-container');
+    const widgetIframe = document.querySelector('iframe[src*="booksy.com"]');
     
-    if (widgetDialog || widgetContainer) {
-      // Check if click/touch is inside the widget
-      const clickedInside = 
-        (widgetDialog && widgetDialog.contains(event.target)) ||
-        (widgetContainer && widgetContainer.contains(event.target)) ||
-        event.target.closest('.booksy-widget-container-dialog') ||
-        event.target.closest('.booksy-widget-container') ||
-        event.target.closest('[class*="booksy"]') ||
-        // Also check for overlay/backdrop clicks
-        event.target.classList.contains('booksy-overlay') ||
-        event.target.classList.contains('booksy-backdrop');
+    // Get all Booksy-related elements
+    const allBooksyElements = document.querySelectorAll('[class*="booksy"], [id*="booksy"], iframe[src*="booksy.com"]');
+    
+    if (widgetDialog || widgetContainer || widgetIframe || allBooksyElements.length > 0) {
+      // Check if click/touch is inside any Booksy element
+      let clickedInside = false;
+      
+      // Check if clicked inside dialog
+      if (widgetDialog && widgetDialog.contains(event.target)) {
+        clickedInside = true;
+      }
+      
+      // Check if clicked inside container
+      if (widgetContainer && widgetContainer.contains(event.target)) {
+        clickedInside = true;
+      }
+      
+      // Check if clicked inside iframe (we can't detect this directly, but check parent)
+      if (widgetIframe && (widgetIframe.contains(event.target) || event.target === widgetIframe)) {
+        clickedInside = true;
+      }
+      
+      // Check if clicked on any Booksy element or its children
+      allBooksyElements.forEach(el => {
+        if (el.contains(event.target) || el === event.target) {
+          clickedInside = true;
+        }
+      });
+      
+      // Check if clicked on element with Booksy classes
+      const targetElement = event.target;
+      if (targetElement) {
+        const targetClasses = targetElement.className || '';
+        const targetId = targetElement.id || '';
+        if (targetClasses.toLowerCase().includes('booksy') || 
+            targetId.toLowerCase().includes('booksy') ||
+            targetElement.closest('[class*="booksy"]') ||
+            targetElement.closest('[id*="booksy"]')) {
+          clickedInside = true;
+        }
+      }
 
       // If clicked outside, close the widget
       if (!clickedInside) {

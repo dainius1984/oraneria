@@ -65,30 +65,32 @@ const Hero = () => {
           </motion.p>
 
           {/* CTA Button */}
-          <motion.button
-            onClick={openBooksyWidget}
-            initial={{ opacity: 0, y: 20 }}
-            animate={videoLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            className="booksy-business-link inline-block px-8 md:px-10 py-3 md:py-4 rounded-full text-white font-light text-base md:text-lg tracking-[0.1em] uppercase shadow-xl cursor-pointer"
-            style={{ 
-              backgroundColor: '#C86B46', 
-              fontFamily: 'Playfair Display, serif', 
-              letterSpacing: '0.15em' 
-            }}
-            whileHover={{ 
-              scale: 1.05,
-              backgroundColor: '#E08D6D',
-              boxShadow: '0 15px 35px rgba(200, 107, 70, 0.5)'
-            }}
-            whileTap={{ scale: 0.95 }}
-            transition={{ 
-              opacity: { duration: 0.8, delay: 0.9, ease: 'easeOut' },
-              y: { duration: 0.8, delay: 0.9, ease: 'easeOut' },
-              default: { type: 'spring', stiffness: 400, damping: 17 }
-            }}
-          >
-            Umów Wizytę
-          </motion.button>
+          <div className="flex justify-center">
+            <motion.button
+              onClick={openBooksyWidget}
+              initial={{ opacity: 0, y: 20 }}
+              animate={videoLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              className="booksy-business-link px-8 md:px-10 py-3 md:py-4 rounded-full text-white font-light text-base md:text-lg tracking-[0.1em] uppercase shadow-xl cursor-pointer"
+              style={{ 
+                backgroundColor: '#C86B46', 
+                fontFamily: 'Playfair Display, serif', 
+                letterSpacing: '0.15em' 
+              }}
+              whileHover={{ 
+                scale: 1.05,
+                backgroundColor: '#E08D6D',
+                boxShadow: '0 15px 35px rgba(200, 107, 70, 0.5)'
+              }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ 
+                opacity: { duration: 0.8, delay: 0.9, ease: 'easeOut' },
+                y: { duration: 0.8, delay: 0.9, ease: 'easeOut' },
+                default: { type: 'spring', stiffness: 400, damping: 17 }
+              }}
+            >
+              Umów Wizytę
+            </motion.button>
+          </div>
         </motion.div>
       </div>
     </section>

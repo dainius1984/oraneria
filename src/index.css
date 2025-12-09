@@ -87,11 +87,22 @@
   [class*="booksy-widget"],
   [class*="booksy-button"],
   [class*="BooksyWidget"],
+  [class*="booksy"],
   iframe[src*="booksy.com"],
   div[data-booksy-widget],
-  a[href*="booksy.com"][target="_blank"]:not(.booksy-business-link) {
+  a[href*="booksy.com"][target="_blank"]:not(.booksy-business-link),
+  div[style*="position: fixed"][style*="bottom"],
+  div[style*="position:fixed"][style*="bottom"],
+  #booksy-widget-container,
+  .booksy-widget-container,
+  body > div:last-child[style*="position"],
+  body > div:last-child[style*="fixed"] {
     display: none !important;
     visibility: hidden !important;
     opacity: 0 !important;
+    height: 0 !important;
+    width: 0 !important;
+    overflow: hidden !important;
+    pointer-events: none !important;
   }
 }

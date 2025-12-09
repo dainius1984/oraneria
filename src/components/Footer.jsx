@@ -38,16 +38,16 @@ const Footer = () => {
             className="text-center"
           >
             <h2 
-              className="text-3xl md:text-4xl font-bold mb-3 text-orange-50"
+              className="text-3xl md:text-4xl font-bold mb-4 text-orange-50"
               style={{ fontFamily: 'Playfair Display, serif' }}
             >
               ORANŻERIA
             </h2>
-            <div className="mb-3 flex justify-center">
+            <div className="mb-4 flex justify-center">
               <img 
                 src="/img/logo/logo.png" 
                 alt="Oranżeria Logo" 
-                className="h-12 md:h-16 w-auto"
+                className="h-12 md:h-16 w-auto mx-auto"
               />
             </div>
             <p className="text-sm md:text-base text-orange-50/80 leading-relaxed">

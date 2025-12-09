@@ -1,12 +1,19 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
 import Navbar from './components/Navbar.jsx';
 import Footer from './components/Footer.jsx';
 import ScrollToTop from './components/ScrollToTop.jsx';
 import Home from './pages/Home.jsx';
 import AboutUs from './components/AboutUs.jsx';
 import Pricing from './components/Pricing.jsx';
+import { hideBooksyWidget } from './utils/hideBooksyWidget';
 
 function App() {
+  useEffect(() => {
+    // Hide Booksy floating widget
+    hideBooksyWidget();
+  }, []);
+
   return (
     <Router>
       <ScrollToTop />

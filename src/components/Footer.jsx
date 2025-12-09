@@ -40,8 +40,11 @@ const Footer = () => {
             >
               ORANŻERIA
             </h2>
+            <p className="text-sm md:text-base text-orange-50/80 leading-relaxed mb-2">
+              Więcej niż salon kosmetyczny.
+            </p>
             <p className="text-sm md:text-base text-orange-50/80 leading-relaxed">
-              Naturalne piękno w Twoim rytmie.
+              Twój azyl spokoju w sercu miasta.
             </p>
           </motion.div>
 

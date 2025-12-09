@@ -81,7 +81,7 @@ const AboutUs = () => {
       <section className="relative w-full h-[50vh] overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="/img/1.jpg"
+            src="/img/554358974_24832431279721695_407827954530258314_n.jpg"
             alt="Salon Oranżeria"
             className="w-full h-full object-cover"
             onError={(e) => {

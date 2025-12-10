@@ -1,6 +1,7 @@
 /**
- * Opens Booksy widget by clicking the actual Booksy widget button
+ * Simple function to open Booksy widget
  * Based on Booksy's standard implementation
+ * The script creates: <div class="booksy-widget-button"></div>
  */
 export const openBooksyWidget = (e) => {
   if (e) {
@@ -8,52 +9,69 @@ export const openBooksyWidget = (e) => {
     e.stopPropagation();
   }
 
-  // Wait for Booksy script to load, then click the button
-  const tryClickBooksyButton = () => {
-    // Find the Booksy widget button that Booksy creates
-    const booksyButton = document.querySelector('.booksy-widget-button');
-    
-    if (booksyButton) {
-      // Temporarily make it visible and clickable
-      const wasHidden = booksyButton.style.display === 'none' || 
-                       booksyButton.style.visibility === 'hidden' ||
-                       booksyButton.style.opacity === '0';
-      
-      if (wasHidden) {
-        booksyButton.style.display = 'block';
-        booksyButton.style.visibility = 'visible';
-        booksyButton.style.opacity = '1';
-        booksyButton.style.pointerEvents = 'auto';
-      }
+  // Function to find and click the Booksy button
+  const clickBooksyButton = () => {
+    // Method 1: Find the widget button that Booksy creates
+    const widgetButton = document.querySelector('.booksy-widget-button');
+    if (widgetButton) {
+      // Make sure it's clickable
+      widgetButton.style.display = 'block';
+      widgetButton.style.visibility = 'visible';
+      widgetButton.style.opacity = '1';
+      widgetButton.style.pointerEvents = 'auto';
+      widgetButton.style.position = 'fixed';
+      widgetButton.style.top = '50%';
+      widgetButton.style.left = '50%';
+      widgetButton.style.zIndex = '99999';
       
       // Click it
-      booksyButton.click();
-      
+      widgetButton.click();
       return true;
     }
-    
-    // Fallback: try the business link
+
+    // Method 2: Try the widget container button
+    const container = document.querySelector('.booksy-widget-container');
+    if (container) {
+      const button = container.querySelector('.booksy-widget-button');
+      if (button) {
+        button.style.display = 'block';
+        button.style.visibility = 'visible';
+        button.style.opacity = '1';
+        button.style.pointerEvents = 'auto';
+        button.click();
+        return true;
+      }
+    }
+
+    // Method 3: Try the business link
     const businessLink = document.querySelector('a.booksy-business-link[href*="booksy.com"]');
     if (businessLink) {
+      businessLink.target = '_self';
       businessLink.click();
       return true;
     }
-    
+
     return false;
   };
 
   // Try immediately
-  if (tryClickBooksyButton()) {
+  if (clickBooksyButton()) {
     return;
   }
 
-  // Wait a bit for script to load
-  setTimeout(() => {
-    if (!tryClickBooksyButton()) {
-      // Final fallback: open Booksy page
-      window.open('https://booksy.com/pl-pl/dl/show-business/263937', '_blank', 'noopener,noreferrer');
+  // Wait for Booksy script to load (max 2 seconds)
+  let attempts = 0;
+  const maxAttempts = 10;
+  const interval = setInterval(() => {
+    attempts++;
+    if (clickBooksyButton() || attempts >= maxAttempts) {
+      clearInterval(interval);
+      if (attempts >= maxAttempts) {
+        // Fallback: open Booksy page
+        window.open('https://booksy.com/pl-pl/dl/show-business/263937', '_blank', 'noopener,noreferrer');
+      }
     }
-  }, 300);
+  }, 200);
 };
 
 /**
@@ -68,5 +86,7 @@ export const closeBooksyWidget = () => {
   const dialog = document.querySelector('.booksy-widget-container-dialog');
   if (dialog) {
     dialog.style.display = 'none';
+    dialog.style.visibility = 'hidden';
+    dialog.style.opacity = '0';
   }
 };

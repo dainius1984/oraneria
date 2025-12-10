@@ -1,5 +1,12 @@
 /**
- * Opens Booksy widget by clicking the actual Booksy widget button
+ * Booksy Business URL - Direct link to Booksy booking page
+ * This opens in a new tab/window
+ */
+export const BOOKSY_BUSINESS_URL = 'https://booksy.com/pl-pl/dl/show-business/263937';
+
+/**
+ * Opens Booksy widget (modal/dialog on the page)
+ * This is different from the URL - widget opens without leaving the page
  * Based on Booksy's standard implementation from their script
  */
 export const openBooksyWidget = (e) => {
@@ -8,44 +15,90 @@ export const openBooksyWidget = (e) => {
     e.stopPropagation();
   }
 
-  const booksyUrl = 'https://booksy.com/pl-pl/dl/show-business/263937';
+  // Debug: Check what Booksy created
+  const debugBooksy = () => {
+    console.log('=== Booksy Debug ===');
+    console.log('window.BooksyWidget:', window.BooksyWidget);
+    console.log('window.Booksy:', window.Booksy);
+    console.log('window.openBooksyWidget:', window.openBooksyWidget);
+    
+    const widgetButton = document.querySelector('.booksy-widget-button');
+    const widgetContainer = document.querySelector('.booksy-widget-container');
+    const businessLink = document.querySelector('a.booksy-business-link');
+    const dialog = document.querySelector('.booksy-widget-container-dialog');
+    
+    console.log('.booksy-widget-button:', widgetButton);
+    console.log('.booksy-widget-container:', widgetContainer);
+    console.log('a.booksy-business-link:', businessLink);
+    console.log('.booksy-widget-container-dialog:', dialog);
+    
+    if (widgetButton) {
+      console.log('Widget button styles:', window.getComputedStyle(widgetButton));
+      console.log('Widget button display:', widgetButton.style.display);
+    }
+  };
 
   // Simple function to click the Booksy button
   const clickBooksyButton = () => {
-    // Find the widget button - Booksy creates: <div class="booksy-widget-button"></div>
+    // Method 1: Try Booksy API if available
+    if (window.BooksyWidget && typeof window.BooksyWidget.open === 'function') {
+      try {
+        console.log('Using BooksyWidget.open()');
+        window.BooksyWidget.open();
+        return true;
+      } catch (error) {
+        console.log('BooksyWidget.open() failed:', error);
+      }
+    }
+
+    if (window.Booksy && typeof window.Booksy.open === 'function') {
+      try {
+        console.log('Using Booksy.open()');
+        window.Booksy.open();
+        return true;
+      } catch (error) {
+        console.log('Booksy.open() failed:', error);
+      }
+    }
+
+    if (typeof window.openBooksyWidget === 'function') {
+      try {
+        console.log('Using window.openBooksyWidget()');
+        window.openBooksyWidget();
+        return true;
+      } catch (error) {
+        console.log('window.openBooksyWidget() failed:', error);
+      }
+    }
+
+    // Method 2: Find and click the widget button
     const widgetButton = document.querySelector('.booksy-widget-button');
     
     if (widgetButton) {
-      // Force it to be visible and clickable
-      const originalStyles = {
-        display: widgetButton.style.display,
-        visibility: widgetButton.style.visibility,
-        opacity: widgetButton.style.opacity,
-        pointerEvents: widgetButton.style.pointerEvents,
-        position: widgetButton.style.position
-      };
-
-      // Make it visible
-      widgetButton.style.cssText = `
-        display: block !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-        pointer-events: auto !important;
-        position: fixed !important;
-        top: 50% !important;
-        left: 50% !important;
-        transform: translate(-50%, -50%) !important;
-        z-index: 99999 !important;
-        width: auto !important;
-        height: auto !important;
-      `;
+      console.log('Found .booksy-widget-button, attempting to click');
       
-      // Click it multiple ways
+      // Make it visible and clickable
+      const originalDisplay = widgetButton.style.display;
+      const originalVisibility = widgetButton.style.visibility;
+      const originalOpacity = widgetButton.style.opacity;
+      const originalPointerEvents = widgetButton.style.pointerEvents;
+      
+      // Force visibility
+      widgetButton.style.display = 'block';
+      widgetButton.style.visibility = 'visible';
+      widgetButton.style.opacity = '1';
+      widgetButton.style.pointerEvents = 'auto';
+      widgetButton.style.position = 'fixed';
+      widgetButton.style.top = '50%';
+      widgetButton.style.left = '50%';
+      widgetButton.style.zIndex = '99999';
+      
+      // Try clicking
       try {
         // Direct click
         widgetButton.click();
         
-        // Dispatch click event
+        // Also try programmatic click event
         const clickEvent = new MouseEvent('click', {
           bubbles: true,
           cancelable: true,
@@ -54,19 +107,43 @@ export const openBooksyWidget = (e) => {
         });
         widgetButton.dispatchEvent(clickEvent);
         
-        // Also try mousedown/mouseup
-        widgetButton.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true }));
-        widgetButton.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, cancelable: true }));
+        // Restore styles after a moment
+        setTimeout(() => {
+          widgetButton.style.display = originalDisplay;
+          widgetButton.style.visibility = originalVisibility;
+          widgetButton.style.opacity = originalOpacity;
+          widgetButton.style.pointerEvents = originalPointerEvents;
+          widgetButton.style.position = '';
+          widgetButton.style.top = '';
+          widgetButton.style.left = '';
+          widgetButton.style.zIndex = '';
+        }, 100);
         
         return true;
       } catch (error) {
-        console.log('Error clicking Booksy button:', error);
+        console.log('Error clicking widget button:', error);
       }
     }
 
-    // Fallback: Try business link
+    // Method 3: Try widget container button
+    const widgetContainer = document.querySelector('.booksy-widget-container');
+    if (widgetContainer) {
+      const containerButton = widgetContainer.querySelector('.booksy-widget-button');
+      if (containerButton) {
+        console.log('Found button in container, clicking');
+        containerButton.style.display = 'block';
+        containerButton.style.visibility = 'visible';
+        containerButton.style.opacity = '1';
+        containerButton.style.pointerEvents = 'auto';
+        containerButton.click();
+        return true;
+      }
+    }
+
+    // Method 4: Try business link
     const businessLink = document.querySelector('a.booksy-business-link[href*="booksy.com"]');
     if (businessLink) {
+      console.log('Found business link, clicking');
       try {
         businessLink.target = '_self';
         businessLink.click();
@@ -79,6 +156,9 @@ export const openBooksyWidget = (e) => {
     return false;
   };
 
+  // Debug first
+  debugBooksy();
+
   // Try immediately
   if (clickBooksyButton()) {
     return;
@@ -89,14 +169,34 @@ export const openBooksyWidget = (e) => {
   const maxAttempts = 15;
   const checkInterval = setInterval(() => {
     attempts++;
+    
+    if (attempts === 1) {
+      console.log('Waiting for Booksy script to load...');
+    }
+    
     if (clickBooksyButton()) {
       clearInterval(checkInterval);
     } else if (attempts >= maxAttempts) {
       clearInterval(checkInterval);
-      // Final fallback: open Booksy page
-      window.open(booksyUrl, '_blank', 'noopener,noreferrer');
+      console.log('Booksy widget not found after', maxAttempts * 200, 'ms. Opening Booksy page directly.');
+      debugBooksy(); // Final debug
+      // Final fallback: open Booksy page (URL, not widget)
+      window.open(BOOKSY_BUSINESS_URL, '_blank', 'noopener,noreferrer');
     }
   }, 200);
+};
+
+/**
+ * Opens Booksy page directly (URL in new tab)
+ * This is different from the widget - opens the full Booksy booking page
+ */
+export const openBooksyPage = (e) => {
+  if (e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+  
+  window.open(BOOKSY_BUSINESS_URL, '_blank', 'noopener,noreferrer');
 };
 
 /**

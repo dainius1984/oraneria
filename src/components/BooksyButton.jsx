@@ -1,16 +1,22 @@
-import { openBooksyWidget } from '../utils/booksy';
+import { openBooksyWidget, openBooksyPage } from '../utils/booksy';
 
 const BooksyButton = ({ 
   text = 'Umów Wizytę', 
   variant = 'primary',
   className = '',
   size = 'default',
-  centered = false
+  centered = false,
+  action = 'widget' // 'widget' or 'page' - widget opens modal, page opens URL
 }) => {
   const handleClick = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    openBooksyWidget(e);
+    
+    if (action === 'page') {
+      openBooksyPage(e);
+    } else {
+      openBooksyWidget(e);
+    }
   };
 
   // Simple size classes

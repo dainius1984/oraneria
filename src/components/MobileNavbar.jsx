@@ -213,7 +213,8 @@ const MobileNavbar = ({ isVisible }) => {
                   >
                     <div className="w-full flex justify-center">
                       <BooksyButton 
-                        text="Rezerwacja" 
+                        text="Rezerwacja"
+                        action="page" 
                         variant="primary"
                         size="large"
                         centered={true}

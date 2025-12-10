@@ -199,7 +199,8 @@ const DesktopNavbar = ({ isVisible }) => {
 
               {/* CTA Button */}
               <BooksyButton 
-                text="Rezerwacja" 
+                text="Rezerwacja"
+                action="page" 
                 variant="primary"
                 size="small"
               />

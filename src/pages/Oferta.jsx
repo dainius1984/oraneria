@@ -30,34 +30,12 @@ const ServiceItem = ({ service, index }) => {
         {/* Right Side: Actions */}
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 md:gap-4 flex-shrink-0">
           {/* Primary Action: Booksy Booking Button */}
-          <motion.button
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              openBooksyWidget(e);
-            }}
-            className="booksy-business-link px-6 md:px-8 py-3 rounded-full text-white font-medium text-sm md:text-base tracking-wide uppercase shadow-lg cursor-pointer relative overflow-hidden whitespace-nowrap"
-            style={{ 
-              backgroundColor: '#B85C3A', // Darker terracotta
-              fontFamily: 'Playfair Display, serif',
-              letterSpacing: '0.1em'
-            }}
-            whileHover={{ 
-              scale: 1.05,
-              y: -2,
-              backgroundColor: '#C86B46',
-              boxShadow: '0 10px 25px rgba(184, 92, 58, 0.5)'
-            }}
-            whileTap={{ scale: 0.95 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-          >
-            <span className="relative z-10 flex items-center gap-2">
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-              Umów wizytę
-            </span>
-          </motion.button>
+          <BooksyButton
+            text="Umów wizytę"
+            variant="primary"
+            size="small"
+            className="whitespace-nowrap"
+          />
 
           {/* Secondary Action: Details Link */}
           <motion.a

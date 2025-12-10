@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import { openBooksyWidget } from '../utils/booksy';
 
 const BooksyButton = ({ 
@@ -14,86 +13,66 @@ const BooksyButton = ({
     openBooksyWidget(e);
   };
 
-  const baseStyles = {
-    primary: {
-      backgroundColor: '#B85C3A', // Darker terracotta (orange-700 equivalent)
-      color: 'white',
-      fontFamily: 'Playfair Display, serif',
-      letterSpacing: '0.1em',
-    },
-    outline: {
-      backgroundColor: 'transparent',
-      color: '#C86B46',
-      border: '2px solid #C86B46',
-      fontFamily: 'Playfair Display, serif',
-      letterSpacing: '0.1em',
-    }
-  };
-
-  const sizeStyles = {
+  // Simple size classes
+  const sizeClasses = {
     small: 'px-6 py-2.5 text-sm',
     default: 'px-8 md:px-12 py-4 md:py-5 text-base md:text-lg',
     large: 'px-10 md:px-16 py-5 md:py-6 text-lg md:text-xl'
   };
 
-  const buttonClasses = `
-    booksy-business-link
+  // Base button classes - no special Booksy classes
+  const baseClasses = `
     rounded-full
     font-medium
-    tracking-wide
-    uppercase
-    shadow-lg
     cursor-pointer
-    relative
-    overflow-hidden
     transition-all
     duration-300
-    ${sizeStyles[size]}
+    ${sizeClasses[size]}
     ${centered ? 'mx-auto block' : ''}
     ${className}
   `.trim().replace(/\s+/g, ' ');
 
-  const hoverStyles = variant === 'primary' 
-    ? { 
-        scale: 1.05,
-        y: -2, // Subtle lift effect
-        backgroundColor: '#C86B46', // Lighter on hover
-        boxShadow: '0 10px 25px rgba(184, 92, 58, 0.5)' // Enhanced shadow
+  // Simple styles based on variant
+  const buttonStyles = variant === 'primary' 
+    ? {
+        backgroundColor: '#B85C3A',
+        color: 'white',
+        fontFamily: 'Playfair Display, serif',
+        letterSpacing: '0.1em',
       }
     : {
-        scale: 1.05,
-        y: -2,
-        backgroundColor: '#C86B46',
-        color: 'white',
-        boxShadow: '0 10px 25px rgba(200, 107, 70, 0.4)'
+        backgroundColor: 'transparent',
+        color: '#C86B46',
+        border: '2px solid #C86B46',
+        fontFamily: 'Playfair Display, serif',
+        letterSpacing: '0.1em',
       };
 
   return (
-    <motion.button
+    <button
       onClick={handleClick}
-      className={buttonClasses}
-      style={baseStyles[variant]}
-      whileHover={hoverStyles}
-      whileTap={{ scale: 0.95 }}
-      transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+      className={baseClasses}
+      style={buttonStyles}
+      onMouseEnter={(e) => {
+        if (variant === 'primary') {
+          e.target.style.backgroundColor = '#C86B46';
+        } else {
+          e.target.style.backgroundColor = '#C86B46';
+          e.target.style.color = 'white';
+        }
+      }}
+      onMouseLeave={(e) => {
+        if (variant === 'primary') {
+          e.target.style.backgroundColor = '#B85C3A';
+        } else {
+          e.target.style.backgroundColor = 'transparent';
+          e.target.style.color = '#C86B46';
+        }
+      }}
     >
-      <span className="relative z-10">{text}</span>
-      {variant === 'primary' && (
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-          initial={{ x: '-100%' }}
-          animate={{ x: '100%' }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            repeatDelay: 3,
-            ease: 'easeInOut'
-          }}
-        />
-      )}
-    </motion.button>
+      {text}
+    </button>
   );
 };
 
 export default BooksyButton;
-

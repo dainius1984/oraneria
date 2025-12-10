@@ -38,8 +38,8 @@ export const openBooksyWidget = (e) => {
     }
   };
 
-  // Simple function to click the Booksy button
-  const clickBooksyButton = () => {
+  // Simple function to open Booksy widget
+  const openWidget = () => {
     // Method 1: Try Booksy API if available
     if (window.BooksyWidget && typeof window.BooksyWidget.open === 'function') {
       try {
@@ -71,52 +71,64 @@ export const openBooksyWidget = (e) => {
       }
     }
 
-    // Method 2: Find and click the widget button
+    // Method 2: Show the dialog directly (it's already in DOM)
+    const dialog = document.querySelector('.booksy-widget-container-dialog');
+    if (dialog) {
+      console.log('Found dialog, showing it directly');
+      try {
+        // Show the dialog
+        dialog.style.display = 'block';
+        dialog.style.visibility = 'visible';
+        dialog.style.opacity = '1';
+        dialog.style.pointerEvents = 'auto';
+        dialog.style.position = 'fixed';
+        dialog.style.top = '0';
+        dialog.style.left = '0';
+        dialog.style.width = '100%';
+        dialog.style.height = '100%';
+        dialog.style.zIndex = '99999';
+        
+        // Also try to trigger any iframes inside
+        const iframe = dialog.querySelector('iframe[src*="booksy.com"]');
+        if (iframe) {
+          iframe.style.display = 'block';
+          iframe.style.visibility = 'visible';
+          iframe.style.opacity = '1';
+        }
+        
+        return true;
+      } catch (error) {
+        console.log('Error showing dialog:', error);
+      }
+    }
+
+    // Method 3: Try clicking the widget button
     const widgetButton = document.querySelector('.booksy-widget-button');
-    
     if (widgetButton) {
       console.log('Found .booksy-widget-button, attempting to click');
-      
-      // Make it visible and clickable
-      const originalDisplay = widgetButton.style.display;
-      const originalVisibility = widgetButton.style.visibility;
-      const originalOpacity = widgetButton.style.opacity;
-      const originalPointerEvents = widgetButton.style.pointerEvents;
-      
-      // Force visibility
-      widgetButton.style.display = 'block';
-      widgetButton.style.visibility = 'visible';
-      widgetButton.style.opacity = '1';
-      widgetButton.style.pointerEvents = 'auto';
-      widgetButton.style.position = 'fixed';
-      widgetButton.style.top = '50%';
-      widgetButton.style.left = '50%';
-      widgetButton.style.zIndex = '99999';
-      
-      // Try clicking
       try {
-        // Direct click
+        // Make it visible temporarily
+        const originalStyles = {
+          display: widgetButton.style.display,
+          visibility: widgetButton.style.visibility,
+          opacity: widgetButton.style.opacity,
+          pointerEvents: widgetButton.style.pointerEvents
+        };
+        
+        widgetButton.style.display = 'block';
+        widgetButton.style.visibility = 'visible';
+        widgetButton.style.opacity = '1';
+        widgetButton.style.pointerEvents = 'auto';
+        
+        // Click it
         widgetButton.click();
         
-        // Also try programmatic click event
-        const clickEvent = new MouseEvent('click', {
-          bubbles: true,
-          cancelable: true,
-          view: window,
-          buttons: 1
-        });
-        widgetButton.dispatchEvent(clickEvent);
-        
-        // Restore styles after a moment
+        // Restore after a moment
         setTimeout(() => {
-          widgetButton.style.display = originalDisplay;
-          widgetButton.style.visibility = originalVisibility;
-          widgetButton.style.opacity = originalOpacity;
-          widgetButton.style.pointerEvents = originalPointerEvents;
-          widgetButton.style.position = '';
-          widgetButton.style.top = '';
-          widgetButton.style.left = '';
-          widgetButton.style.zIndex = '';
+          widgetButton.style.display = originalStyles.display;
+          widgetButton.style.visibility = originalStyles.visibility;
+          widgetButton.style.opacity = originalStyles.opacity;
+          widgetButton.style.pointerEvents = originalStyles.pointerEvents;
         }, 100);
         
         return true;
@@ -125,28 +137,18 @@ export const openBooksyWidget = (e) => {
       }
     }
 
-    // Method 3: Try widget container button
-    const widgetContainer = document.querySelector('.booksy-widget-container');
-    if (widgetContainer) {
-      const containerButton = widgetContainer.querySelector('.booksy-widget-button');
-      if (containerButton) {
-        console.log('Found button in container, clicking');
-        containerButton.style.display = 'block';
-        containerButton.style.visibility = 'visible';
-        containerButton.style.opacity = '1';
-        containerButton.style.pointerEvents = 'auto';
-        containerButton.click();
-        return true;
-      }
-    }
-
-    // Method 4: Try business link
+    // Method 4: Try business link (but change target to _self so widget can intercept)
     const businessLink = document.querySelector('a.booksy-business-link[href*="booksy.com"]');
     if (businessLink) {
-      console.log('Found business link, clicking');
+      console.log('Found business link, clicking with _self target');
       try {
+        const originalTarget = businessLink.target;
         businessLink.target = '_self';
         businessLink.click();
+        // Restore after a moment
+        setTimeout(() => {
+          businessLink.target = originalTarget;
+        }, 100);
         return true;
       } catch (error) {
         console.log('Error clicking business link:', error);
@@ -160,7 +162,7 @@ export const openBooksyWidget = (e) => {
   debugBooksy();
 
   // Try immediately
-  if (clickBooksyButton()) {
+  if (openWidget()) {
     return;
   }
 
@@ -174,7 +176,7 @@ export const openBooksyWidget = (e) => {
       console.log('Waiting for Booksy script to load...');
     }
     
-    if (clickBooksyButton()) {
+    if (openWidget()) {
       clearInterval(checkInterval);
     } else if (attempts >= maxAttempts) {
       clearInterval(checkInterval);

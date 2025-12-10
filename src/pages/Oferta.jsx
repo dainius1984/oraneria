@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
 import BooksyButton from '../components/BooksyButton';
-import { openBooksyWidget } from '../utils/booksy';
 
 // Service Item Component - Restaurant Menu Style
 const ServiceItem = ({ service, index }) => {

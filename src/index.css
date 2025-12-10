@@ -123,6 +123,9 @@
     pointer-events: none !important;
   }
 
+  /* Note: REZERWUJ button hiding is handled by JavaScript in closeBooksyWidget() */
+  /* CSS cannot reliably detect text content, so we use JS to find and hide buttons with "REZERWUJ" text */
+
 
   /* Ensure our custom Booksy buttons are always visible */
   .booksy-business-link {

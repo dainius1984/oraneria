@@ -1,3 +1,6 @@
+// Import hideBooksyWidget to ensure floating buttons are hidden when closing
+import { hideBooksyWidget } from './hideBooksyWidget.js';
+
 /**
  * Booksy Business URL - Direct link to Booksy booking page
  * This opens in a new tab/window
@@ -7,10 +10,6 @@ export const BOOKSY_BUSINESS_URL = 'https://booksy.com/pl-pl/dl/show-business/26
 /**
  * Opens Booksy widget (modal/dialog on the page)
  * This is different from the URL - widget opens without leaving the page
- * 
- * The Booksy script (https://booksy.com/widget/code.js?id=263937&country=pl&lang=pl)
- * creates an <a class="booksy-business-link"> element that, when clicked, opens the widget.
- * We need to find this link and click it properly.
  */
 export const openBooksyWidget = (e) => {
   if (e) {
@@ -18,190 +17,52 @@ export const openBooksyWidget = (e) => {
     e.stopPropagation();
   }
 
-  console.log('=== Opening Booksy Widget ===');
+  console.log('=== Opening Booksy Widget (Simplified) ===');
 
-  // Helper function to try opening the widget
-  const tryOpenWidget = () => {
-    // Method 1: Try clicking the Booksy widget button directly
-    // Booksy creates: <div class="booksy-widget-button"></div>
-    const booksyButton = document.querySelector('.booksy-widget-button');
-    if (booksyButton) {
-      console.log('Found booksy-widget-button, clicking...');
-      try {
-        // Temporarily make button visible and clickable if hidden
-        const originalDisplay = booksyButton.style.display;
-        const originalVisibility = booksyButton.style.visibility;
-        const originalOpacity = booksyButton.style.opacity;
-        const originalPointerEvents = booksyButton.style.pointerEvents;
-        
-        booksyButton.style.display = 'block';
-        booksyButton.style.visibility = 'visible';
-        booksyButton.style.opacity = '1';
-        booksyButton.style.pointerEvents = 'auto';
-        
-      // Click the button
+  // Method 1: Try clicking the Booksy widget button directly
+  // The Booksy script creates a hidden button that triggers the widget
+  const booksyButton = document.querySelector('.booksy-widget-button');
+  
+  if (booksyButton) {
+    try {
+      // Ensure the button is clickable
+      const originalPointerEvents = booksyButton.style.pointerEvents;
+      booksyButton.style.pointerEvents = 'auto';
+      
       booksyButton.click();
       
-      // Restore styles after click
+      // Restore pointer events
       setTimeout(() => {
-        booksyButton.style.display = originalDisplay;
-        booksyButton.style.visibility = originalVisibility;
-        booksyButton.style.opacity = originalOpacity;
         booksyButton.style.pointerEvents = originalPointerEvents;
       }, 100);
       
-      // Ensure dialog is visible after opening - check multiple times
-      const ensureDialogVisible = () => {
-        const dialog = document.querySelector('.booksy-widget-container-dialog');
-        if (dialog) {
-          // Force dialog to be visible
-          dialog.style.setProperty('display', 'flex', 'important');
-          dialog.style.setProperty('visibility', 'visible', 'important');
-          dialog.style.setProperty('opacity', '1', 'important');
-          dialog.style.setProperty('pointer-events', 'auto', 'important');
-          dialog.style.setProperty('position', 'fixed', 'important');
-          dialog.style.setProperty('top', '0', 'important');
-          dialog.style.setProperty('left', '0', 'important');
-          dialog.style.setProperty('width', '100%', 'important');
-          dialog.style.setProperty('height', '100%', 'important');
-          dialog.style.setProperty('z-index', '99999', 'important');
-          
-          // Make sure any iframe inside is visible
-          const iframe = dialog.querySelector('iframe');
-          if (iframe) {
-            iframe.style.setProperty('display', 'block', 'important');
-            iframe.style.setProperty('visibility', 'visible', 'important');
-            iframe.style.setProperty('opacity', '1', 'important');
-          }
-          
-          console.log('Dialog forced to be visible');
-          return true;
-        }
-        return false;
-      };
-      
-      // Check immediately, then after delays
-      setTimeout(() => {
-        if (ensureDialogVisible()) {
-          setupClickOutsideHandler();
-        }
-      }, 200);
-      
-      setTimeout(() => {
-        if (ensureDialogVisible()) {
-          setupClickOutsideHandler();
-        }
-      }, 500);
-      
-      setTimeout(() => {
-        if (ensureDialogVisible()) {
-          setupClickOutsideHandler();
-        }
-      }, 1000);
-      
-      console.log('Widget button clicked');
-      return true;
-      } catch (error) {
-        console.error('Error clicking widget button:', error);
-      }
+      // Setup close handlers
+      setTimeout(setupClickOutsideHandler, 500);
+      return;
+    } catch (error) {
+      console.error('Error clicking widget button:', error);
     }
-    return false;
-  };
-
-  // Try immediately
-  if (tryOpenWidget()) {
-    return;
   }
 
   // Method 2: Try clicking the business link
   const businessLink = document.querySelector('a.booksy-business-link[href*="booksy.com"]');
   if (businessLink) {
-    console.log('Found booksy-business-link, clicking...');
     try {
-      const originalTarget = businessLink.target;
-      businessLink.removeAttribute('target');
-      
-      const clickEvent = new MouseEvent('click', {
-        view: window,
-        bubbles: true,
-        cancelable: true,
-        buttons: 1
-      });
-      
-      businessLink.dispatchEvent(clickEvent);
       businessLink.click();
-      
-      setTimeout(() => {
-        if (originalTarget) {
-          businessLink.target = originalTarget;
-        }
-        setupClickOutsideHandler();
-      }, 300);
-      
-      console.log('Business link clicked');
+      setTimeout(setupClickOutsideHandler, 500);
       return;
     } catch (error) {
       console.error('Error clicking business link:', error);
     }
   }
-
-  // If not found, wait a bit for Booksy script to load and try again
-  setTimeout(() => {
-    if (tryOpenWidget()) {
-      return;
-    }
-    
-    // Try business link again
-    const retryLink = document.querySelector('a.booksy-business-link[href*="booksy.com"]');
-    if (retryLink) {
-      try {
-        retryLink.removeAttribute('target');
-        retryLink.click();
-        setTimeout(() => setupClickOutsideHandler(), 300);
-        return;
-      } catch (error) {
-        console.error('Error clicking retry link:', error);
-      }
-    }
-    
-    // Fallback: Try to show dialog directly
-    const dialog = document.querySelector('.booksy-widget-container-dialog');
-    if (dialog) {
-      console.log('Trying to show dialog directly...');
-      
-      const iframe = dialog.querySelector('iframe');
-      dialog.style.display = 'flex';
-      dialog.style.visibility = 'visible';
-      dialog.style.opacity = '1';
-      dialog.style.pointerEvents = 'auto';
-      dialog.style.position = 'fixed';
-      dialog.style.top = '0';
-      dialog.style.left = '0';
-      dialog.style.width = '100%';
-      dialog.style.height = '100%';
-      dialog.style.zIndex = '9999';
-      
-      if (iframe) {
-        iframe.style.display = 'block';
-        iframe.style.visibility = 'visible';
-        iframe.style.opacity = '1';
-        iframe.style.width = '100%';
-        iframe.style.height = '100%';
-      }
-      
-      setTimeout(() => setupClickOutsideHandler(), 300);
-      return;
-    }
-    
-    // Final fallback: open Booksy page in new tab
-    console.warn('Widget could not be opened, opening Booksy page instead');
-    window.open(BOOKSY_BUSINESS_URL, '_blank', 'noopener,noreferrer');
-  }, 500);
+  
+  // Fallback: If widget can't be opened, open in new tab
+  console.log('Falling back to opening Booksy page');
+  window.open(BOOKSY_BUSINESS_URL, '_blank', 'noopener,noreferrer');
 };
 
 /**
  * Opens Booksy page directly (URL in new tab)
- * This is different from the widget - opens the full Booksy booking page
  */
 export const openBooksyPage = (e) => {
   if (e) {
@@ -213,102 +74,111 @@ export const openBooksyPage = (e) => {
 };
 
 /**
- * Closes Booksy widget
+ * Closes Booksy widget - Simplified version
  */
 export const closeBooksyWidget = () => {
-  const dialog = document.querySelector('.booksy-widget-container-dialog');
-  if (dialog) {
-    dialog.style.display = 'none';
-    dialog.style.visibility = 'hidden';
-    dialog.style.opacity = '0';
-    dialog.style.pointerEvents = 'none';
-  }
+  console.log('=== Closing Booksy Widget ===');
   
-  // Also try API if available
+  // 1. Try Booksy API
   if (window.BooksyWidget && typeof window.BooksyWidget.close === 'function') {
     try {
       window.BooksyWidget.close();
     } catch (error) {
-      console.log('BooksyWidget.close() failed:', error);
+      console.log('BooksyWidget.close error:', error);
     }
   }
+  
+  // 2. Hide dialog containers using standard classes
+  const dialogs = document.querySelectorAll('.booksy-widget-container-dialog, [class*="booksy"][class*="dialog"]');
+  dialogs.forEach(dialog => {
+    // Force hide
+    dialog.style.setProperty('display', 'none', 'important');
+    dialog.style.setProperty('visibility', 'hidden', 'important');
+    dialog.style.setProperty('opacity', '0', 'important');
+    dialog.style.setProperty('pointer-events', 'none', 'important');
+    dialog.style.setProperty('z-index', '-1', 'important');
+  });
+  
+  // 3. Remove any overlays/backdrops
+  const overlays = document.querySelectorAll('[class*="booksy"][class*="overlay"], [class*="booksy"][class*="backdrop"]');
+  overlays.forEach(overlay => {
+    overlay.style.setProperty('display', 'none', 'important');
+  });
+  
+  // 4. Restore body scrolling
+  if (document.body) {
+    document.body.style.removeProperty('overflow');
+    document.body.style.removeProperty('position');
+    document.body.style.removeProperty('top');
+    document.body.style.removeProperty('width');
+    document.body.style.setProperty('overflow', 'auto', 'important');
+  }
+  
+  if (document.documentElement) {
+    document.documentElement.style.removeProperty('overflow');
+    document.documentElement.style.setProperty('overflow', 'auto', 'important');
+  }
+
+  // 5. Hide the floating "Rezerwuj" button if it appeared
+  try {
+    hideBooksyWidget();
+  } catch (e) {
+    console.error(e);
+  }
+  
+  // Double check cleanup after a delay
+  setTimeout(() => {
+    const leftoverDialogs = document.querySelectorAll('.booksy-widget-container-dialog');
+    leftoverDialogs.forEach(d => {
+      d.style.setProperty('display', 'none', 'important');
+    });
+  }, 100);
 };
 
 /**
- * Sets up click-outside handler to close the widget
+ * Sets up click-outside handler
  */
 let clickOutsideHandler = null;
-let touchOutsideHandler = null;
 
 const setupClickOutsideHandler = () => {
-  // Remove existing handlers if any
+  // Remove existing
   if (clickOutsideHandler) {
     document.removeEventListener('click', clickOutsideHandler);
     clickOutsideHandler = null;
   }
-  if (touchOutsideHandler) {
-    document.removeEventListener('touchend', touchOutsideHandler);
-    touchOutsideHandler = null;
-  }
 
-  // Handler for mouse clicks and touch events
   const handleOutsideClick = (event) => {
-    const widgetDialog = document.querySelector('.booksy-widget-container-dialog');
-    const widgetContainer = document.querySelector('.booksy-widget-container');
-    const widgetIframe = document.querySelector('iframe[src*="booksy.com"]');
-    
-    if (widgetDialog || widgetContainer || widgetIframe) {
-      let clickedInside = false;
-      
-      if (widgetDialog && widgetDialog.contains(event.target)) {
-        clickedInside = true;
-      }
-      
-      if (widgetContainer && widgetContainer.contains(event.target)) {
-        clickedInside = true;
-      }
-      
-      if (widgetIframe && (widgetIframe.contains(event.target) || event.target === widgetIframe)) {
-        clickedInside = true;
-      }
-      
-      // Check if clicked on Booksy element
-      const targetElement = event.target;
-      if (targetElement) {
-        const targetClasses = targetElement.className || '';
-        const targetId = targetElement.id || '';
-        if (targetClasses.toLowerCase().includes('booksy') || 
-            targetId.toLowerCase().includes('booksy') ||
-            targetElement.closest('[class*="booksy"]') ||
-            targetElement.closest('[id*="booksy"]')) {
-          clickedInside = true;
-        }
-      }
+    // If clicking on one of our custom buttons, don't interfere
+    if (event.target.closest('.booksy-business-link') || 
+        event.target.classList.contains('booksy-business-link')) {
+      return;
+    }
 
-      // If clicked outside, close the widget
-      if (!clickedInside) {
-        closeBooksyWidget();
-        document.removeEventListener('click', clickOutsideHandler);
-        document.removeEventListener('touchend', touchOutsideHandler);
-        clickOutsideHandler = null;
-        touchOutsideHandler = null;
-      }
-    } else {
-      // Widget not found, remove handlers
+    // Check if widget is visible
+    const widgetDialog = document.querySelector('.booksy-widget-container-dialog');
+    if (!widgetDialog) return;
+    
+    const style = window.getComputedStyle(widgetDialog);
+    if (style.display === 'none' || style.visibility === 'hidden') return;
+
+    // Check if click is outside the content
+    // Booksy usually has a content wrapper inside the dialog
+    const content = widgetDialog.querySelector('iframe') || widgetDialog.querySelector('div > div');
+    
+    if (content && !content.contains(event.target)) {
+      console.log('Clicked outside widget content');
+      closeBooksyWidget();
+      
+      // Cleanup listener
       document.removeEventListener('click', clickOutsideHandler);
-      document.removeEventListener('touchend', touchOutsideHandler);
       clickOutsideHandler = null;
-      touchOutsideHandler = null;
     }
   };
 
-  // Create handlers
   clickOutsideHandler = handleOutsideClick;
-  touchOutsideHandler = handleOutsideClick;
-
-  // Add handlers with a delay
+  
+  // Delay attachment to avoid immediate trigger
   setTimeout(() => {
-    document.addEventListener('click', clickOutsideHandler, true);
-    document.addEventListener('touchend', touchOutsideHandler, true);
-  }, 100);
+    document.addEventListener('click', clickOutsideHandler);
+  }, 200);
 };

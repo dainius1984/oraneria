@@ -51,46 +51,56 @@ const AboutUs = () => {
 
   return (
     <div className="w-full bg-[#FFFAF5]">
-      {/* Hero Section - With Image Background */}
-      <section className="relative w-full pt-24 md:pt-28 pb-20 md:pb-24 px-4 md:px-8 overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0">
-          <img
-            src="/img/469171614_17842771176380714_7787508925189487850_n.jpg"
-            alt="Oranżeria"
-            className="w-full h-full object-cover opacity-20"
-            onError={(e) => {
-              e.target.src = 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=1200&h=600&fit=crop';
-            }}
-          />
-          <div className="absolute inset-0 bg-[#FFFAF5]/80" />
-        </div>
-        
-        <div className="relative z-10 max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-center"
-          >
-            {/* Main heading */}
-            <h1 
-              className="text-5xl md:text-6xl lg:text-7xl font-bold text-[#2F4F4F] leading-tight mb-4"
-              style={{ fontFamily: 'Playfair Display, serif' }}
-            >
-              Witaj w ORANŻERII!
-            </h1>
-            <motion.p
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
+      {/* Hero Section - Elegant Split Layout */}
+      <section className="relative w-full pt-24 md:pt-28 pb-20 md:pb-24 px-4 md:px-8 bg-[#FFFAF5]">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
+            {/* Left: Text Content */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto"
+              transition={{ duration: 0.8 }}
+              className="text-center lg:text-left"
             >
-              Miejsce, gdzie piękno spotyka się z naturą
-            </motion.p>
-          </motion.div>
+              <h1 
+                className="text-5xl md:text-6xl lg:text-7xl font-bold text-[#2F4F4F] leading-tight mb-6"
+                style={{ fontFamily: 'Playfair Display, serif' }}
+              >
+                Witaj w ORANŻERII!
+              </h1>
+              <motion.p
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="text-lg md:text-xl text-gray-600 leading-relaxed"
+              >
+                Miejsce, gdzie piękno spotyka się z naturą, a każdy szczegół tworzony jest z myślą o Twoim komforcie i dobrej energii.
+              </motion.p>
+            </motion.div>
+
+            {/* Right: Elegant Image */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="relative"
+            >
+              <div className="relative overflow-hidden rounded-2xl shadow-xl">
+                <img
+                  src="/img/1.jpg"
+                  alt="Oranżeria - Salon Piękności"
+                  className="w-full h-[400px] md:h-[500px] object-cover"
+                  onError={(e) => {
+                    e.target.src = '/img/469171614_17842771176380714_7787508925189487850_n.jpg';
+                  }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent" />
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 

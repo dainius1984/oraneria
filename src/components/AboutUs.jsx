@@ -84,33 +84,58 @@ const AboutUs = () => {
         </div>
       </section>
 
-      {/* About Us Section - Cream Background, Left Aligned */}
+      {/* About Us Section - Two Column Layout */}
       <section className="w-full py-16 md:py-24 px-4 md:px-8 bg-[#FFFAF5]">
-        <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h2 
-              className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#2F4F4F] mb-6"
-              style={{ fontFamily: 'Playfair Display, serif' }}
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
+            {/* Left Column: Text Content */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.8 }}
             >
-              O nas
-            </h2>
-            <div className="space-y-4 text-base md:text-lg text-gray-700 leading-relaxed">
-              <p>
-                To miejsce gdzie piękno spotyka się z naturą, a każdy szczegół wnętrza stworzony jest z myślą o komforcie naszych gości którym oferujemy kompleksową gamę usług - od pielęgnacji twarzy, przez relaksujące zabiegi na ciało oraz skórę głowy aż po pielęgnację i stylizację dłoni oraz stóp.
-              </p>
-              <p>
-                Zatrzymaj się w ORANŻERII, gdzie przestronny, stylowy wystrój i atmosfera pełna spokoju tworzą dla Ciebie idealne warunki do relaksu, a nasz zespół profesjonalistów zadba o Twoje piękno i dobre samopoczucie. Dla nas żadne wyzwanie skórne nie jest problemem!
-              </p>
-              <p>
-                ORANŻERIA to połączenie najnowocześniejszych na rynku technologii i urządzeń, wysokiej jakości kosmetyków oraz doświadczenia wykwalifikowanego personelu.
-              </p>
-            </div>
-          </motion.div>
+              <h2 
+                className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#2F4F4F] mb-6"
+                style={{ fontFamily: 'Playfair Display, serif' }}
+              >
+                O nas
+              </h2>
+              <div className="space-y-4 text-base md:text-lg text-gray-700 leading-relaxed">
+                <p>
+                  To miejsce gdzie piękno spotyka się z naturą, a każdy szczegół wnętrza stworzony jest z myślą o komforcie naszych gości którym oferujemy kompleksową gamę usług - od pielęgnacji twarzy, przez relaksujące zabiegi na ciało oraz skórę głowy aż po pielęgnację i stylizację dłoni oraz stóp.
+                </p>
+                <p>
+                  Zatrzymaj się w ORANŻERII, gdzie przestronny, stylowy wystrój i atmosfera pełna spokoju tworzą dla Ciebie idealne warunki do relaksu, a nasz zespół profesjonalistów zadba o Twoje piękno i dobre samopoczucie. Dla nas żadne wyzwanie skórne nie jest problemem!
+                </p>
+                <p>
+                  ORANŻERIA to połączenie najnowocześniejszych na rynku technologii i urządzeń, wysokiej jakości kosmetyków oraz doświadczenia wykwalifikowanego personelu.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Right Column: Image */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.8 }}
+              className="relative"
+            >
+              <div className="relative overflow-hidden rounded-2xl shadow-lg">
+                <img
+                  src="/img/1.jpg"
+                  alt="Wnętrze Oranżerii"
+                  className="w-full h-full object-cover"
+                  style={{ minHeight: '400px' }}
+                  onError={(e) => {
+                    e.target.src = 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&h=600&fit=crop';
+                  }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -213,7 +238,7 @@ const AboutUs = () => {
         </div>
       </section>
 
-      {/* Team Section - Cream Background, 2-Column Grid */}
+      {/* Team Section - Cream Background, 3-Column Grid */}
       <section className="w-full py-16 md:py-24 px-4 md:px-8 bg-[#FFFAF5]">
         <div className="max-w-7xl mx-auto">
           <motion.div
@@ -224,12 +249,35 @@ const AboutUs = () => {
             className="text-center mb-12 md:mb-16"
           >
             <h2 
-              className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#2F4F4F] mb-6"
+              className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#2F4F4F] mb-8"
               style={{ fontFamily: 'Playfair Display, serif' }}
             >
               Nasi specjaliści
             </h2>
-            <div className="space-y-4 text-base md:text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
+            
+            {/* Team Hero Image */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="mb-12 md:mb-16"
+            >
+              <div className="relative overflow-hidden rounded-2xl shadow-lg max-w-5xl mx-auto">
+                <img
+                  src="/img/2.jpg"
+                  alt="Zespół Oranżerii"
+                  className="w-full h-full object-cover"
+                  style={{ minHeight: '300px', maxHeight: '500px' }}
+                  onError={(e) => {
+                    e.target.src = 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=1200&h=600&fit=crop';
+                  }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
+              </div>
+            </motion.div>
+
+            <div className="space-y-4 text-base md:text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed mb-12">
               <p>
                 Za każdą wizytą w naszym salonie stoi zespół pełen pasji, doświadczenia i uważności. Nasze specjalistki łączą wspólny cel - troskę o Twoje piękno, komfort i dobre samopoczucie.
               </p>
@@ -239,7 +287,8 @@ const AboutUs = () => {
             </div>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 lg:gap-16">
+          {/* 3-Column Grid for Specialists */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 lg:gap-12">
             {teamMembers.map((member, index) => (
               <motion.div
                 key={member.id}
@@ -247,19 +296,40 @@ const AboutUs = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.6, delay: index * 0.15 }}
-                className="space-y-4"
+                className="flex flex-col items-center text-center"
               >
-                <div>
-                  <h3 
-                    className="text-2xl md:text-3xl font-bold text-[#2F4F4F] mb-2"
-                    style={{ fontFamily: 'Playfair Display, serif' }}
-                  >
-                    {member.name}
-                  </h3>
-                  <p className="text-lg md:text-xl text-[#C86B46] font-medium mb-4">
-                    {member.role}
-                  </p>
+                {/* Circular Headshot Placeholder */}
+                <div className="mb-6 w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden shadow-lg bg-gray-200 flex items-center justify-center">
+                  <img
+                    src={`/img/team-${member.id}.jpg`}
+                    alt={member.name}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      // Placeholder if image doesn't exist
+                      e.target.style.display = 'none';
+                      e.target.parentElement.innerHTML = `
+                        <div class="w-full h-full bg-gradient-to-br from-[#C86B46] to-[#E08D6D] flex items-center justify-center">
+                          <span class="text-white text-4xl font-bold" style="font-family: 'Playfair Display', serif;">
+                            ${member.name.split(' ').map(n => n[0]).join('')}
+                          </span>
+                        </div>
+                      `;
+                    }}
+                  />
                 </div>
+
+                {/* Name and Role */}
+                <h3 
+                  className="text-2xl md:text-3xl font-bold text-[#2F4F4F] mb-2"
+                  style={{ fontFamily: 'Playfair Display, serif' }}
+                >
+                  {member.name}
+                </h3>
+                <p className="text-lg md:text-xl text-[#C86B46] font-medium mb-4">
+                  {member.role}
+                </p>
+
+                {/* Bio */}
                 <div className="space-y-3 text-base md:text-lg text-gray-700 leading-relaxed">
                   <p>{member.description}</p>
                   <p>{member.details}</p>

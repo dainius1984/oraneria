@@ -69,10 +69,16 @@ const Oferta = () => {
     }
   };
 
+  const handleBookConsultation = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    openBooksyWidget(e);
+  };
+
   return (
     <div className="w-full bg-[#FFFAF5] min-h-screen">
       {/* Hero Section */}
-      <section className="relative w-full py-16 md:py-24 px-4 md:px-8">
+      <section className="relative w-full pt-24 md:pt-32 pb-16 md:pb-24 px-4 md:px-8">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -125,7 +131,7 @@ const Oferta = () => {
       </section>
 
       {/* Services Section */}
-      <section id="services-section" className="w-full py-12 md:py-16 px-4 md:px-8">
+      <section id="services-section" className="w-full py-12 md:py-20 px-4 md:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="space-y-8 md:space-y-12">
             {services.map((service, index) => (
@@ -154,12 +160,13 @@ const Oferta = () => {
 
       {/* Consultation CTA Section */}
       <section className="w-full py-16 md:py-24 px-4 md:px-8 bg-white/30">
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
+            className="text-center"
           >
             <h2 
               className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#2F4F4F] mb-6"
@@ -167,22 +174,41 @@ const Oferta = () => {
             >
               Nie wiesz, od czego zacząć?
             </h2>
-            <p className="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed">
+            <p className="text-lg md:text-xl text-gray-600 mb-10 md:mb-12 leading-relaxed">
               Umów się na konsultację - stworzymy dla Ciebie plan pielęgnacji idealnie dopasowany do Twoich potrzeb.
             </p>
-            <motion.button
-              onClick={openBooksyWidget}
-              className="btn-primary booksy-business-link inline-block cursor-pointer"
-              whileHover={{ 
-                scale: 1.05,
-                backgroundColor: '#E08D6D',
-                boxShadow: '0 10px 25px rgba(200, 107, 70, 0.3)'
-              }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-            >
-              Umów Konsultację
-            </motion.button>
+            <div className="flex justify-center">
+              <motion.button
+                onClick={handleBookConsultation}
+                className="booksy-business-link px-8 md:px-12 py-4 md:py-5 rounded-full text-white font-medium text-base md:text-lg tracking-wide uppercase shadow-xl cursor-pointer relative overflow-hidden"
+                style={{ 
+                  backgroundColor: '#C86B46', 
+                  fontFamily: 'Playfair Display, serif',
+                  letterSpacing: '0.1em',
+                  minWidth: '280px'
+                }}
+                whileHover={{ 
+                  scale: 1.05,
+                  backgroundColor: '#E08D6D',
+                  boxShadow: '0 15px 35px rgba(200, 107, 70, 0.4)'
+                }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+              >
+                <span className="relative z-10">Umów Konsultację</span>
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                  initial={{ x: '-100%' }}
+                  animate={{ x: '100%' }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    repeatDelay: 3,
+                    ease: 'easeInOut'
+                  }}
+                />
+              </motion.button>
+            </div>
           </motion.div>
         </div>
       </section>

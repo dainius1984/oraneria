@@ -52,7 +52,7 @@ const AboutUs = () => {
   return (
     <div className="w-full bg-[#FFFAF5]">
       {/* Hero Section */}
-      <section className="relative w-full py-16 md:py-24 px-4 md:px-8">
+      <section className="relative w-full pt-24 md:pt-32 pb-16 md:pb-24 px-4 md:px-8">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -66,7 +66,7 @@ const AboutUs = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="text-6xl md:text-7xl mb-6"
+              className="text-6xl md:text-7xl mb-8"
             >
               🧡
             </motion.div>

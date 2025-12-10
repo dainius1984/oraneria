@@ -16,7 +16,7 @@ const BooksyButton = ({
 
   const baseStyles = {
     primary: {
-      backgroundColor: '#C86B46',
+      backgroundColor: '#B85C3A', // Darker terracotta (orange-700 equivalent)
       color: 'white',
       fontFamily: 'Playfair Display, serif',
       letterSpacing: '0.1em',
@@ -42,7 +42,7 @@ const BooksyButton = ({
     font-medium
     tracking-wide
     uppercase
-    shadow-xl
+    shadow-lg
     cursor-pointer
     relative
     overflow-hidden
@@ -56,14 +56,16 @@ const BooksyButton = ({
   const hoverStyles = variant === 'primary' 
     ? { 
         scale: 1.05,
-        backgroundColor: '#E08D6D',
-        boxShadow: '0 15px 35px rgba(200, 107, 70, 0.4)'
+        y: -2, // Subtle lift effect
+        backgroundColor: '#C86B46', // Lighter on hover
+        boxShadow: '0 10px 25px rgba(184, 92, 58, 0.5)' // Enhanced shadow
       }
     : {
         scale: 1.05,
+        y: -2,
         backgroundColor: '#C86B46',
         color: 'white',
-        boxShadow: '0 15px 35px rgba(200, 107, 70, 0.4)'
+        boxShadow: '0 10px 25px rgba(200, 107, 70, 0.4)'
       };
 
   return (

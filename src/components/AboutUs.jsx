@@ -51,27 +51,31 @@ const AboutUs = () => {
 
   return (
     <div className="w-full bg-[#FFFAF5]">
-      {/* Hero Section */}
-      <section className="relative w-full pt-32 md:pt-40 pb-20 md:pb-24 px-4 md:px-8">
+      {/* Hero Section - Seamless Integration */}
+      <section className="relative w-full pt-24 md:pt-28 pb-16 md:pb-20 px-4 md:px-8 bg-[#FFFAF5]">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-12 md:mb-16"
+            className="text-center relative"
           >
+            {/* Heart as subtle watermark behind text */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 0.15, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-6xl md:text-7xl mb-10"
+              transition={{ duration: 1 }}
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-9xl md:text-[12rem] pointer-events-none"
+              style={{ color: '#C86B46' }}
             >
               🧡
             </motion.div>
+            
+            {/* Main heading */}
             <h1 
-              className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#2F4F4F] mb-6"
+              className="relative z-10 text-5xl md:text-6xl lg:text-7xl font-bold text-[#2F4F4F] leading-tight"
               style={{ fontFamily: 'Playfair Display, serif' }}
             >
               Witaj w ORANŻERII!
@@ -80,135 +84,91 @@ const AboutUs = () => {
         </div>
       </section>
 
-      {/* About Us Section */}
-      <section className="w-full py-12 md:py-16 px-4 md:px-8">
-        <div className="max-w-4xl mx-auto">
+      {/* About Us Section - Cream Background, Left Aligned */}
+      <section className="w-full py-16 md:py-24 px-4 md:px-8 bg-[#FFFAF5]">
+        <div className="max-w-5xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6 }}
-            className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 md:p-8 lg:p-10 shadow-md border border-orange-100/50"
+            transition={{ duration: 0.8 }}
           >
             <h2 
-              className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#2F4F4F] mb-6"
+              className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#2F4F4F] mb-6"
               style={{ fontFamily: 'Playfair Display, serif' }}
             >
-              O nas:
+              O nas
             </h2>
-            <p className="text-base md:text-lg text-gray-600 leading-relaxed mb-4">
-              To miejsce gdzie piękno spotyka się z naturą, a każdy szczegół wnętrza stworzony jest z myślą o komforcie naszych gości którym oferujemy kompleksową gamę usług - od pielęgnacji twarzy, przez relaksujące zabiegi na ciało oraz skórę głowy aż po pielęgnację i stylizację dłoni oraz stóp.
-            </p>
-            <p className="text-base md:text-lg text-gray-600 leading-relaxed mb-4">
-              Zatrzymaj się w ORANŻERII, gdzie przestronny, stylowy wystrój i atmosfera pełna spokoju tworzą dla Ciebie idealne warunki do relaksu, a nasz zespół profesjonalistów zadba o Twoje piękno i dobre samopoczucie. Dla nas żadne wyzwanie skórne nie jest problemem!
-            </p>
-            <p className="text-base md:text-lg text-gray-600 leading-relaxed">
-              ORANŻERIA to połączenie najnowocześniejszych na rynku technologii i urządzeń, wysokiej jakości kosmetyków oraz doświadczenia wykwalifikowanego personelu.
-            </p>
+            <div className="space-y-4 text-base md:text-lg text-gray-700 leading-relaxed">
+              <p>
+                To miejsce gdzie piękno spotyka się z naturą, a każdy szczegół wnętrza stworzony jest z myślą o komforcie naszych gości którym oferujemy kompleksową gamę usług - od pielęgnacji twarzy, przez relaksujące zabiegi na ciało oraz skórę głowy aż po pielęgnację i stylizację dłoni oraz stóp.
+              </p>
+              <p>
+                Zatrzymaj się w ORANŻERII, gdzie przestronny, stylowy wystrój i atmosfera pełna spokoju tworzą dla Ciebie idealne warunki do relaksu, a nasz zespół profesjonalistów zadba o Twoje piękno i dobre samopoczucie. Dla nas żadne wyzwanie skórne nie jest problemem!
+              </p>
+              <p>
+                ORANŻERIA to połączenie najnowocześniejszych na rynku technologii i urządzeń, wysokiej jakości kosmetyków oraz doświadczenia wykwalifikowanego personelu.
+              </p>
+            </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Philosophy Section */}
-      <section className="w-full py-12 md:py-16 px-4 md:px-8 bg-white/30">
-        <div className="max-w-4xl mx-auto">
+      {/* Philosophy Section - White Background, Right Aligned (Z-pattern) */}
+      <section className="w-full py-16 md:py-24 px-4 md:px-8 bg-white">
+        <div className="max-w-5xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6 }}
-            className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 md:p-8 lg:p-10 shadow-md border border-orange-100/50"
+            transition={{ duration: 0.8 }}
+            className="text-right md:text-left"
           >
             <h2 
-              className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#2F4F4F] mb-6"
+              className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#2F4F4F] mb-6"
               style={{ fontFamily: 'Playfair Display, serif' }}
             >
-              Nasza filozofia:
+              Nasza filozofia
             </h2>
-            <p className="text-base md:text-lg text-gray-600 leading-relaxed mb-4">
-              W ORANŻERII stawiamy na świadome i spersonalizowane podejście. Każdy plan pielęgnacyjny i każdy zabieg tworzymy z myślą o tym, co najlepiej odpowiada Twojej skórze i stylowi życia.
-            </p>
-            <p className="text-base md:text-lg text-gray-600 leading-relaxed mb-4">
-              Wykorzystujemy najnowsze technologie oraz certyfikowane preparaty, łącząc je z autorskimi metodami, które gwarantują efekty naturalne, ale zauważalne.
-            </p>
-            <p className="text-base md:text-lg text-gray-600 leading-relaxed">
-              Wierzymy, że prawdziwe piękno pochodzi z harmonii ciała i ducha, dlatego podchodzimy do pielęgnacji holistycznie, z szacunkiem dla naturalności i indywidualnych potrzeb każdej osoby.
-            </p>
+            <div className="space-y-4 text-base md:text-lg text-gray-700 leading-relaxed">
+              <p>
+                W ORANŻERII stawiamy na świadome i spersonalizowane podejście. Każdy plan pielęgnacyjny i każdy zabieg tworzymy z myślą o tym, co najlepiej odpowiada Twojej skórze i stylowi życia.
+              </p>
+              <p>
+                Wykorzystujemy najnowsze technologie oraz certyfikowane preparaty, łącząc je z autorskimi metodami, które gwarantują efekty naturalne, ale zauważalne.
+              </p>
+              <p>
+                Wierzymy, że prawdziwe piękno pochodzi z harmonii ciała i ducha, dlatego podchodzimy do pielęgnacji holistycznie, z szacunkiem dla naturalności i indywidualnych potrzeb każdej osoby.
+              </p>
+            </div>
           </motion.div>
         </div>
       </section>
 
-      {/* What Makes Us Different Section */}
-      <section className="w-full py-12 md:py-16 px-4 md:px-8">
-        <div className="max-w-4xl mx-auto">
+      {/* What Makes Us Different - Cream Background, Left Aligned */}
+      <section className="w-full py-16 md:py-24 px-4 md:px-8 bg-[#FFFAF5]">
+        <div className="max-w-5xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6 }}
-            className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 md:p-8 lg:p-10 shadow-md border border-orange-100/50"
+            transition={{ duration: 0.8 }}
           >
             <h2 
-              className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#2F4F4F] mb-6"
+              className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#2F4F4F] mb-6"
               style={{ fontFamily: 'Playfair Display, serif' }}
             >
               Co nas wyróżnia?
             </h2>
-            <p className="text-base md:text-lg text-gray-600 leading-relaxed">
+            <p className="text-base md:text-lg text-gray-700 leading-relaxed">
               Jesteśmy miejscem, gdzie nowoczesna kosmetologia spotyka się z przyjazną, domową atmosferą. Nasi goście mogą liczyć na pełne bezpieczeństwo, profesjonalizm oraz wsparcie na każdym etapie pielęgnacji. Dbamy o komfort, higienę i indywidualne potrzeby - bo wiemy, że każdy zasługuje na wyjątkową troskę.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Our Values Section */}
-      <section className="w-full py-12 md:py-16 px-4 md:px-8 bg-white/30">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
-            <h2 
-              className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#2F4F4F] mb-6"
-              style={{ fontFamily: 'Playfair Display, serif' }}
-            >
-              Nasze wartości:
-            </h2>
-            <p className="text-base md:text-lg text-gray-600 max-w-3xl mx-auto mb-8">
-              Pasja, profesjonalizm, empatia i ciągły rozwój – to wartości, które kierują naszą pracą każdego dnia. Nieustannie podnosimy kwalifikacje, by dostarczać usługi na najwyższym poziomie i być na bieżąco z trendami w branży beauty.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-            {values.map((value, index) => (
-              <motion.div
-                key={value.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-md border border-orange-100/50 text-center"
-              >
-                <h3 
-                  className="text-xl md:text-2xl font-bold text-[#2F4F4F] mb-3"
-                  style={{ fontFamily: 'Playfair Display, serif' }}
-                >
-                  {value.title}
-                </h3>
-                <p className="text-gray-600 text-sm md:text-base">
-                  {value.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Team Section */}
-      <section className="w-full py-12 md:py-16 px-4 md:px-8">
+      {/* Our Values Section - White Background */}
+      <section className="w-full py-16 md:py-24 px-4 md:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -218,49 +178,91 @@ const AboutUs = () => {
             className="text-center mb-12 md:mb-16"
           >
             <h2 
-              className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#2F4F4F] mb-4"
+              className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#2F4F4F] mb-6"
               style={{ fontFamily: 'Playfair Display, serif' }}
             >
-              Nasi specjaliści:
+              Nasze wartości
             </h2>
-            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Za każdą wizytą w naszym salonie stoi zespół pełen pasji, doświadczenia i uważności. Nasze specjalistki łączą wspólny cel - troskę o Twoje piękno, komfort i dobre samopoczucie.
-            </p>
-            <p className="text-base md:text-lg text-gray-600 max-w-3xl mx-auto mt-4 leading-relaxed">
-              W ORANŻERII nie ma przypadkowych osób - każda z nas jest tutaj, by tworzyć wyjątkowe miejsce, do którego chce się wracać. Z nami możesz być pewny, że znajdziesz wsparcie i fachową opiekę dostosowaną do Twoich oczekiwań.
+            <p className="text-base md:text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
+              Pasja, profesjonalizm, empatia i ciągły rozwój – to wartości, które kierują naszą pracą każdego dnia. Nieustannie podnosimy kwalifikacje, by dostarczać usługi na najwyższym poziomie i być na bieżąco z trendami w branży beauty.
             </p>
           </motion.div>
 
-          <div className="space-y-12 md:space-y-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
+            {values.map((value, index) => (
+              <motion.div
+                key={value.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="text-center"
+              >
+                <h3 
+                  className="text-2xl md:text-3xl font-bold text-[#2F4F4F] mb-3"
+                  style={{ fontFamily: 'Playfair Display, serif' }}
+                >
+                  {value.title}
+                </h3>
+                <p className="text-gray-600 text-base md:text-lg leading-relaxed">
+                  {value.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Team Section - Cream Background, 2-Column Grid */}
+      <section className="w-full py-16 md:py-24 px-4 md:px-8 bg-[#FFFAF5]">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12 md:mb-16"
+          >
+            <h2 
+              className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#2F4F4F] mb-6"
+              style={{ fontFamily: 'Playfair Display, serif' }}
+            >
+              Nasi specjaliści
+            </h2>
+            <div className="space-y-4 text-base md:text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
+              <p>
+                Za każdą wizytą w naszym salonie stoi zespół pełen pasji, doświadczenia i uważności. Nasze specjalistki łączą wspólny cel - troskę o Twoje piękno, komfort i dobre samopoczucie.
+              </p>
+              <p>
+                W ORANŻERII nie ma przypadkowych osób - każda z nas jest tutaj, by tworzyć wyjątkowe miejsce, do którego chce się wracać. Z nami możesz być pewny, że znajdziesz wsparcie i fachową opiekę dostosowaną do Twoich oczekiwań.
+              </p>
+            </div>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 lg:gap-16">
             {teamMembers.map((member, index) => (
               <motion.div
                 key={member.id}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 md:p-8 lg:p-10 shadow-md border border-orange-100/50"
+                transition={{ duration: 0.6, delay: index * 0.15 }}
+                className="space-y-4"
               >
-                <div className="flex flex-col md:flex-row gap-6 md:gap-8">
-                  <div className="md:w-1/3">
-                    <h3 
-                      className="text-2xl md:text-3xl font-bold text-[#2F4F4F] mb-2"
-                      style={{ fontFamily: 'Playfair Display, serif' }}
-                    >
-                      {member.name}
-                    </h3>
-                    <p className="text-lg md:text-xl text-[#C86B46] font-medium mb-4">
-                      {member.role}
-                    </p>
-                  </div>
-                  <div className="md:w-2/3">
-                    <p className="text-base md:text-lg text-gray-600 leading-relaxed mb-4">
-                      {member.description}
-                    </p>
-                    <p className="text-base md:text-lg text-gray-600 leading-relaxed">
-                      {member.details}
-                    </p>
-                  </div>
+                <div>
+                  <h3 
+                    className="text-2xl md:text-3xl font-bold text-[#2F4F4F] mb-2"
+                    style={{ fontFamily: 'Playfair Display, serif' }}
+                  >
+                    {member.name}
+                  </h3>
+                  <p className="text-lg md:text-xl text-[#C86B46] font-medium mb-4">
+                    {member.role}
+                  </p>
+                </div>
+                <div className="space-y-3 text-base md:text-lg text-gray-700 leading-relaxed">
+                  <p>{member.description}</p>
+                  <p>{member.details}</p>
                 </div>
               </motion.div>
             ))}
@@ -268,61 +270,58 @@ const AboutUs = () => {
         </div>
       </section>
 
-      {/* How We Care Section */}
-      <section className="w-full py-12 md:py-16 px-4 md:px-8 bg-white/30">
-        <div className="max-w-4xl mx-auto">
+      {/* How We Care Section - White Background */}
+      <section className="w-full py-16 md:py-24 px-4 md:px-8 bg-white">
+        <div className="max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6 }}
-            className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 md:p-8 lg:p-10 shadow-md border border-orange-100/50"
           >
             <h2 
-              className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#2F4F4F] mb-6"
+              className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#2F4F4F] mb-6"
               style={{ fontFamily: 'Playfair Display, serif' }}
             >
               Jak dbamy o Ciebie?
             </h2>
-            <p className="text-base md:text-lg text-gray-600 leading-relaxed">
+            <p className="text-base md:text-lg text-gray-700 leading-relaxed">
               W Oranżerii każdy klient otrzymuje indywidualne podejście - zaczynając od konsultacji, przez przygotowanie spersonalizowanego planu zabiegowego, aż po opiekę pozabiegowa. Jesteśmy tu, by służyć radą i wsparciem, pomagając Ci osiągnąć zdrowy, naturalny wygląd i dobre samopoczucie.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Atmosphere Section */}
-      <section className="w-full py-12 md:py-16 px-4 md:px-8">
-        <div className="max-w-4xl mx-auto">
+      {/* Atmosphere Section - Cream Background */}
+      <section className="w-full py-16 md:py-24 px-4 md:px-8 bg-[#FFFAF5]">
+        <div className="max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6 }}
-            className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 md:p-8 lg:p-10 shadow-md border border-orange-100/50"
           >
             <h2 
-              className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#2F4F4F] mb-6"
+              className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#2F4F4F] mb-6"
               style={{ fontFamily: 'Playfair Display, serif' }}
             >
-              Atmosfera i miejsce:
+              Atmosfera i miejsce
             </h2>
-            <p className="text-base md:text-lg text-gray-600 leading-relaxed">
+            <p className="text-base md:text-lg text-gray-700 leading-relaxed">
               Tworzymy przestrzeń, w której panuje ciepło, zaufanie i pełen komfort. Chcemy, aby każda wizyta była nie tylko skutecznym zabiegiem, ale także chwilą relaksu i przyjemności - miejscem, które dodaje energii i pozwala zadbać o siebie w spokoju.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Final CTA Section */}
-      <section className="w-full py-16 md:py-24 px-4 md:px-8 bg-white/30">
-        <div className="max-w-4xl mx-auto">
+      {/* Final CTA Section - White Background */}
+      <section className="w-full py-20 md:py-28 px-4 md:px-8 bg-white">
+        <div className="max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center"
           >
             <h2 
               className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#2F4F4F] mb-6"
@@ -330,7 +329,7 @@ const AboutUs = () => {
             >
               Zapraszamy do ORANŻERII!
             </h2>
-            <p className="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed">
+            <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
               Jesteśmy gotowe, by poznać Ciebie i Twoje potrzeby. Zapraszamy do kontaktu, umówienia konsultacji i wspólnego odkrywania Twojego naturalnego piękna. U nas znajdziesz nie tylko profesjonalne usługi, ale także zespół, który troszczy się o Ciebie z sercem.
             </p>
             <motion.div

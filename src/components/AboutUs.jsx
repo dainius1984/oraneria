@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { openBooksyWidget } from '../utils/booksy';
+import BooksyButton from './BooksyButton';
 
 const AboutUs = () => {
   const teamMembers = [
@@ -52,7 +52,7 @@ const AboutUs = () => {
   return (
     <div className="w-full bg-[#FFFAF5]">
       {/* Hero Section */}
-      <section className="relative w-full pt-24 md:pt-32 pb-16 md:pb-24 px-4 md:px-8">
+      <section className="relative w-full pt-32 md:pt-40 pb-20 md:pb-24 px-4 md:px-8">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -66,7 +66,7 @@ const AboutUs = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="text-6xl md:text-7xl mb-8"
+              className="text-6xl md:text-7xl mb-10"
             >
               🧡
             </motion.div>
@@ -316,12 +316,13 @@ const AboutUs = () => {
 
       {/* Final CTA Section */}
       <section className="w-full py-16 md:py-24 px-4 md:px-8 bg-white/30">
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
+            className="text-center"
           >
             <h2 
               className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#2F4F4F] mb-6"
@@ -342,24 +343,20 @@ const AboutUs = () => {
               🧡
             </motion.div>
             <p 
-              className="text-xl md:text-2xl font-bold text-[#2F4F4F] mb-8"
+              className="text-xl md:text-2xl font-bold text-[#2F4F4F] mb-10 md:mb-12"
               style={{ fontFamily: 'Playfair Display, serif' }}
             >
               Odwiedź ORANŻERIE by poczuć różnicę!
             </p>
-            <motion.button
-              onClick={openBooksyWidget}
-              className="btn-primary booksy-business-link inline-block cursor-pointer"
-              whileHover={{ 
-                scale: 1.05,
-                backgroundColor: '#E08D6D',
-                boxShadow: '0 10px 25px rgba(200, 107, 70, 0.3)'
-              }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-            >
-              Umów Konsultację
-            </motion.button>
+            <div className="flex justify-center">
+              <BooksyButton 
+                text="Umów Konsultację" 
+                variant="primary"
+                size="default"
+                centered={true}
+                className="min-w-[280px]"
+              />
+            </div>
           </motion.div>
         </div>
       </section>

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { openBooksyWidget } from '../utils/booksy';
+import BooksyButton from './BooksyButton';
 
 const Contact = () => {
   const contactInfo = {
@@ -104,19 +104,13 @@ const Contact = () => {
             </div>
 
             {/* CTA Button */}
-            <motion.button
-              onClick={openBooksyWidget}
-              className="btn-primary booksy-business-link mt-8 block md:inline-block mx-auto md:mx-0 text-center cursor-pointer"
-              whileHover={{ 
-                scale: 1.05,
-                backgroundColor: '#E08D6D',
-                boxShadow: '0 10px 25px rgba(200, 107, 70, 0.3)'
-              }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-            >
-              Umów Wizytę
-            </motion.button>
+            <div className="mt-8 flex justify-center md:justify-start">
+              <BooksyButton 
+                text="Umów Wizytę" 
+                variant="primary"
+                size="default"
+              />
+            </div>
           </motion.div>
 
           {/* Map Embed */}

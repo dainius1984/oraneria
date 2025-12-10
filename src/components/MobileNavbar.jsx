@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { openBooksyWidget } from '../utils/booksy';
+import BooksyButton from './BooksyButton';
 
 const MobileNavbar = ({ isVisible }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -211,41 +211,15 @@ const MobileNavbar = ({ isVisible }) => {
                     }}
                     className="pt-2 pb-2"
                   >
-                    <motion.button
-                      onClick={() => {
-                        setMobileMenuOpen(false);
-                        openBooksyWidget();
-                      }}
-                      className="booksy-business-link w-full mx-auto px-8 py-5 rounded-full text-white font-light text-lg tracking-[0.15em] uppercase shadow-xl cursor-pointer relative overflow-hidden"
-                      style={{ 
-                        backgroundColor: '#C86B46', 
-                        fontFamily: 'Playfair Display, serif', 
-                        letterSpacing: '0.2em',
-                        maxWidth: '90%',
-                        display: 'block'
-                      }}
-                      whileHover={{ 
-                        scale: 1.02,
-                        backgroundColor: '#E08D6D',
-                        boxShadow: '0 20px 40px rgba(200, 107, 70, 0.4)'
-                      }}
-                      whileTap={{ scale: 0.98 }}
-                      transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-                    >
-                      {/* Shine effect */}
-                      <motion.div
-                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-                        initial={{ x: '-100%' }}
-                        animate={{ x: '100%' }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          repeatDelay: 3,
-                          ease: 'easeInOut'
-                        }}
+                    <div className="w-full flex justify-center">
+                      <BooksyButton 
+                        text="Rezerwacja" 
+                        variant="primary"
+                        size="large"
+                        centered={true}
+                        className="w-full max-w-[90%]"
                       />
-                      <span className="relative z-10">Rezerwacja</span>
-                    </motion.button>
+                    </div>
                   </motion.div>
                 </div>
               </motion.div>

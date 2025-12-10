@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
-import { openBooksyWidget } from '../utils/booksy';
+import BooksyButton from './BooksyButton';
 import { useState } from 'react';
 
 const DesktopNavbar = ({ isVisible }) => {
@@ -198,19 +198,11 @@ const DesktopNavbar = ({ isVisible }) => {
               </div>
 
               {/* CTA Button */}
-              <motion.button
-                onClick={openBooksyWidget}
-                className="btn-primary booksy-business-link cursor-pointer"
-                whileHover={{ 
-                  scale: 1.05,
-                  backgroundColor: '#E08D6D',
-                  boxShadow: '0 10px 25px rgba(200, 107, 70, 0.3)'
-                }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-              >
-                Rezerwacja
-              </motion.button>
+              <BooksyButton 
+                text="Rezerwacja" 
+                variant="primary"
+                size="small"
+              />
             </motion.div>
           </div>
         </div>

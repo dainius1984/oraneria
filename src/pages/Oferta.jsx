@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { openBooksyWidget } from '../utils/booksy';
+import BooksyButton from '../components/BooksyButton';
 
 const Oferta = () => {
   const [activeCategory, setActiveCategory] = useState(null);
@@ -67,12 +67,6 @@ const Oferta = () => {
     if (servicesSection) {
       servicesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-  };
-
-  const handleBookConsultation = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    openBooksyWidget(e);
   };
 
   return (
@@ -178,36 +172,13 @@ const Oferta = () => {
               Umów się na konsultację - stworzymy dla Ciebie plan pielęgnacji idealnie dopasowany do Twoich potrzeb.
             </p>
             <div className="flex justify-center">
-              <motion.button
-                onClick={handleBookConsultation}
-                className="booksy-business-link px-8 md:px-12 py-4 md:py-5 rounded-full text-white font-medium text-base md:text-lg tracking-wide uppercase shadow-xl cursor-pointer relative overflow-hidden"
-                style={{ 
-                  backgroundColor: '#C86B46', 
-                  fontFamily: 'Playfair Display, serif',
-                  letterSpacing: '0.1em',
-                  minWidth: '280px'
-                }}
-                whileHover={{ 
-                  scale: 1.05,
-                  backgroundColor: '#E08D6D',
-                  boxShadow: '0 15px 35px rgba(200, 107, 70, 0.4)'
-                }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-              >
-                <span className="relative z-10">Umów Konsultację</span>
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-                  initial={{ x: '-100%' }}
-                  animate={{ x: '100%' }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    repeatDelay: 3,
-                    ease: 'easeInOut'
-                  }}
-                />
-              </motion.button>
+              <BooksyButton 
+                text="Umów Konsultację" 
+                variant="primary"
+                size="default"
+                centered={true}
+                className="min-w-[280px]"
+              />
             </div>
           </motion.div>
         </div>

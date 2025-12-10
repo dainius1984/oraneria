@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useState, useRef, useEffect } from 'react';
-import { openBooksyWidget } from '../utils/booksy';
+import BooksyButton from './BooksyButton';
 
 const categories = ['Twarz', 'Ciało', 'Medycyna Estetyczna', 'Rytuały SPA', 'Dodatki'];
 
@@ -272,15 +272,14 @@ const Pricing = () => {
                                   </div>
                                 </div>
                               </div>
-                              <motion.button
-                                onClick={openBooksyWidget}
-                                className="booksy-business-link opacity-0 group-hover:opacity-100 transition-opacity duration-300 px-4 py-2 rounded-full text-white text-sm font-medium whitespace-nowrap cursor-pointer"
-                                style={{ backgroundColor: '#C86B46' }}
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                              >
-                                Rezerwuj
-                              </motion.button>
+                              <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <BooksyButton 
+                                  text="Rezerwuj" 
+                                  variant="primary"
+                                  size="small"
+                                  className="whitespace-nowrap"
+                                />
+                              </div>
                             </div>
                             {/* Dotted separator line */}
                             <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent opacity-50" />
@@ -339,15 +338,12 @@ const Pricing = () => {
                 <div className="text-sm text-[#C86B46] font-medium mb-4">
                   Oszczędzasz {pkg.savings}
                 </div>
-                <motion.button
-                  onClick={openBooksyWidget}
-                  className="booksy-business-link block w-full text-center px-6 py-3 rounded-full text-white font-medium cursor-pointer"
-                  style={{ backgroundColor: '#C86B46' }}
-                  whileHover={{ scale: 1.02, backgroundColor: '#E08D6D' }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  Rezerwuj Pakiet
-                </motion.button>
+                <BooksyButton 
+                  text="Rezerwuj Pakiet" 
+                  variant="primary"
+                  size="default"
+                  className="w-full"
+                />
               </motion.div>
             ))}
           </div>

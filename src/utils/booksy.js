@@ -1,6 +1,6 @@
 /**
  * Opens the Booksy booking widget
- * Simple approach: click the widget button that Booksy creates
+ * Uses the Booksy widget API if available, otherwise falls back to clicking the widget button
  */
 export const openBooksyWidget = (e) => {
   // Prevent default if it's an event
@@ -11,11 +11,63 @@ export const openBooksyWidget = (e) => {
 
   const booksyUrl = 'https://booksy.com/pl-pl/dl/show-business/263937';
 
-  // Wait a bit for Booksy script to load if needed
+  // Method 1: Try Booksy Widget API (if available)
+  if (window.BooksyWidget && typeof window.BooksyWidget.open === 'function') {
+    try {
+      window.BooksyWidget.open();
+      setTimeout(() => {
+        setupClickOutsideHandler();
+      }, 300);
+      return;
+    } catch (error) {
+      console.log('BooksyWidget.open() failed:', error);
+    }
+  }
+
+  // Method 2: Try alternative Booksy API
+  if (window.Booksy && typeof window.Booksy.open === 'function') {
+    try {
+      window.Booksy.open();
+      setTimeout(() => {
+        setupClickOutsideHandler();
+      }, 300);
+      return;
+    } catch (error) {
+      console.log('Booksy.open() failed:', error);
+    }
+  }
+
+  // Method 2.5: Try Booksy global function
+  if (typeof window.openBooksyWidget === 'function') {
+    try {
+      window.openBooksyWidget();
+      setTimeout(() => {
+        setupClickOutsideHandler();
+      }, 300);
+      return;
+    } catch (error) {
+      console.log('window.openBooksyWidget() failed:', error);
+    }
+  }
+
+  // Method 3: Find and click the Booksy widget button
   const tryOpenWidget = () => {
-    // Method 1: Find and click the Booksy widget button
-    // Booksy creates: <div class="booksy-widget-button"></div>
-    const booksyButton = document.querySelector('.booksy-widget-button');
+    // Look for Booksy widget button with multiple selectors
+    const selectors = [
+      '.booksy-widget-button',
+      '[data-booksy-widget]',
+      '[class*="booksy"][class*="button"]',
+      '[id*="booksy"]',
+      'a[href*="booksy.com"]',
+      'button[onclick*="booksy"]'
+    ];
+    
+    let booksyButton = null;
+    for (const selector of selectors) {
+      booksyButton = document.querySelector(selector);
+      if (booksyButton) break;
+    }
+    
     if (booksyButton) {
       try {
         // Temporarily make button visible and clickable if it's hidden
@@ -23,14 +75,27 @@ export const openBooksyWidget = (e) => {
         const originalVisibility = booksyButton.style.visibility;
         const originalOpacity = booksyButton.style.opacity;
         const originalPointerEvents = booksyButton.style.pointerEvents;
+        const originalZIndex = booksyButton.style.zIndex;
         
         booksyButton.style.display = 'block';
         booksyButton.style.visibility = 'visible';
         booksyButton.style.opacity = '1';
         booksyButton.style.pointerEvents = 'auto';
+        booksyButton.style.zIndex = '9999';
+        booksyButton.style.position = 'fixed';
         
-        // Trigger click event
-        booksyButton.click();
+        // Create and dispatch click event
+        const clickEvent = new MouseEvent('click', {
+          bubbles: true,
+          cancelable: true,
+          view: window
+        });
+        booksyButton.dispatchEvent(clickEvent);
+        
+        // Also try direct click
+        if (typeof booksyButton.click === 'function') {
+          booksyButton.click();
+        }
         
         // Restore original styles after a brief moment
         setTimeout(() => {
@@ -38,7 +103,11 @@ export const openBooksyWidget = (e) => {
           booksyButton.style.visibility = originalVisibility;
           booksyButton.style.opacity = originalOpacity;
           booksyButton.style.pointerEvents = originalPointerEvents;
-        }, 100);
+          booksyButton.style.zIndex = originalZIndex;
+          if (!originalDisplay) {
+            booksyButton.style.position = '';
+          }
+        }, 200);
         
         // Set up click-outside handler
         setTimeout(() => {
@@ -50,39 +119,18 @@ export const openBooksyWidget = (e) => {
       }
     }
 
-    // Method 2: Try to find button inside widget container
-    const widgetContainer = document.querySelector('.booksy-widget-container:not(.booksy-widget-container-dialog)');
-    if (widgetContainer) {
-      const button = widgetContainer.querySelector('.booksy-widget-button');
-      if (button) {
-        try {
-          // Temporarily make button visible and clickable
-          const originalDisplay = button.style.display;
-          const originalVisibility = button.style.visibility;
-          const originalOpacity = button.style.opacity;
-          const originalPointerEvents = button.style.pointerEvents;
-          
-          button.style.display = 'block';
-          button.style.visibility = 'visible';
-          button.style.opacity = '1';
-          button.style.pointerEvents = 'auto';
-          
-          button.click();
-          
-          setTimeout(() => {
-            button.style.display = originalDisplay;
-            button.style.visibility = originalVisibility;
-            button.style.opacity = originalOpacity;
-            button.style.pointerEvents = originalPointerEvents;
-          }, 100);
-          
-          setTimeout(() => {
-            setupClickOutsideHandler();
-          }, 300);
-          return true;
-        } catch (error) {
-          console.log('Widget container button click failed:', error);
-        }
+    // Method 4: Try to find iframe and trigger it
+    const booksyIframe = document.querySelector('iframe[src*="booksy.com"]');
+    if (booksyIframe && booksyIframe.contentWindow) {
+      try {
+        booksyIframe.contentWindow.postMessage({ type: 'open' }, '*');
+        booksyIframe.contentWindow.postMessage('open', '*');
+        setTimeout(() => {
+          setupClickOutsideHandler();
+        }, 300);
+        return true;
+      } catch (error) {
+        console.log('Booksy iframe postMessage failed:', error);
       }
     }
 
@@ -95,19 +143,29 @@ export const openBooksyWidget = (e) => {
   }
 
   // If not found, wait a bit and try again (Booksy script might still be loading)
-  setTimeout(() => {
+  // Try multiple times with increasing delays
+  let attempts = 0;
+  const maxAttempts = 3;
+  const tryWithDelay = () => {
+    attempts++;
     if (tryOpenWidget()) {
       return;
     }
     
-    // Fallback: Open Booksy page directly
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    if (isMobile) {
-      window.location.href = booksyUrl;
+    if (attempts < maxAttempts) {
+      setTimeout(tryWithDelay, 300 * attempts);
     } else {
-      window.open(booksyUrl, '_blank', 'noopener,noreferrer');
+      // Final fallback: Open Booksy page directly
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      if (isMobile) {
+        window.location.href = booksyUrl;
+      } else {
+        window.open(booksyUrl, '_blank', 'noopener,noreferrer');
+      }
     }
-  }, 500);
+  };
+  
+  setTimeout(tryWithDelay, 300);
 };
 
 /**

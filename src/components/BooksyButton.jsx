@@ -20,19 +20,19 @@ const BooksyButton = ({
     large: 'px-10 md:px-16 py-5 md:py-6 text-lg md:text-xl'
   };
 
-  // Base button classes - no special Booksy classes
+  // Base button classes - minimal styling
   const baseClasses = `
     rounded-full
     font-medium
     cursor-pointer
     transition-all
-    duration-300
+    duration-200
     ${sizeClasses[size]}
     ${centered ? 'mx-auto block' : ''}
     ${className}
   `.trim().replace(/\s+/g, ' ');
 
-  // Simple styles based on variant
+  // Simple inline styles
   const buttonStyles = variant === 'primary' 
     ? {
         backgroundColor: '#B85C3A',

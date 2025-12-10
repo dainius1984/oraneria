@@ -51,35 +51,45 @@ const AboutUs = () => {
 
   return (
     <div className="w-full bg-[#FFFAF5]">
-      {/* Hero Section - Seamless Integration */}
-      <section className="relative w-full pt-24 md:pt-28 pb-16 md:pb-20 px-4 md:px-8 bg-[#FFFAF5]">
-        <div className="max-w-7xl mx-auto">
+      {/* Hero Section - With Image Background */}
+      <section className="relative w-full pt-24 md:pt-28 pb-20 md:pb-24 px-4 md:px-8 overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src="/img/469171614_17842771176380714_7787508925189487850_n.jpg"
+            alt="Oranżeria"
+            className="w-full h-full object-cover opacity-20"
+            onError={(e) => {
+              e.target.src = 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=1200&h=600&fit=crop';
+            }}
+          />
+          <div className="absolute inset-0 bg-[#FFFAF5]/80" />
+        </div>
+        
+        <div className="relative z-10 max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center relative"
+            className="text-center"
           >
-            {/* Heart as subtle watermark behind text */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 0.15, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1 }}
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-9xl md:text-[12rem] pointer-events-none"
-              style={{ color: '#C86B46' }}
-            >
-              🧡
-            </motion.div>
-            
             {/* Main heading */}
             <h1 
-              className="relative z-10 text-5xl md:text-6xl lg:text-7xl font-bold text-[#2F4F4F] leading-tight"
+              className="text-5xl md:text-6xl lg:text-7xl font-bold text-[#2F4F4F] leading-tight mb-4"
               style={{ fontFamily: 'Playfair Display, serif' }}
             >
               Witaj w ORANŻERII!
             </h1>
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto"
+            >
+              Miejsce, gdzie piękno spotyka się z naturą
+            </motion.p>
           </motion.div>
         </div>
       </section>

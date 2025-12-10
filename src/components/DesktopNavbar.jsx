@@ -9,7 +9,7 @@ const DesktopNavbar = ({ isVisible }) => {
 
   const navLinks = [
     { name: 'O nas', href: '/o-nas' },
-    { name: 'Oferta', href: '/#oferta' },
+    { name: 'Oferta', href: '/oferta' },
     { name: 'Cennik', href: '/cennik' },
   ];
 

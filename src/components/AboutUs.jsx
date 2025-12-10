@@ -1,30 +1,165 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState } from 'react';
 import BooksyButton from './BooksyButton';
 
 const AboutUs = () => {
+  const [selectedMember, setSelectedMember] = useState(null);
+
   const teamMembers = [
     {
-      id: 1,
+      id: 'jz',
+      initials: 'JZ',
       name: 'Justyna Ziółkowska',
       role: 'KOSMETOLOG',
-      description: 'To Justyna w ORANŻERII zadba o Waszą skórę i zdrowy, promienny wygląd, łącząc nowoczesną kosmetologię, laseroterapię oraz holistyczne podejście w duchu well aging.',
-      details: 'Jako założycielka ORANŻERII z pasją i doświadczeniem wykonuje skuteczne i bezpieczne zabiegi kosmetologiczne oraz laserowe, które wspierają naturalne procesy skóry i pomagają cieszyć się zdrowym pięknem na dłużej. Justyna tworzy indywidualne beauty plany, dopasowane do Waszych potrzeb i celów - niezależnie od tego, czy chcesz zniwelować oznaki starzenia, poprawić kondycję skóry wrażliwej czy walczysz z trądzikiem. Dzięki temu każdy zabieg przynosi realne efekty i komfort.'
+      shortBio: 'Założycielka ORANŻERII. Łączy nowoczesną kosmetologię z podejściem holistycznym.',
+      fullBio: [
+        'To Justyna w ORANŻERII zadba o Waszą skórę i zdrowy, promienny wygląd, łącząc nowoczesną kosmetologię, laseroterapię oraz holistyczne podejście w duchu well aging.',
+        'Jako założycielka ORANŻERII z pasją i doświadczeniem wykonuje skuteczne i bezpieczne zabiegi kosmetologiczne oraz laserowe, które wspierają naturalne procesy skóry i pomagają cieszyć się zdrowym pięknem na dłużej. Justyna tworzy indywidualne beauty plany, dopasowane do Waszych potrzeb i celów - niezależnie od tego, czy chcesz zniwelować oznaki starzenia, poprawić kondycję skóry wrażliwej czy walczysz z trądzikiem. Dzięki temu każdy zabieg przynosi realne efekty i komfort.'
+      ]
     },
     {
-      id: 2,
+      id: 'as',
+      initials: 'AS',
       name: 'Agnieszka Sukiennik',
       role: 'LINERGISTKA',
-      description: 'To właśnie Agnieszka w ORANŻERII dba o Wasze nowe brwi, usta i skórę - tworząc makijaż permanentny, który wygląda naturalnie, harmonijnie i pięknie się goi.',
-      details: 'Z wykształcenia jest kosmetologiem, a specjalizuje się w zaawansowanych technikach pigmentacji oraz bezpiecznym usuwaniu starych makijaży. Korzysta z metod takich jak hairstroke, ombre, scalp micropigmentation (SMP) itd., by idealnie dopasować efekt do Twojej urody. Jest półfinalistką Mistrzostw Polski PMU 2025 w aż trzech kategoriach - i nieustannie się szkoli, by dawać Wam to, co najlepsze. Agnieszka słynie z precyzji, profesjonalizmu i… cudownej atmosfery podczas zabiegów. W pracy stawia na indywidualne podejście, bezpieczeństwo i efekty, które naprawdę cieszą - nie tylko wizualnie.'
+      shortBio: 'Specjalistka od naturalnego makijażu permanentnego. Półfinalistka Mistrzostw Polski PMU 2025.',
+      fullBio: [
+        'To właśnie Agnieszka w ORANŻERII dba o Wasze nowe brwi, usta i skórę - tworząc makijaż permanentny, który wygląda naturalnie, harmonijnie i pięknie się goi.',
+        'Z wykształcenia jest kosmetologiem, a specjalizuje się w zaawansowanych technikach pigmentacji oraz bezpiecznym usuwaniu starych makijaży. Korzysta z metod takich jak hairstroke, ombre, scalp micropigmentation (SMP) itd., by idealnie dopasować efekt do Twojej urody. Jest półfinalistką Mistrzostw Polski PMU 2025 w aż trzech kategoriach - i nieustannie się szkoli, by dawać Wam to, co najlepsze. Agnieszka słynie z precyzji, profesjonalizmu i… cudownej atmosfery podczas zabiegów. W pracy stawia na indywidualne podejście, bezpieczeństwo i efekty, które naprawdę cieszą - nie tylko wizualnie.'
+      ]
     },
     {
-      id: 3,
+      id: 'mn',
+      initials: 'MN',
       name: 'Maja Nowak',
       role: 'SPECJALISTKA MEDYCYNY ESTETYCZNEJ',
-      description: 'Maja w ORANŻERII łączy wiedzę i doświadczenie, by dzięki medycynie estetycznej uwydatnić Twoje naturalne piękno, zachowując jednocześnie delikatność i harmonię rysów twarzy.',
-      details: 'Ukończyła szkołę kosmetyczną w Gdyni i regularnie rozwija swoje umiejętności na kursach oraz szkoleniach z zakresu kosmetologii i medycyny estetycznej. W swojej pracy stawia na bezpieczeństwo, indywidualne podejście i najwyższą jakość, korzystając tylko z certyfikowanych preparatów i sprawdzonych marek. Każdy zabieg poprzedza konsultacją oraz wywiadem medycznym, a w razie potrzeby dba o komfort stosując znieczulenie. Maja korzysta z profesjonalnych linii kosmetycznych, mezokoktajli i wypełniaczy, by osiągnąć subtelne i trwałe efekty, które zachwycają. Jej misją jest, byś każdy klient poczuł się naturalnie piękny, pewny siebie i otoczony troską - niezależnie od wieku.'
+      shortBio: 'Łączy wiedzę medyczną z estetyką, aby wydobyć Twoje naturalne piękno.',
+      fullBio: [
+        'Maja w ORANŻERII łączy wiedzę i doświadczenie, by dzięki medycynie estetycznej uwydatnić Twoje naturalne piękno, zachowując jednocześnie delikatność i harmonię rysów twarzy.',
+        'Ukończyła szkołę kosmetyczną w Gdyni i regularnie rozwija swoje umiejętności na kursach oraz szkoleniach z zakresu kosmetologii i medycyny estetycznej. W swojej pracy stawia na bezpieczeństwo, indywidualne podejście i najwyższą jakość, korzystając tylko z certyfikowanych preparatów i sprawdzonych marek. Każdy zabieg poprzedza konsultacją oraz wywiadem medycznym, a w razie potrzeby dba o komfort stosując znieczulenie. Maja korzysta z profesjonalnych linii kosmetycznych, mezokoktajli i wypełniaczy, by osiągnąć subtelne i trwałe efekty, które zachwycają. Jej misją jest, byś każdy klient poczuł się naturalnie piękny, pewny siebie i otoczony troską - niezależnie od wieku.'
+      ]
     }
   ];
+
+  // Team Card Component
+  const TeamCard = ({ member, onClick, index }) => {
+    return (
+      <motion.div
+        layoutId={`card-${member.id}`}
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.6, delay: index * 0.15 }}
+        onClick={onClick}
+        className="group relative bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer border border-stone-100 flex flex-col items-center text-center h-full"
+        whileHover={{ y: -5 }}
+      >
+        {/* Decorative Initials Circle */}
+        <div className="w-24 h-24 rounded-full bg-[#C86B46] flex items-center justify-center text-white text-2xl font-serif mb-6 shadow-md group-hover:scale-110 transition-transform duration-300"
+          style={{ fontFamily: 'Playfair Display, serif' }}
+        >
+          {member.initials}
+        </div>
+        <h3 
+          className="text-2xl font-bold text-[#2F4F4F] mb-2"
+          style={{ fontFamily: 'Playfair Display, serif' }}
+        >
+          {member.name}
+        </h3>
+        <p className="text-xs font-bold tracking-widest text-[#C86B46] uppercase mb-4">
+          {member.role}
+        </p>
+        <p className="text-gray-600 text-sm leading-relaxed mb-6 line-clamp-3">
+          {member.shortBio}
+        </p>
+        <div className="mt-auto">
+          <span className="text-sm font-medium text-gray-400 group-hover:text-[#C86B46] transition-colors flex items-center gap-1">
+            Poznaj mnie bliżej →
+          </span>
+        </div>
+      </motion.div>
+    );
+  };
+
+  // Modal Component
+  const Modal = ({ member, onClose }) => {
+    if (!member) return null;
+
+    return (
+      <div className="fixed inset-0 z-50 grid place-items-center p-4">
+        {/* Backdrop */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={onClose}
+          className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+        />
+        {/* Modal Content */}
+        <motion.div
+          layoutId={`card-${member.id}`}
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.9 }}
+          className="relative bg-white w-full max-w-2xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
+        >
+          <div className="relative p-8 md:p-10 overflow-y-auto">
+            {/* Close Button */}
+            <button
+              onClick={onClose}
+              className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100 text-gray-500 transition-colors z-10"
+              aria-label="Zamknij"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            <div className="flex flex-col items-center mb-8">
+              <div
+                className="w-20 h-20 rounded-full bg-[#C86B46] flex items-center justify-center text-white text-xl font-serif mb-4 shadow-inner"
+                style={{ fontFamily: 'Playfair Display, serif' }}
+              >
+                {member.initials}
+              </div>
+              <h2
+                className="text-3xl font-bold text-[#2F4F4F] text-center"
+                style={{ fontFamily: 'Playfair Display, serif' }}
+              >
+                {member.name}
+              </h2>
+              <p className="text-xs font-bold tracking-widest text-[#C86B46] uppercase mt-2">
+                {member.role}
+              </p>
+            </div>
+
+            <div className="space-y-4 text-gray-600 leading-relaxed text-justify">
+              {member.fullBio.map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
+            </div>
+
+            <div className="mt-10 pt-6 border-t border-gray-100 flex justify-center">
+              <button
+                onClick={onClose}
+                className="px-8 py-3 bg-[#C86B46] text-white rounded-full hover:bg-[#B85C3A] transition-colors text-sm tracking-wide font-medium"
+                style={{ fontFamily: 'Playfair Display, serif' }}
+              >
+                Zamknij
+              </button>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    );
+  };
 
   const values = [
     {
@@ -59,25 +194,25 @@ const AboutUs = () => {
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
               className="text-center lg:text-left"
             >
               <h1 
                 className="text-5xl md:text-6xl lg:text-7xl font-bold text-[#2F4F4F] leading-tight mb-6"
-                style={{ fontFamily: 'Playfair Display, serif' }}
-              >
+            style={{ fontFamily: 'Playfair Display, serif' }}
+          >
                 Witaj w ORANŻERII!
               </h1>
-              <motion.p
+          <motion.p
                 initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.2 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
                 className="text-lg md:text-xl text-gray-600 leading-relaxed"
-              >
+          >
                 Miejsce, gdzie piękno spotyka się z naturą, a każdy szczegół tworzony jest z myślą o Twoim komforcie i dobrej energii.
-              </motion.p>
+          </motion.p>
             </motion.div>
 
             {/* Right: Elegant Image */}
@@ -297,66 +432,32 @@ const AboutUs = () => {
               </div>
             </motion.div>
 
-            <div className="space-y-4 text-base md:text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed mb-12">
-              <p>
-                Za każdą wizytą w naszym salonie stoi zespół pełen pasji, doświadczenia i uważności. Nasze specjalistki łączą wspólny cel - troskę o Twoje piękno, komfort i dobre samopoczucie.
-              </p>
-              <p>
-                W ORANŻERII nie ma przypadkowych osób - każda z nas jest tutaj, by tworzyć wyjątkowe miejsce, do którego chce się wracać. Z nami możesz być pewny, że znajdziesz wsparcie i fachową opiekę dostosowaną do Twoich oczekiwań.
-              </p>
-            </div>
+            <p className="text-base md:text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed mb-12">
+              Poznaj specjalistki, które zadbają o Twoje piękno i komfort w ORANŻERII.
+            </p>
           </motion.div>
 
-          {/* 3-Column Grid for Specialists */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 lg:gap-12">
+          {/* Team Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {teamMembers.map((member, index) => (
-              <motion.div
+              <TeamCard
                 key={member.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.6, delay: index * 0.15 }}
-                className="flex flex-col items-center text-center"
-              >
-                {/* Circular Headshot Placeholder */}
-                <div className="mb-6 w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden shadow-lg bg-gray-200 flex items-center justify-center">
-                  <img
-                    src={`/img/team-${member.id}.jpg`}
-                    alt={member.name}
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      // Placeholder if image doesn't exist
-                      e.target.style.display = 'none';
-                      e.target.parentElement.innerHTML = `
-                        <div class="w-full h-full bg-gradient-to-br from-[#C86B46] to-[#E08D6D] flex items-center justify-center">
-                          <span class="text-white text-4xl font-bold" style="font-family: 'Playfair Display', serif;">
-                            ${member.name.split(' ').map(n => n[0]).join('')}
-                          </span>
-                        </div>
-                      `;
-                    }}
-                  />
-                </div>
-
-                {/* Name and Role */}
-                <h3 
-                  className="text-2xl md:text-3xl font-bold text-[#2F4F4F] mb-2"
-                  style={{ fontFamily: 'Playfair Display, serif' }}
-                >
-                  {member.name}
-                </h3>
-                <p className="text-lg md:text-xl text-[#C86B46] font-medium mb-4">
-                  {member.role}
-                </p>
-
-                {/* Bio */}
-                <div className="space-y-3 text-base md:text-lg text-gray-700 leading-relaxed">
-                  <p>{member.description}</p>
-                  <p>{member.details}</p>
-                </div>
-              </motion.div>
+                member={member}
+                onClick={() => setSelectedMember(member)}
+                index={index}
+              />
             ))}
           </div>
+
+          {/* Modal */}
+          <AnimatePresence>
+            {selectedMember && (
+              <Modal
+                member={selectedMember}
+                onClose={() => setSelectedMember(null)}
+              />
+            )}
+          </AnimatePresence>
         </div>
       </section>
 
@@ -365,7 +466,7 @@ const AboutUs = () => {
         <div className="max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+                whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6 }}
           >
@@ -377,9 +478,9 @@ const AboutUs = () => {
             </h2>
             <p className="text-base md:text-lg text-gray-700 leading-relaxed">
               W Oranżerii każdy klient otrzymuje indywidualne podejście - zaczynając od konsultacji, przez przygotowanie spersonalizowanego planu zabiegowego, aż po opiekę pozabiegowa. Jesteśmy tu, by służyć radą i wsparciem, pomagając Ci osiągnąć zdrowy, naturalny wygląd i dobre samopoczucie.
-            </p>
-          </motion.div>
-        </div>
+                    </p>
+                  </motion.div>
+                </div>
       </section>
 
       {/* Atmosphere Section - Cream Background */}
@@ -393,14 +494,14 @@ const AboutUs = () => {
           >
             <h2 
               className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#2F4F4F] mb-6"
-              style={{ fontFamily: 'Playfair Display, serif' }}
-            >
+                    style={{ fontFamily: 'Playfair Display, serif' }}
+                  >
               Atmosfera i miejsce
             </h2>
             <p className="text-base md:text-lg text-gray-700 leading-relaxed">
               Tworzymy przestrzeń, w której panuje ciepło, zaufanie i pełen komfort. Chcemy, aby każda wizyta była nie tylko skutecznym zabiegiem, ale także chwilą relaksu i przyjemności - miejscem, które dodaje energii i pozwala zadbać o siebie w spokoju.
             </p>
-          </motion.div>
+              </motion.div>
         </div>
       </section>
 
@@ -422,9 +523,9 @@ const AboutUs = () => {
             <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
               Jesteśmy gotowe, by poznać Ciebie i Twoje potrzeby. Zapraszamy do kontaktu, umówienia konsultacji i wspólnego odkrywania Twojego naturalnego piękna. U nas znajdziesz nie tylko profesjonalne usługi, ale także zespół, który troszczy się o Ciebie z sercem.
             </p>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-5xl md:text-6xl mb-8"
@@ -445,8 +546,8 @@ const AboutUs = () => {
                 centered={true}
                 className="min-w-[280px]"
               />
-            </div>
-          </motion.div>
+                </div>
+              </motion.div>
         </div>
       </section>
     </div>

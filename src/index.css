@@ -81,7 +81,7 @@
     scrollbar-width: none;  /* Firefox */
   }
 
-  /* Hide Booksy floating widget button, but NOT the dialog container */
+  /* Hide Booksy floating widget button, but NEVER hide the dialog container */
   /* Only hide small floating buttons (not dialogs) */
   .booksy-widget-container:not(.booksy-widget-container-dialog)[style*="position: fixed"],
   .booksy-widget-container:not(.booksy-widget-container-dialog)[style*="position:fixed"] {
@@ -90,6 +90,17 @@
     visibility: hidden !important;
     pointer-events: none !important;
     /* Don't set display: none - keep in DOM for programmatic access */
+  }
+
+  /* CRITICAL: Never hide the dialog container - let Booksy control its visibility */
+  /* But ensure it can be displayed when Booksy opens it */
+  .booksy-widget-container-dialog[style*="display"] {
+    /* If Booksy sets display, respect it */
+  }
+  
+  /* Only override if something is trying to hide it incorrectly */
+  .booksy-widget-container-dialog[style*="display: none"] {
+    /* Don't force show - let Booksy handle it */
   }
 
   /* Hide floating buttons, but keep them accessible for clicking */

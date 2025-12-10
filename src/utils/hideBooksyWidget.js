@@ -6,15 +6,25 @@
 export const hideBooksyWidget = () => {
   // Function to hide only the floating button, not the widget container or dialog
   const hideFloatingButton = () => {
+    // First check if dialog is open - if so, don't hide anything
+    const dialog = document.querySelector('.booksy-widget-container-dialog');
+    if (dialog) {
+      const dialogStyle = window.getComputedStyle(dialog);
+      // If dialog is visible (not display:none), don't run hiding logic
+      if (dialogStyle.display !== 'none' && dialogStyle.visibility !== 'hidden') {
+        return; // Dialog is open, don't hide anything
+      }
+    }
+    
     // Find all widget containers
     const widgetContainers = document.querySelectorAll('.booksy-widget-container');
     
     widgetContainers.forEach(widgetContainer => {
       if (!widgetContainer) return;
       
-      // DON'T hide dialog containers - they need to be visible when opened
+      // NEVER hide dialog containers - they need to be visible when opened
       if (widgetContainer.classList.contains('booksy-widget-container-dialog')) {
-        return;
+        return; // Skip dialog containers completely
       }
       
       const style = window.getComputedStyle(widgetContainer);
@@ -143,9 +153,30 @@ export const hideBooksyWidget = () => {
   setTimeout(hideFloatingButton, 3000);
 
   // Use MutationObserver to catch elements added dynamically
+  // But be careful not to hide dialogs
   if (typeof window !== 'undefined' && window.MutationObserver) {
-    const observer = new MutationObserver(() => {
-      hideFloatingButton();
+    const observer = new MutationObserver((mutations) => {
+      // Check if a dialog was added - if so, don't hide it
+      let dialogAdded = false;
+      mutations.forEach(mutation => {
+        mutation.addedNodes.forEach(node => {
+          if (node.nodeType === 1) { // Element node
+            if (node.classList && node.classList.contains('booksy-widget-container-dialog')) {
+              dialogAdded = true;
+            }
+            // Also check children
+            const dialog = node.querySelector && node.querySelector('.booksy-widget-container-dialog');
+            if (dialog) {
+              dialogAdded = true;
+            }
+          }
+        });
+      });
+      
+      // Only hide floating buttons if no dialog was added
+      if (!dialogAdded) {
+        hideFloatingButton();
+      }
     });
 
     observer.observe(document.body, {

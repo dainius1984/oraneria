@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useState, useRef, useEffect } from 'react';
 import BooksyButton from './BooksyButton';
+import { openBooksyWidget } from '../utils/booksy';
 
 const categories = ['Twarz', 'Ciało', 'Medycyna Estetyczna', 'Rytuały SPA', 'Dodatki'];
 
@@ -245,7 +246,15 @@ const Pricing = () => {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.4, delay: itemIndex * 0.05 }}
-                            className="group relative py-4 md:py-5 border-b border-gray-200/50 last:border-0 hover:bg-white/80 rounded-lg px-3 md:px-4 transition-all duration-300"
+                            className="group relative py-4 md:py-5 border-b border-gray-200/50 last:border-0 hover:bg-white/80 rounded-lg px-3 md:px-4 transition-all duration-300 cursor-pointer"
+                            onClick={(e) => {
+                              // Don't trigger if clicking the button itself
+                              if (e.target.closest('button')) {
+                                return;
+                              }
+                              // Open Booksy widget when clicking anywhere on the row
+                              openBooksyWidget(e);
+                            }}
                           >
                             <div className="flex items-center justify-between gap-4">
                               <div className="flex-1 min-w-0">
@@ -269,7 +278,10 @@ const Pricing = () => {
                                     {item.price}
                                   </span>
                                 </div>
-                                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center">
+                                <div 
+                                  className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center"
+                                  onClick={(e) => e.stopPropagation()}
+                                >
                                   <BooksyButton 
                                     text="Rezerwuj" 
                                     variant="primary"

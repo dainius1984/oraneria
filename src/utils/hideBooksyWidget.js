@@ -3,23 +3,46 @@
  * Keeps dialog functional while hiding the floating button
  */
 export const hideBooksyWidget = () => {
-  // Hide floating widget button (keep functional for programmatic clicks)
+  // Hide ALL floating widget buttons (keep functional for programmatic clicks)
   document.querySelectorAll('.booksy-widget-button').forEach(button => {
-    if (!button.closest('.booksy-widget-container-dialog')) {
+    // Only keep visible if it's inside an open dialog
+    const isInDialog = button.closest('.booksy-widget-container-dialog');
+    const dialogStyle = isInDialog ? window.getComputedStyle(isInDialog) : null;
+    const isDialogVisible = dialogStyle && dialogStyle.display !== 'none' && dialogStyle.visibility !== 'hidden' && dialogStyle.opacity !== '0';
+    
+    // Hide button if not in visible dialog OR if it's outside #root
+    const isInRoot = button.closest('#root');
+    if (!isDialogVisible || !isInRoot) {
       button.style.setProperty('opacity', '0', 'important');
       button.style.setProperty('visibility', 'hidden', 'important');
       button.style.setProperty('pointer-events', 'none', 'important');
+      button.style.setProperty('display', 'none', 'important');
+    } else {
+      // Keep button accessible for programmatic clicks even if hidden visually
+      button.style.setProperty('pointer-events', 'auto', 'important');
     }
   });
 
-  // Hide floating containers (not dialogs)
+  // Hide ALL floating containers (not dialogs) - especially those outside #root
   document.querySelectorAll('.booksy-widget-container').forEach(container => {
-    if (!container.classList.contains('booksy-widget-container-dialog')) {
+    const isDialog = container.classList.contains('booksy-widget-container-dialog');
+    const isInRoot = container.closest('#root');
+    
+    // If it's not a dialog, hide it aggressively
+    if (!isDialog) {
       const style = window.getComputedStyle(container);
-      if (style.position === 'fixed' || style.position === 'absolute') {
+      const rect = container.getBoundingClientRect();
+      
+      // Hide if fixed/absolute OR if it's outside root OR if it's at bottom of screen
+      if (style.position === 'fixed' || 
+          style.position === 'absolute' || 
+          !isInRoot ||
+          rect.bottom > window.innerHeight - 100) {
+        container.style.setProperty('display', 'none', 'important');
         container.style.setProperty('opacity', '0', 'important');
         container.style.setProperty('pointer-events', 'none', 'important');
         container.style.setProperty('visibility', 'hidden', 'important');
+        container.style.setProperty('z-index', '-9999', 'important');
       }
     }
   });
@@ -89,6 +112,39 @@ export const hideBooksyWidget = () => {
         el.style.setProperty('pointer-events', 'none', 'important');
         el.style.setProperty('z-index', '-9999', 'important');
       }
+    }
+  });
+
+  // CRITICAL: Hide ALL Booksy containers that are direct children of body (outside #root)
+  document.querySelectorAll('body > .booksy-widget-container').forEach(container => {
+    // Only hide if it's NOT a visible dialog
+    const isDialog = container.classList.contains('booksy-widget-container-dialog');
+    if (!isDialog) {
+      container.style.setProperty('display', 'none', 'important');
+      container.style.setProperty('opacity', '0', 'important');
+      container.style.setProperty('visibility', 'hidden', 'important');
+      container.style.setProperty('pointer-events', 'none', 'important');
+      container.style.setProperty('z-index', '-9999', 'important');
+    } else {
+      // Check if dialog is actually visible
+      const dialogStyle = window.getComputedStyle(container);
+      if (dialogStyle.display === 'none' || dialogStyle.visibility === 'hidden') {
+        // Dialog is hidden, hide the container too
+        container.style.setProperty('display', 'none', 'important');
+      }
+    }
+  });
+
+  // Hide ALL Booksy buttons that are direct children of body
+  document.querySelectorAll('body > .booksy-widget-button, body > a.booksy-business-link[href*="booksy.com"]').forEach(button => {
+    // Only hide if it's not inside a visible dialog
+    const isInDialog = button.closest('.booksy-widget-container-dialog');
+    if (!isInDialog) {
+      button.style.setProperty('display', 'none', 'important');
+      button.style.setProperty('opacity', '0', 'important');
+      button.style.setProperty('visibility', 'hidden', 'important');
+      button.style.setProperty('pointer-events', 'none', 'important');
+      button.style.setProperty('z-index', '-9999', 'important');
     }
   });
 };

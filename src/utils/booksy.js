@@ -18,16 +18,30 @@ export const openBooksyWidget = (e) => {
   }
 
   // Try clicking the Booksy widget button (created by Booksy script)
-  const booksyButton = document.querySelector('.booksy-widget-button');
+  // Find button even if it's hidden (outside #root)
+  const booksyButton = document.querySelector('body > .booksy-widget-button, .booksy-widget-button');
   
   if (booksyButton) {
     try {
+      // Temporarily make button clickable
+      const originalDisplay = booksyButton.style.display;
+      const originalOpacity = booksyButton.style.opacity;
+      const originalVisibility = booksyButton.style.visibility;
       const originalPointerEvents = booksyButton.style.pointerEvents;
-      booksyButton.style.pointerEvents = 'auto';
+      
+      booksyButton.style.setProperty('display', 'block', 'important');
+      booksyButton.style.setProperty('opacity', '1', 'important');
+      booksyButton.style.setProperty('visibility', 'visible', 'important');
+      booksyButton.style.setProperty('pointer-events', 'auto', 'important');
+      
       booksyButton.click();
       
+      // Restore hidden state after click
       setTimeout(() => {
-        booksyButton.style.pointerEvents = originalPointerEvents;
+        booksyButton.style.setProperty('display', originalDisplay || 'none', 'important');
+        booksyButton.style.setProperty('opacity', originalOpacity || '0', 'important');
+        booksyButton.style.setProperty('visibility', originalVisibility || 'hidden', 'important');
+        booksyButton.style.setProperty('pointer-events', originalPointerEvents || 'none', 'important');
         setupClickOutsideHandler();
       }, 500);
       return;

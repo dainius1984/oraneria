@@ -84,17 +84,23 @@ body {
   /* ============================================
      Booksy Widget - Hide Floating Button
      ============================================ */
-  /* Hide floating widget button, but keep dialog functional */
+  /* Hide ALL floating widget containers (not dialogs) - especially those outside #root */
+  body > .booksy-widget-container:not(.booksy-widget-container-dialog),
   .booksy-widget-container:not(.booksy-widget-container-dialog)[style*="position: fixed"],
   .booksy-widget-container:not(.booksy-widget-container-dialog)[style*="position:fixed"] {
+    display: none !important;
     opacity: 0 !important;
     visibility: hidden !important;
     pointer-events: none !important;
+    z-index: -9999 !important;
   }
 
-  /* Hide floating buttons (keep accessible for programmatic clicks) */
+  /* Hide ALL floating buttons (keep accessible for programmatic clicks only) */
+  body > .booksy-widget-button,
+  body > .booksy-widget-container .booksy-widget-button:not(.booksy-widget-container-dialog .booksy-widget-button),
   .booksy-widget-button[style*="position: fixed"]:not(.booksy-widget-container-dialog .booksy-widget-button),
   .booksy-widget-button[style*="position:fixed"]:not(.booksy-widget-container-dialog .booksy-widget-button) {
+    display: none !important;
     opacity: 0 !important;
     visibility: hidden !important;
     pointer-events: none !important;

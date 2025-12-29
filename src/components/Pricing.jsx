@@ -249,36 +249,34 @@ const Pricing = () => {
                           >
                             <div className="flex items-center justify-between gap-4">
                               <div className="flex-1 min-w-0">
-                                <div className="flex items-start gap-3 md:gap-4 flex-wrap">
-                                  <div className="flex-1 min-w-0">
-                                    <h4 className="text-base md:text-lg font-bold text-[#2F4F4F] mb-1">
-                                      {item.name}
-                                    </h4>
-                                    <div className="flex items-center gap-3 text-sm text-gray-600">
-                                      <span>{item.description}</span>
-                                      <span className="text-[#C86B46]">•</span>
-                                      <span>{item.time}</span>
-                                    </div>
-                                  </div>
-                                  <div className="flex items-center gap-4">
-                                    {item.oldPrice && (
-                                      <span className="text-sm text-gray-400 line-through">
-                                        {item.oldPrice}
-                                      </span>
-                                    )}
-                                    <span className="text-lg md:text-xl font-bold text-[#C86B46] whitespace-nowrap">
-                                      {item.price}
-                                    </span>
-                                  </div>
+                                <h4 className="text-base md:text-lg font-bold text-[#2F4F4F] mb-1">
+                                  {item.name}
+                                </h4>
+                                <div className="flex items-center gap-3 text-sm text-gray-600">
+                                  <span>{item.description}</span>
+                                  <span className="text-[#C86B46]">•</span>
+                                  <span>{item.time}</span>
                                 </div>
                               </div>
-                              <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <BooksyButton 
-                                  text="Rezerwuj" 
-                                  variant="primary"
-                                  size="small"
-                                  className="whitespace-nowrap"
-                                />
+                              <div className="flex items-center gap-3 md:gap-4 flex-shrink-0">
+                                <div className="flex items-center gap-4">
+                                  {item.oldPrice && (
+                                    <span className="text-sm text-gray-400 line-through">
+                                      {item.oldPrice}
+                                    </span>
+                                  )}
+                                  <span className="text-lg md:text-xl font-bold text-[#C86B46] whitespace-nowrap">
+                                    {item.price}
+                                  </span>
+                                </div>
+                                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center">
+                                  <BooksyButton 
+                                    text="Rezerwuj" 
+                                    variant="primary"
+                                    size="small"
+                                    className="whitespace-nowrap"
+                                  />
+                                </div>
                               </div>
                             </div>
                             {/* Dotted separator line */}

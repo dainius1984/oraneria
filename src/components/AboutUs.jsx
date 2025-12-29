@@ -323,14 +323,26 @@ const AboutUs = () => {
             className="max-w-4xl mx-auto text-center py-12 md:py-16"
           >
             <div className="relative">
-              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-4 text-6xl text-[#C86B46]/20" style={{ fontFamily: 'Playfair Display, serif' }}>"</div>
+              {/* Opening quote mark */}
+              <div 
+                className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-2 md:-translate-y-4 text-5xl md:text-7xl text-[#C86B46]/15 leading-none"
+                style={{ fontFamily: 'Playfair Display, serif', fontStyle: 'italic' }}
+              >
+                &ldquo;
+              </div>
               <p 
-                className="text-2xl md:text-3xl lg:text-4xl text-[#2F4F4F] leading-relaxed italic px-8"
+                className="text-2xl md:text-3xl lg:text-4xl text-[#2F4F4F] leading-relaxed italic px-8 md:px-12 pt-4 md:pt-6"
                 style={{ fontFamily: 'Playfair Display, serif' }}
               >
                 Prawdziwe piękno pochodzi z harmonii ciała i ducha
               </p>
-              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-4 text-6xl text-[#C86B46]/20" style={{ fontFamily: 'Playfair Display, serif' }}>"</div>
+              {/* Closing quote mark */}
+              <div 
+                className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-2 md:translate-y-4 text-5xl md:text-7xl text-[#C86B46]/15 leading-none"
+                style={{ fontFamily: 'Playfair Display, serif', fontStyle: 'italic' }}
+              >
+                &rdquo;
+              </div>
             </div>
           </motion.div>
 

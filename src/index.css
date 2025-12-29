@@ -81,38 +81,26 @@
     scrollbar-width: none;  /* Firefox */
   }
 
-  /* Hide Booksy floating widget button, but NEVER hide the dialog container */
-  /* Only hide small floating buttons (not dialogs) */
+  /* ============================================
+     Booksy Widget - Hide Floating Button
+     ============================================ */
+  /* Hide floating widget button, but keep dialog functional */
   .booksy-widget-container:not(.booksy-widget-container-dialog)[style*="position: fixed"],
   .booksy-widget-container:not(.booksy-widget-container-dialog)[style*="position:fixed"] {
-    /* Only hide if it's small (floating button, not dialog) */
     opacity: 0 !important;
     visibility: hidden !important;
     pointer-events: none !important;
-    /* Don't set display: none - keep in DOM for programmatic access */
   }
 
-  /* CRITICAL: Never hide the dialog container - let Booksy control its visibility */
-  /* But ensure it can be displayed when Booksy opens it */
-  .booksy-widget-container-dialog[style*="display"] {
-    /* If Booksy sets display, respect it */
-  }
-  
-  /* Only override if something is trying to hide it incorrectly */
-  .booksy-widget-container-dialog[style*="display: none"] {
-    /* Don't force show - let Booksy handle it */
-  }
-
-  /* Hide floating buttons, but keep them accessible for clicking */
+  /* Hide floating buttons (keep accessible for programmatic clicks) */
   .booksy-widget-button[style*="position: fixed"]:not(.booksy-widget-container-dialog .booksy-widget-button),
   .booksy-widget-button[style*="position:fixed"]:not(.booksy-widget-container-dialog .booksy-widget-button) {
     opacity: 0 !important;
     visibility: hidden !important;
     pointer-events: none !important;
-    /* Don't set display: none - keep functional */
   }
 
-  /* Hide floating iframes and other floating Booksy elements */
+  /* Hide floating iframes */
   iframe[src*="booksy.com"][style*="position: fixed"],
   iframe[src*="booksy.com"][style*="position:fixed"],
   div[data-booksy-widget][style*="position: fixed"],
@@ -123,10 +111,10 @@
     pointer-events: none !important;
   }
 
-  /* Note: REZERWUJ button hiding is handled by JavaScript in closeBooksyWidget() */
-  /* CSS cannot reliably detect text content, so we use JS to find and hide buttons with "REZERWUJ" text */
 
-
+  /* ============================================
+     Booksy Widget - Custom Buttons
+     ============================================ */
   /* Ensure our custom Booksy buttons are always visible */
   .booksy-business-link {
     display: block !important;
@@ -138,75 +126,75 @@
     pointer-events: auto !important;
   }
 
-  /* Style Booksy Widget to match website theme */
-  /* Overlay/Backdrop styling */
+  /* ============================================
+     Booksy Widget - Theme Styling
+     ============================================ */
+  /* Overlay/Backdrop */
   .booksy-widget-container-dialog,
   [class*="booksy"][class*="overlay"],
   [class*="booksy"][class*="backdrop"],
   [class*="booksy"][class*="modal"] {
-    background-color: rgba(47, 79, 79, 0.85) !important; /* Dark Slate Green with transparency */
+    background-color: rgba(47, 79, 79, 0.85) !important;
     backdrop-filter: blur(4px) !important;
   }
 
-  /* Widget container/dialog box */
+  /* Dialog container */
   .booksy-widget-container-dialog > div,
   [class*="booksy"][class*="dialog"] > div,
   [class*="booksy"][class*="content"] {
-    background-color: #FFFAF5 !important; /* Warm Alabaster */
+    background-color: #FFFAF5 !important;
     border-radius: 16px !important;
     box-shadow: 0 20px 60px rgba(47, 79, 79, 0.3) !important;
   }
 
-  /* Primary buttons in widget */
+  /* Buttons */
   [class*="booksy"] button[type="submit"],
   [class*="booksy"] .btn-primary,
   [class*="booksy"] button.primary,
-  [class*="booksy"] [class*="button"][class*="primary"],
-  iframe[src*="booksy.com"] + * button {
-    background-color: #C86B46 !important; /* Terracotta Orange */
+  [class*="booksy"] [class*="button"][class*="primary"] {
+    background-color: #C86B46 !important;
     color: white !important;
     border-color: #C86B46 !important;
     font-family: 'Playfair Display', serif !important;
-    border-radius: 9999px !important; /* Rounded */
+    border-radius: 9999px !important;
     transition: all 0.3s ease !important;
   }
 
   [class*="booksy"] button[type="submit"]:hover,
   [class*="booksy"] .btn-primary:hover,
   [class*="booksy"] button.primary:hover {
-    background-color: #E08D6D !important; /* Soft Terracotta */
+    background-color: #E08D6D !important;
     transform: translateY(-1px) !important;
     box-shadow: 0 4px 12px rgba(200, 107, 70, 0.4) !important;
   }
 
-  /* Headings in widget */
+  /* Typography */
   [class*="booksy"] h1,
   [class*="booksy"] h2,
   [class*="booksy"] h3,
   [class*="booksy"] h4,
   [class*="booksy"] .title {
-    color: #2F4F4F !important; /* Dark Slate Green */
+    color: #2F4F4F !important;
     font-family: 'Playfair Display', serif !important;
   }
 
-  /* Text in widget */
   [class*="booksy"] p,
   [class*="booksy"] span,
   [class*="booksy"] div:not([class*="button"]) {
-    color: #2F4F4F !important; /* Dark Slate Green */
+    color: #2F4F4F !important;
   }
 
-  /* Links in widget */
+  /* Links */
   [class*="booksy"] a {
-    color: #C86B46 !important; /* Terracotta Orange */
+    color: #C86B46 !important;
     transition: color 0.3s ease !important;
   }
 
   [class*="booksy"] a:hover {
-    color: #E08D6D !important; /* Soft Terracotta */
+    color: #E08D6D !important;
   }
 
-  /* Input fields */
+  /* Form inputs */
   [class*="booksy"] input,
   [class*="booksy"] select,
   [class*="booksy"] textarea {
@@ -236,14 +224,14 @@
     color: #C86B46 !important;
   }
 
-  /* Borders and dividers */
+  /* Borders & Dividers */
   [class*="booksy"] hr,
   [class*="booksy"] [class*="divider"],
   [class*="booksy"] [class*="border"] {
     border-color: rgba(200, 107, 70, 0.2) !important;
   }
 
-  /* Calendar/Date picker styling */
+  /* Calendar/Date picker */
   [class*="booksy"] [class*="calendar"],
   [class*="booksy"] [class*="date"] {
     background-color: #FFFAF5 !important;
@@ -255,7 +243,7 @@
     color: white !important;
   }
 
-  /* Scrollbar styling for widget */
+  /* Scrollbar */
   [class*="booksy"] ::-webkit-scrollbar {
     width: 8px !important;
   }

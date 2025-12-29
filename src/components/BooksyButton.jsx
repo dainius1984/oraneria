@@ -57,22 +57,30 @@ const BooksyButton = ({
   return (
     <button
       onClick={handleClick}
-      className={baseClasses}
+      className={`${baseClasses} hover:scale-105 active:scale-95`}
       style={buttonStyles}
       onMouseEnter={(e) => {
         if (variant === 'primary') {
           e.target.style.backgroundColor = '#C86B46';
+          e.target.style.transform = 'scale(1.05)';
+          e.target.style.boxShadow = '0 8px 20px rgba(200, 107, 70, 0.4)';
         } else {
           e.target.style.backgroundColor = '#C86B46';
           e.target.style.color = 'white';
+          e.target.style.transform = 'scale(1.05)';
+          e.target.style.boxShadow = '0 8px 20px rgba(200, 107, 70, 0.3)';
         }
       }}
       onMouseLeave={(e) => {
         if (variant === 'primary') {
           e.target.style.backgroundColor = '#B85C3A';
+          e.target.style.transform = 'scale(1)';
+          e.target.style.boxShadow = 'none';
         } else {
           e.target.style.backgroundColor = 'transparent';
           e.target.style.color = '#C86B46';
+          e.target.style.transform = 'scale(1)';
+          e.target.style.boxShadow = 'none';
         }
       }}
     >

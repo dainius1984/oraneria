@@ -58,9 +58,14 @@ const TreatmentFinder = () => {
   ];
 
   const handleCardClick = (href) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Navigate to Oferta page with filter or scroll to section
+    if (href.startsWith('#')) {
+      window.location.href = `/oferta${href}`;
+    } else {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     }
   };
 
@@ -83,7 +88,7 @@ const TreatmentFinder = () => {
           </p>
         </motion.div>
 
-        {/* Treatment Cards Grid */}
+        {/* Interactive Solution Cards Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
           {treatments.map((treatment, index) => (
             <motion.div
@@ -98,28 +103,29 @@ const TreatmentFinder = () => {
               onClick={() => handleCardClick(treatment.href)}
             >
               <motion.div
-                className={`
-                  bg-white rounded-2xl p-6 md:p-8 shadow-md 
-                  h-full flex flex-col items-center justify-center
-                  ${hoveredCard === treatment.id 
-                    ? 'bg-gradient-to-br from-orange-50 to-orange-100/50' 
-                    : ''
-                  }
-                `}
+                className="bg-white rounded-2xl p-6 md:p-8 shadow-md h-full flex flex-col items-center justify-center border-2 border-transparent transition-all duration-300"
+                style={{
+                  borderColor: hoveredCard === treatment.id ? '#C86B46' : 'transparent'
+                }}
                 whileHover={{
-                  y: -5,
-                  boxShadow: '0 10px 25px rgba(251, 146, 60, 0.25)',
+                  y: -8,
+                  boxShadow: '0 12px 30px rgba(200, 107, 70, 0.2)',
                   transition: { duration: 0.3, ease: 'easeOut' }
                 }}
               >
-                {/* Icon */}
-                <div 
-                  className={`mb-4 transition-colors duration-300 ${
-                    hoveredCard === treatment.id ? 'text-[#C86B46]' : 'text-[#C86B46]'
-                  }`}
+                {/* Icon with Color Change on Hover */}
+                <motion.div 
+                  className="mb-4"
+                  animate={{
+                    color: hoveredCard === treatment.id ? '#C86B46' : '#2F4F4F',
+                    scale: hoveredCard === treatment.id ? 1.1 : 1
+                  }}
+                  transition={{ duration: 0.3 }}
                 >
-                  {treatment.icon}
-                </div>
+                  <div className={hoveredCard === treatment.id ? 'text-[#C86B46]' : 'text-[#2F4F4F]'}>
+                    {treatment.icon}
+                  </div>
+                </motion.div>
 
                 {/* Title */}
                 <h3 
@@ -133,20 +139,28 @@ const TreatmentFinder = () => {
                   {treatment.title}
                 </h3>
 
-                {/* View Arrow */}
+                {/* View Arrow - Always Visible but Animated */}
                 <motion.div
-                  initial={{ opacity: 0, x: -10 }}
                   animate={{ 
-                    opacity: hoveredCard === treatment.id ? 1 : 0,
-                    x: hoveredCard === treatment.id ? 0 : -10
+                    opacity: hoveredCard === treatment.id ? 1 : 0.6,
+                    x: hoveredCard === treatment.id ? 0 : -5
                   }}
                   transition={{ duration: 0.3 }}
-                  className="flex items-center gap-2 text-[#C86B46] font-medium text-sm"
+                  className="flex items-center gap-2 text-[#C86B46] font-medium text-sm mt-2"
                 >
                   <span>Zobacz</span>
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <motion.svg 
+                    className="w-4 h-4" 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke="currentColor"
+                    animate={{
+                      x: hoveredCard === treatment.id ? 4 : 0
+                    }}
+                    transition={{ duration: 0.3 }}
+                  >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
+                  </motion.svg>
                 </motion.div>
               </motion.div>
             </motion.div>

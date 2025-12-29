@@ -1,6 +1,7 @@
 import Hero from '../components/Hero.jsx';
 import TreatmentFinder from '../components/TreatmentFinder.jsx';
 import Bestsellers from '../components/Bestsellers.jsx';
+import TrustSection from '../components/TrustSection.jsx';
 import Contact from '../components/Contact.jsx';
 
 const Home = () => {
@@ -9,6 +10,7 @@ const Home = () => {
       <Hero />
       <TreatmentFinder />
       <Bestsellers />
+      <TrustSection />
       <Contact />
     </div>
   );

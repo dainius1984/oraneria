@@ -47,12 +47,12 @@ const Footer = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center"
+            className="text-center lg:text-left"
           >
             <a 
               href="/" 
               onClick={handleLogoClick}
-              className="block cursor-pointer"
+              className="block cursor-pointer mb-4"
             >
               <h2 
                 className="text-3xl md:text-4xl font-bold mb-4 text-orange-50 hover:text-[#C86B46] transition-colors duration-300"
@@ -64,12 +64,12 @@ const Footer = () => {
             <a 
               href="/" 
               onClick={handleLogoClick}
-              className="block mb-4 flex justify-center hover:opacity-80 transition-opacity duration-300 cursor-pointer"
+              className="block mb-4 flex justify-center lg:justify-start hover:opacity-80 transition-opacity duration-300 cursor-pointer"
             >
               <img 
                 src="/img/logo/logo.png" 
                 alt="Oranżeria Logo" 
-                className="h-12 md:h-16 w-auto mx-auto"
+                className="h-12 md:h-16 w-auto"
               />
             </a>
             <p className="text-sm md:text-base text-orange-50/80 leading-relaxed">
@@ -77,7 +77,7 @@ const Footer = () => {
             </p>
           </motion.div>
 
-          {/* Column 2: Quick Links */}
+          {/* Column 2: Quick Links - Better Grouped */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -86,25 +86,25 @@ const Footer = () => {
             className="text-center md:text-left"
           >
             <h3 
-              className="text-lg font-bold mb-4 text-[#C86B46]"
+              className="text-lg font-bold mb-6 text-[#C86B46]"
               style={{ fontFamily: 'Playfair Display, serif' }}
             >
               Szybkie Linki
             </h3>
-            <ul className="space-y-2">
+            <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.name}>
                   {link.isHash ? (
                     <a
                       href={link.href}
-                      className="text-orange-50/80 hover:text-[#C86B46] transition-colors duration-300 text-sm md:text-base"
+                      className="text-orange-50/80 hover:text-[#C86B46] transition-colors duration-300 text-sm md:text-base inline-block"
                     >
                       {link.name}
                     </a>
                   ) : (
                     <Link
                       to={link.href}
-                      className="text-orange-50/80 hover:text-[#C86B46] transition-colors duration-300 text-sm md:text-base"
+                      className="text-orange-50/80 hover:text-[#C86B46] transition-colors duration-300 text-sm md:text-base inline-block"
                     >
                       {link.name}
                     </Link>
@@ -114,7 +114,7 @@ const Footer = () => {
             </ul>
           </motion.div>
 
-          {/* Column 3: Contact */}
+          {/* Column 3: Contact - Better Grouped */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -123,20 +123,20 @@ const Footer = () => {
             className="text-center md:text-left"
           >
             <h3 
-              className="text-lg font-bold mb-4 text-[#C86B46]"
+              className="text-lg font-bold mb-6 text-[#C86B46]"
               style={{ fontFamily: 'Playfair Display, serif' }}
             >
               Kontakt
             </h3>
-            <div className="space-y-3 text-sm md:text-base text-orange-50/80">
-              <div>
-                <p className="mb-1">{contactInfo.address.street}</p>
+            <div className="space-y-4 text-sm md:text-base text-orange-50/80">
+              <div className="space-y-1">
+                <p>{contactInfo.address.street}</p>
                 <p>{contactInfo.address.city}</p>
               </div>
               <div>
                 <a 
                   href={`tel:${contactInfo.phone.replace(/\s/g, '')}`}
-                  className="hover:text-[#C86B46] transition-colors duration-300"
+                  className="hover:text-[#C86B46] transition-colors duration-300 block"
                 >
                   {contactInfo.phone}
                 </a>
@@ -144,7 +144,7 @@ const Footer = () => {
               <div>
                 <a 
                   href={`mailto:${contactInfo.email}`}
-                  className="hover:text-[#C86B46] transition-colors duration-300"
+                  className="hover:text-[#C86B46] transition-colors duration-300 block break-all"
                 >
                   {contactInfo.email}
                 </a>

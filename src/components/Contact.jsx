@@ -113,41 +113,59 @@ const Contact = () => {
             </div>
           </motion.div>
 
-          {/* Map Embed */}
+          {/* Map Embed - Fully Responsive */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6 }}
-            className="bg-white rounded-2xl p-2 shadow-lg overflow-hidden"
+            className="bg-white rounded-2xl p-2 shadow-lg overflow-hidden w-full"
           >
-            <div className="w-full h-full min-h-[400px] md:min-h-[500px] rounded-xl overflow-hidden relative">
+            <div className="w-full h-[400px] md:h-[500px] rounded-xl overflow-hidden relative">
               <iframe
                 src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2504.1234567890123!2d17.0123456!3d51.1234567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTHCsDA3JzI0LjQiTiAxN8KwMDAnNDQuNCJF!5e0!3m2!1spl!2spl!4v1234567890123!5m2!1spl!2spl&q=${encodeURIComponent('ul. Ślężna 189/191 LU 2, 53-110 Wrocław')}`}
                 width="100%"
                 height="100%"
                 style={{ 
-                  border: 0, 
-                  minHeight: '400px',
+                  border: 0,
                   filter: 'sepia(20%) contrast(90%) opacity(90%)'
                 }}
                 allowFullScreen=""
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 title="Lokalizacja Salonu Oranżeria"
-                className="rounded-xl"
+                className="rounded-xl w-full h-full"
               />
-              <div className="absolute bottom-4 right-4">
+              
+              {/* Utility Buttons */}
+              <div className="absolute bottom-4 left-4 right-4 flex flex-col sm:flex-row gap-2 justify-end">
+                {/* Copy Address Button */}
+                <button
+                  onClick={() => {
+                    const address = `${contactInfo.address.street}, ${contactInfo.address.city}`;
+                    navigator.clipboard.writeText(address).then(() => {
+                      alert('Adres skopiowany!');
+                    });
+                  }}
+                  className="bg-white/95 hover:bg-white px-4 py-2 rounded-lg shadow-md text-[#C86B46] hover:text-[#E08D6D] transition-colors text-sm font-medium flex items-center gap-2 justify-center"
+                >
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                  Kopiuj adres
+                </button>
+                
+                {/* Open in Google Maps Button */}
                 <a
                   href={contactInfo.mapUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-white/90 hover:bg-white px-4 py-2 rounded-lg shadow-md text-[#C86B46] hover:text-[#E08D6D] transition-colors text-sm font-medium flex items-center gap-2"
+                  className="bg-white/95 hover:bg-white px-4 py-2 rounded-lg shadow-md text-[#C86B46] hover:text-[#E08D6D] transition-colors text-sm font-medium flex items-center gap-2 justify-center"
                 >
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                   </svg>
-                  Otwórz w Google Maps
+                  Otwórz w Maps
                 </a>
               </div>
             </div>

@@ -95,6 +95,38 @@ body {
     z-index: -9999 !important;
   }
 
+  /* Hide empty Booksy dialog containers outside #root */
+  body > .booksy-widget-container-dialog:empty {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    z-index: -9999 !important;
+    height: 0 !important;
+    width: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Hide hidden Booksy dialog containers */
+  body > .booksy-widget-container-dialog[style*="display: none"],
+  body > .booksy-widget-container-dialog[style*="visibility: hidden"] {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    z-index: -9999 !important;
+    height: 0 !important;
+    width: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Hide Booksy containers without iframe (fallback for browsers without :has support) */
+  /* JavaScript will handle this more reliably */
+
   /* Hide ALL floating buttons (keep accessible for programmatic clicks only) */
   body > .booksy-widget-button,
   body > .booksy-widget-container .booksy-widget-button:not(.booksy-widget-container-dialog .booksy-widget-button),

@@ -117,21 +117,51 @@ export const hideBooksyWidget = () => {
 
   // CRITICAL: Hide ALL Booksy containers that are direct children of body (outside #root)
   document.querySelectorAll('body > .booksy-widget-container').forEach(container => {
-    // Only hide if it's NOT a visible dialog
     const isDialog = container.classList.contains('booksy-widget-container-dialog');
+    const dialogStyle = window.getComputedStyle(container);
+    const rect = container.getBoundingClientRect();
+    
+    // Check if container has actual widget content (iframe, content divs, etc.)
+    const hasIframe = container.querySelector('iframe');
+    const hasContentDivs = container.querySelector('[class*="content"], [class*="widget-content"], [class*="dialog-content"], [class*="widget-body"]');
+    const hasWidgetContent = hasIframe || hasContentDivs;
+    const isEmpty = container.children.length === 0 || (!hasWidgetContent && container.textContent.trim().length === 0);
+    
+    // Hide if:
+    // 1. Not a dialog, OR
+    // 2. Dialog is empty (no iframe/content), OR
+    // 3. Dialog is hidden, OR
+    // 4. Dialog has zero dimensions
     if (!isDialog) {
+      // Not a dialog - hide it completely
       container.style.setProperty('display', 'none', 'important');
       container.style.setProperty('opacity', '0', 'important');
       container.style.setProperty('visibility', 'hidden', 'important');
       container.style.setProperty('pointer-events', 'none', 'important');
       container.style.setProperty('z-index', '-9999', 'important');
-    } else {
-      // Check if dialog is actually visible
-      const dialogStyle = window.getComputedStyle(container);
-      if (dialogStyle.display === 'none' || dialogStyle.visibility === 'hidden') {
-        // Dialog is hidden, hide the container too
-        container.style.setProperty('display', 'none', 'important');
-      }
+      container.style.setProperty('height', '0', 'important');
+      container.style.setProperty('width', '0', 'important');
+      container.style.setProperty('overflow', 'hidden', 'important');
+      container.style.setProperty('margin', '0', 'important');
+      container.style.setProperty('padding', '0', 'important');
+    } else if (isDialog && (isEmpty || 
+                           !hasWidgetContent ||
+                           dialogStyle.display === 'none' || 
+                           dialogStyle.visibility === 'hidden' || 
+                           dialogStyle.opacity === '0' ||
+                           rect.width === 0 ||
+                           rect.height === 0)) {
+      // Dialog is empty or hidden - hide it completely
+      container.style.setProperty('display', 'none', 'important');
+      container.style.setProperty('opacity', '0', 'important');
+      container.style.setProperty('visibility', 'hidden', 'important');
+      container.style.setProperty('pointer-events', 'none', 'important');
+      container.style.setProperty('z-index', '-9999', 'important');
+      container.style.setProperty('height', '0', 'important');
+      container.style.setProperty('width', '0', 'important');
+      container.style.setProperty('overflow', 'hidden', 'important');
+      container.style.setProperty('margin', '0', 'important');
+      container.style.setProperty('padding', '0', 'important');
     }
   });
 

@@ -47,7 +47,7 @@ const Footer = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center lg:text-left"
+            className="text-center"
           >
             <a 
               href="/" 
@@ -64,12 +64,12 @@ const Footer = () => {
             <a 
               href="/" 
               onClick={handleLogoClick}
-              className="block mb-4 flex justify-center lg:justify-start hover:opacity-80 transition-opacity duration-300 cursor-pointer"
+              className="block mb-4 flex justify-center hover:opacity-80 transition-opacity duration-300 cursor-pointer"
             >
               <img 
                 src="/img/logo/logo.png" 
                 alt="Oranżeria Logo" 
-                className="h-12 md:h-16 w-auto"
+                className="h-12 md:h-16 w-auto mx-auto"
               />
             </a>
             <p className="text-sm md:text-base text-orange-50/80 leading-relaxed">

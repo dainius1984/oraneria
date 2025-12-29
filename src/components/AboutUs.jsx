@@ -325,7 +325,7 @@ const AboutUs = () => {
             <div className="relative inline-block px-8 md:px-12">
               {/* Opening quote mark - positioned above first word */}
               <span 
-                className="absolute -top-2 md:-top-4 left-0 text-3xl md:text-4xl text-[#C86B46]/20 leading-none"
+                className="absolute -top-4 md:-top-6 left-0 text-5xl md:text-7xl lg:text-8xl text-[#C86B46]/20 leading-none"
                 style={{ fontFamily: 'Playfair Display, serif', fontStyle: 'italic' }}
               >
                 &ldquo;
@@ -338,7 +338,7 @@ const AboutUs = () => {
               </p>
               {/* Closing quote mark - positioned below last word */}
               <span 
-                className="absolute -bottom-2 md:-bottom-4 right-0 text-3xl md:text-4xl text-[#C86B46]/20 leading-none"
+                className="absolute -bottom-4 md:-bottom-6 right-0 text-5xl md:text-7xl lg:text-8xl text-[#C86B46]/20 leading-none"
                 style={{ fontFamily: 'Playfair Display, serif', fontStyle: 'italic' }}
               >
                 &rdquo;

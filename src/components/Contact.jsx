@@ -12,7 +12,7 @@ const Contact = () => {
       weekdays: 'poniedziałek – piątek: 08:00 – 21:00',
       saturday: 'sobota: 08:00 – 14:00'
     },
-    mapUrl: 'https://maps.app.goo.gl/L49coh5mvugD25PF6'
+    mapUrl: 'https://maps.app.goo.gl/TyTx7VZ69ovhJzUG9'
   };
 
   return (
@@ -123,7 +123,7 @@ const Contact = () => {
           >
             <div className="w-full h-[400px] md:h-[500px] rounded-xl overflow-hidden relative">
               <iframe
-                src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2504.1234567890123!2d17.0123456!3d51.1234567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTHCsDA3JzI0LjQiTiAxN8KwMDAnNDQuNCJF!5e0!3m2!1spl!2spl!4v1234567890123!5m2!1spl!2spl&q=${encodeURIComponent('ul. Ślężna 189/191 LU 2, 53-110 Wrocław')}`}
+                src={`https://www.google.com/maps?q=${encodeURIComponent('ul. Ślężna 189/191 LU 2, 53-110 Wrocław')}&output=embed`}
                 width="100%"
                 height="100%"
                 style={{ 

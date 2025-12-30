@@ -123,7 +123,7 @@ const Contact = () => {
           >
             <div className="w-full h-[400px] md:h-[500px] rounded-xl overflow-hidden relative">
               <iframe
-                src={`https://www.google.com/maps?q=${encodeURIComponent('ul. Ślężna 189/191 LU 2, 53-110 Wrocław')}&output=embed`}
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1253.3446200417604!2d17.016968819461752!3d51.07728640767262!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470fc304a7f5a3a7%3A0x44072a4ab0c5ae5a!2sORAN%C5%BBERIA%20-%20Salon%20Kosmetyczny%20Wroc%C5%82aw%20%7C%20Stylizacja%20Paznokci%20%7C%20Makija%C5%BC%20Permanentny%20%7C%20Laseroterapia!5e0!3m2!1sen!2spl!4v1767085677584!5m2!1sen!2spl"
                 width="100%"
                 height="100%"
                 style={{ 

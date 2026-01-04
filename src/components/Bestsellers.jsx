@@ -58,7 +58,7 @@ const Bestsellers = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.8 }}
-            className="bg-[#C86B46] rounded-2xl p-6 md:p-7 text-white relative overflow-hidden flex flex-col justify-between"
+            className="bg-[#C86B46] rounded-2xl p-5 md:p-6 text-white relative overflow-hidden"
           >
             {/* Peach Icon - Compact */}
             <div className="absolute top-3 right-3 opacity-15">
@@ -72,7 +72,7 @@ const Bestsellers = () => {
               <h3 className="text-lg md:text-xl font-bold mb-3" style={{ fontFamily: 'Playfair Display, serif' }}>
                 Bezpieczeństwo
               </h3>
-              <div className="space-y-2.5 text-sm md:text-base leading-relaxed">
+              <div className="space-y-2 text-sm md:text-base leading-relaxed mb-4">
                 <p className="flex items-start gap-2">
                   <span className="text-white/90 mt-1">•</span>
                   <span>Eliminujemy ryzyko powikłań.</span>
@@ -88,7 +88,7 @@ const Bestsellers = () => {
               </div>
             </div>
             
-            <div className="mt-5 pt-4 border-t border-white/20 relative z-10">
+            <div className="pt-3 mt-3 border-t border-white/20 relative z-10">
               <div className="flex items-center justify-between text-xs opacity-75">
                 <span>@oranzeria_wroclaw</span>
                 <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -202,7 +202,7 @@ const Bestsellers = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.8 }}
-            className="bg-[#C86B46] rounded-2xl p-6 md:p-7 text-white relative overflow-hidden flex flex-col justify-between"
+            className="bg-[#C86B46] rounded-2xl p-5 md:p-6 text-white relative overflow-hidden"
           >
             {/* Peach Icon - Compact */}
             <div className="absolute top-3 right-3 opacity-15">
@@ -216,7 +216,7 @@ const Bestsellers = () => {
               <h3 className="text-lg md:text-xl font-bold mb-3" style={{ fontFamily: 'Playfair Display, serif' }}>
                 Nasza pasja
               </h3>
-              <div className="space-y-2.5 text-sm md:text-base leading-relaxed">
+              <div className="space-y-2 text-sm md:text-base leading-relaxed mb-4">
                 <p className="flex items-start gap-2">
                   <span className="text-white/90 mt-1">•</span>
                   <span>Kochamy swoją pracę.</span>
@@ -228,7 +228,7 @@ const Bestsellers = () => {
               </div>
             </div>
             
-            <div className="mt-5 pt-4 border-t border-white/20 relative z-10">
+            <div className="pt-3 mt-3 border-t border-white/20 relative z-10">
               <div className="flex items-center justify-between text-xs opacity-75">
                 <span>@oranzeria_wroclaw</span>
                 <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

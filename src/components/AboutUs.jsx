@@ -11,7 +11,7 @@ const AboutUs = () => {
       id: 'jz',
       name: 'Justyna Ziółkowska',
       role: 'KOSMETOLOG',
-      photo: '/img/1.jpg', // Placeholder - replace with actual photos
+      photo: '/img/2.jpg',
       shortBio: 'Założycielka ORANŻERII. Łączy nowoczesną kosmetologię z podejściem holistycznym.',
       fullBio: [
         'To Justyna w ORANŻERII zadba o Waszą skórę i zdrowy, promienny wygląd, łącząc nowoczesną kosmetologię, laseroterapię oraz holistyczne podejście w duchu well aging.',
@@ -22,7 +22,7 @@ const AboutUs = () => {
       id: 'as',
       name: 'Agnieszka Sukiennik',
       role: 'LINERGISTKA',
-      photo: '/img/2.jpg', // Placeholder - replace with actual photos
+      photo: '/img/2.jpg',
       shortBio: 'Specjalistka od naturalnego makijażu permanentnego. Półfinalistka Mistrzostw Polski PMU 2025.',
       fullBio: [
         'To właśnie Agnieszka w ORANŻERII dba o Wasze nowe brwi, usta i skórę - tworząc makijaż permanentny, który wygląda naturalnie, harmonijnie i pięknie się goi.',
@@ -33,7 +33,7 @@ const AboutUs = () => {
       id: 'mn',
       name: 'Maja Nowak',
       role: 'SPECJALISTKA MEDYCYNY ESTETYCZNEJ',
-      photo: '/img/469171614_17842771176380714_7787508925189487850_n.jpg', // Placeholder - replace with actual photos
+      photo: '/img/2.jpg',
       shortBio: 'Łączy wiedzę medyczną z estetyką, aby wydobyć Twoje naturalne piękno.',
       fullBio: [
         'Maja w ORANŻERII łączy wiedzę i doświadczenie, by dzięki medycynie estetycznej uwydatnić Twoje naturalne piękno, zachowując jednocześnie delikatność i harmonię rysów twarzy.',

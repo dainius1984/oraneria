@@ -50,55 +50,64 @@ const Bestsellers = () => {
           </h2>
         </motion.div>
 
-        {/* Feature Rows */}
-        <div className="space-y-16 md:space-y-24">
-          {features.map((feature, index) => (
+        {/* Main Grid Layout: Orange Cards + Features */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8 mb-16 md:mb-24">
+          {/* Left Orange Card - Bezpieczeństwo */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8 }}
+            className="bg-[#C86B46] rounded-2xl p-6 md:p-8 text-white relative overflow-hidden flex flex-col justify-between min-h-[400px] md:min-h-[500px]"
+          >
+            {/* Peach Icon - Smaller */}
+            <div className="absolute top-4 right-4 opacity-20">
+              <svg className="w-12 h-12 md:w-16 md:h-16" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C8 2 5 5 5 9c0 4 3 7 7 9 4-2 7-5 7-9 0-4-3-7-7-7zm0 2c3 0 5 2 5 5 0 3-2 5-5 7-3-2-5-4-5-7 0-3 2-5 5-5z"/>
+                <path d="M12 8c1 0 2 1 2 2s-1 2-2 2-2-1-2-2 1-2 2-2z"/>
+              </svg>
+            </div>
+            
+            <div>
+              <h3 className="text-xl md:text-2xl font-bold mb-4" style={{ fontFamily: 'Playfair Display, serif' }}>
+                Bezpieczeństwo
+              </h3>
+              <div className="space-y-3 text-sm md:text-base leading-relaxed">
+                <p>Eliminujemy ryzyko powikłań.</p>
+                <p>Korzystamy z nowoczesnych i sprawdzonych rozwiązań.</p>
+                <p>Szkolimy się u najlepszych specjalistów w Polsce i za granicą.</p>
+              </div>
+            </div>
+            
+            <div className="mt-6 pt-6 border-t border-white/20">
+              <div className="flex items-center justify-between text-xs md:text-sm opacity-80">
+                <span>@oranzeria_wroclaw</span>
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Middle Column - Features */}
+          <div className="lg:col-span-1 space-y-8 md:space-y-12">
+            {features.map((feature, index) => (
             <motion.div
               key={feature.id}
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.8, delay: index * 0.2 }}
-              className={`
-                flex flex-col 
-                ${feature.imagePosition === 'right' ? 'md:flex-row-reverse' : 'md:flex-row'}
-                items-center gap-8 md:gap-12
-              `}
+              className="w-full"
             >
-              {/* Image */}
-              <motion.div
-                initial={{ 
-                  opacity: 0, 
-                  x: feature.imagePosition === 'right' ? 50 : -50 
-                }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.8, delay: index * 0.2 + 0.2 }}
-                className="w-full md:w-1/2 h-full flex items-center"
-              >
-                <div className="relative w-full overflow-hidden rounded-2xl shadow-xl">
-                  <img
-                    src={feature.image}
-                    alt={feature.title}
-                    className="w-full h-full min-h-[300px] md:min-h-[400px] object-cover rounded-2xl"
-                    onError={(e) => {
-                      // Fallback to placeholder if image fails to load
-                      e.target.src = index === 0 
-                        ? 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=800&h=600&fit=crop'
-                        : 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800&h=600&fit=crop';
-                    }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl" />
-                </div>
-              </motion.div>
 
-              {/* Content */}
+              {/* Content - Simplified for middle column */}
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.8, delay: index * 0.2 + 0.3 }}
-                className="w-full md:w-1/2 flex flex-col justify-center min-h-[300px] md:min-h-[400px]"
+                className="w-full flex flex-col justify-center"
               >
                 {/* Tag Badge */}
                 <motion.span
@@ -114,19 +123,19 @@ const Bestsellers = () => {
 
                 {/* Title */}
                 <h3 
-                  className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#2F4F4F] mb-4"
+                  className="text-xl md:text-2xl lg:text-3xl font-bold text-[#2F4F4F] mb-3"
                   style={{ fontFamily: 'Playfair Display, serif' }}
                 >
                   {feature.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-base md:text-lg text-gray-600 mb-6 leading-relaxed">
+                <p className="text-sm md:text-base text-gray-600 mb-4 leading-relaxed">
                   {feature.description}
                 </p>
 
                 {/* Benefits List with Elegant Custom Checkmarks */}
-                <ul className="space-y-3 mb-8">
+                <ul className="space-y-2 mb-6">
                   {feature.benefits.map((benefit, benefitIndex) => (
                     <motion.li
                       key={benefitIndex}
@@ -137,12 +146,12 @@ const Bestsellers = () => {
                         duration: 0.5, 
                         delay: index * 0.2 + 0.5 + benefitIndex * 0.1 
                       }}
-                      className="flex items-center gap-3 text-gray-700"
+                      className="flex items-center gap-2 text-gray-700"
                     >
                       {/* Elegant Custom Checkmark */}
-                      <div className="flex-shrink-0 w-6 h-6 rounded-full bg-[#C86B46]/10 flex items-center justify-center">
+                      <div className="flex-shrink-0 w-5 h-5 rounded-full bg-[#C86B46]/10 flex items-center justify-center">
                         <svg 
-                          className="w-4 h-4 text-[#C86B46]" 
+                          className="w-3 h-3 text-[#C86B46]" 
                           fill="none" 
                           viewBox="0 0 24 24" 
                           stroke="currentColor"
@@ -155,7 +164,7 @@ const Bestsellers = () => {
                           />
                         </svg>
                       </div>
-                      <span className="text-base md:text-lg">{benefit}</span>
+                      <span className="text-sm md:text-base">{benefit}</span>
                     </motion.li>
                   ))}
                 </ul>
@@ -167,7 +176,7 @@ const Bestsellers = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.2 + 0.8 }}
-                  className="btn-outline w-fit mx-auto md:mx-0"
+                  className="btn-outline w-fit text-sm md:text-base"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -176,6 +185,43 @@ const Bestsellers = () => {
               </motion.div>
             </motion.div>
           ))}
+          </div>
+
+          {/* Right Orange Card - Nasza pasja */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8 }}
+            className="bg-[#C86B46] rounded-2xl p-6 md:p-8 text-white relative overflow-hidden flex flex-col justify-between min-h-[400px] md:min-h-[500px]"
+          >
+            {/* Peach Icon - Smaller */}
+            <div className="absolute top-4 right-4 opacity-20">
+              <svg className="w-12 h-12 md:w-16 md:h-16" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C8 2 5 5 5 9c0 4 3 7 7 9 4-2 7-5 7-9 0-4-3-7-7-7zm0 2c3 0 5 2 5 5 0 3-2 5-5 7-3-2-5-4-5-7 0-3 2-5 5-5z"/>
+                <path d="M12 8c1 0 2 1 2 2s-1 2-2 2-2-1-2-2 1-2 2-2z"/>
+              </svg>
+            </div>
+            
+            <div>
+              <h3 className="text-xl md:text-2xl font-bold mb-4" style={{ fontFamily: 'Playfair Display, serif' }}>
+                Nasza pasja
+              </h3>
+              <div className="space-y-3 text-sm md:text-base leading-relaxed">
+                <p>Kochamy swoją pracę.</p>
+                <p>Zadbamy o Ciebie ze świadomym zaangażowaniem.</p>
+              </div>
+            </div>
+            
+            <div className="mt-6 pt-6 border-t border-white/20">
+              <div className="flex items-center justify-between text-xs md:text-sm opacity-80">
+                <span>@oranzeria_wroclaw</span>
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>

@@ -65,7 +65,7 @@ const Bestsellers = () => {
                 transition={{ duration: 0.8, delay: index * 0.2 }}
                 className="w-full"
               >
-                <div className={`flex flex-col ${isFirst ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-8 md:gap-10 lg:gap-12 items-start`}>
+                <div className={`flex flex-col ${isFirst ? 'lg:flex-row' : 'lg:flex-row'} gap-8 md:gap-10 lg:gap-12 items-stretch`}>
                   {/* Side Card - Bezpieczeństwo (left) or Nasza pasja (right) */}
                   {(isFirst || isSecond) && (
                     <motion.div
@@ -73,9 +73,9 @@ const Bestsellers = () => {
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true, amount: 0.3 }}
                       transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
-                      className={`w-full lg:w-72 xl:w-80 flex-shrink-0 ${isFirst ? 'lg:order-1' : 'lg:order-2'} sticky top-8`}
+                      className={`w-full lg:w-72 xl:w-80 flex-shrink-0 ${isFirst ? 'lg:order-1' : 'lg:order-2'}`}
                     >
-                      <div className="bg-[#C86B46] rounded-2xl p-6 md:p-7 lg:p-8 text-white relative overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300">
+                      <div className="bg-[#C86B46] rounded-2xl p-6 md:p-7 lg:p-8 text-white relative overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300 h-full flex flex-col">
                         {/* Enhanced Decorative Pattern */}
                         <div className="absolute inset-0 opacity-10">
                           <div className={`absolute top-0 ${isFirst ? 'right-0' : 'left-0'} w-40 h-40 bg-white/20 rounded-full ${isFirst ? '-mr-20' : '-ml-20'} -mt-20`}></div>
@@ -101,7 +101,7 @@ const Bestsellers = () => {
                           </h3>
                           
                           {isFirst ? (
-                            <div className="space-y-3.5 text-base md:text-lg leading-relaxed">
+                            <div className="space-y-3.5 text-base md:text-lg leading-relaxed flex-grow">
                               <p className="opacity-95 flex items-start gap-2">
                                 <span className="text-white/80 mt-1.5">•</span>
                                 <span>Eliminujemy ryzyko powikłań.</span>
@@ -116,7 +116,7 @@ const Bestsellers = () => {
                               </p>
                             </div>
                           ) : (
-                            <div className="space-y-3.5 text-base md:text-lg leading-relaxed">
+                            <div className="space-y-3.5 text-base md:text-lg leading-relaxed flex-grow">
                               <p className="opacity-95 flex items-start gap-2">
                                 <span className="text-white/80 mt-1.5">•</span>
                                 <span>Kochamy swoją pracę.</span>
@@ -125,6 +125,8 @@ const Bestsellers = () => {
                                 <span className="text-white/80 mt-1.5">•</span>
                                 <span>Zadbamy o Ciebie ze świadomym zaangażowaniem.</span>
                               </p>
+                              {/* Spacer to match height */}
+                              <div className="h-12"></div>
                             </div>
                           )}
                         </div>
@@ -138,7 +140,7 @@ const Bestsellers = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.3 }}
                     transition={{ duration: 0.8, delay: index * 0.2 + 0.3, ease: [0.4, 0, 0.2, 1] }}
-                    className={`flex-1 ${isFirst ? 'lg:order-2' : 'lg:order-1'} bg-white rounded-2xl p-6 md:p-8 lg:p-10 shadow-lg border border-gray-100/50`}
+                    className={`flex-1 ${isFirst ? 'lg:order-2' : 'lg:order-1'} bg-white rounded-2xl p-6 md:p-8 lg:p-10 shadow-lg border border-gray-100/50 h-full flex flex-col`}
                   >
                     {/* Tag Badge - Enhanced */}
                     <motion.span

@@ -50,56 +50,77 @@ const Bestsellers = () => {
           </h2>
         </motion.div>
 
-        {/* Main Grid Layout: Orange Cards + Features */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8 mb-16 md:mb-24">
-          {/* Left Orange Card - Bezpieczeństwo - Compact Design */}
+        {/* Value Cards Banner - Compact Horizontal Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-12 md:mb-16">
+          {/* Bezpieczeństwo Card */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.8 }}
-            className="bg-[#C86B46] rounded-2xl p-5 md:p-6 text-white relative overflow-hidden"
+            transition={{ duration: 0.6 }}
+            className="bg-[#C86B46] rounded-xl p-5 md:p-6 text-white relative overflow-hidden"
           >
-            {/* Peach Icon - Compact */}
-            <div className="absolute top-3 right-3 opacity-15">
-              <svg className="w-10 h-10 md:w-12 md:h-12" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2C8 2 5 5 5 9c0 4 3 7 7 9 4-2 7-5 7-9 0-4-3-7-7-7zm0 2c3 0 5 2 5 5 0 3-2 5-5 7-3-2-5-4-5-7 0-3 2-5 5-5z"/>
-                <path d="M12 8c1 0 2 1 2 2s-1 2-2 2-2-1-2-2 1-2 2-2z"/>
-              </svg>
+            {/* Decorative Pattern */}
+            <div className="absolute inset-0 opacity-10">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-white/20 rounded-full -mr-16 -mt-16"></div>
+              <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full -ml-12 -mb-12"></div>
             </div>
             
-            <div className="relative z-10">
-              <h3 className="text-lg md:text-xl font-bold mb-3" style={{ fontFamily: 'Playfair Display, serif' }}>
-                Bezpieczeństwo
-              </h3>
-              <div className="space-y-2 text-sm md:text-base leading-relaxed mb-4">
-                <p className="flex items-start gap-2">
-                  <span className="text-white/90 mt-1">•</span>
-                  <span>Eliminujemy ryzyko powikłań.</span>
-                </p>
-                <p className="flex items-start gap-2">
-                  <span className="text-white/90 mt-1">•</span>
-                  <span>Korzystamy z nowoczesnych i sprawdzonych rozwiązań.</span>
-                </p>
-                <p className="flex items-start gap-2">
-                  <span className="text-white/90 mt-1">•</span>
-                  <span>Szkolimy się u najlepszych specjalistów w Polsce i za granicą.</span>
-                </p>
-              </div>
-            </div>
-            
-            <div className="pt-3 mt-3 border-t border-white/20 relative z-10">
-              <div className="flex items-center justify-between text-xs opacity-75">
-                <span>@oranzeria_wroclaw</span>
-                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            <div className="relative z-10 flex items-start gap-4">
+              {/* Icon */}
+              <div className="flex-shrink-0 w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
+                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
+              </div>
+              
+              <div className="flex-1">
+                <h3 className="text-lg md:text-xl font-bold mb-2" style={{ fontFamily: 'Playfair Display, serif' }}>
+                  Bezpieczeństwo
+                </h3>
+                <p className="text-sm md:text-base leading-relaxed opacity-95">
+                  Nowoczesne rozwiązania, szkolenia u najlepszych specjalistów, eliminacja ryzyka powikłań.
+                </p>
               </div>
             </div>
           </motion.div>
 
-          {/* Middle Column - Features */}
-          <div className="lg:col-span-1 space-y-8 md:space-y-12">
+          {/* Nasza pasja Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="bg-[#C86B46] rounded-xl p-5 md:p-6 text-white relative overflow-hidden"
+          >
+            {/* Decorative Pattern */}
+            <div className="absolute inset-0 opacity-10">
+              <div className="absolute top-0 left-0 w-32 h-32 bg-white/20 rounded-full -ml-16 -mt-16"></div>
+              <div className="absolute bottom-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-12 -mb-12"></div>
+            </div>
+            
+            <div className="relative z-10 flex items-start gap-4">
+              {/* Icon */}
+              <div className="flex-shrink-0 w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
+                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+              </div>
+              
+              <div className="flex-1">
+                <h3 className="text-lg md:text-xl font-bold mb-2" style={{ fontFamily: 'Playfair Display, serif' }}>
+                  Nasza pasja
+                </h3>
+                <p className="text-sm md:text-base leading-relaxed opacity-95">
+                  Kochamy swoją pracę i dbamy o Ciebie ze świadomym zaangażowaniem.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Features Section - Full Width */}
+        <div className="space-y-12 md:space-y-16">
             {features.map((feature, index) => (
             <motion.div
               key={feature.id}
@@ -107,16 +128,15 @@ const Bestsellers = () => {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.8, delay: index * 0.2 }}
-              className="w-full"
+              className="w-full max-w-3xl mx-auto"
             >
-
-              {/* Content - Simplified for middle column */}
+              {/* Content */}
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.8, delay: index * 0.2 + 0.3 }}
-                className="w-full flex flex-col justify-center"
+                className="w-full"
               >
                 {/* Tag Badge */}
                 <motion.span
@@ -194,49 +214,6 @@ const Bestsellers = () => {
               </motion.div>
             </motion.div>
           ))}
-          </div>
-
-          {/* Right Orange Card - Nasza pasja - Compact Design */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.8 }}
-            className="bg-[#C86B46] rounded-2xl p-5 md:p-6 text-white relative overflow-hidden"
-          >
-            {/* Peach Icon - Compact */}
-            <div className="absolute top-3 right-3 opacity-15">
-              <svg className="w-10 h-10 md:w-12 md:h-12" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2C8 2 5 5 5 9c0 4 3 7 7 9 4-2 7-5 7-9 0-4-3-7-7-7zm0 2c3 0 5 2 5 5 0 3-2 5-5 7-3-2-5-4-5-7 0-3 2-5 5-5z"/>
-                <path d="M12 8c1 0 2 1 2 2s-1 2-2 2-2-1-2-2 1-2 2-2z"/>
-              </svg>
-            </div>
-            
-            <div className="relative z-10">
-              <h3 className="text-lg md:text-xl font-bold mb-3" style={{ fontFamily: 'Playfair Display, serif' }}>
-                Nasza pasja
-              </h3>
-              <div className="space-y-2 text-sm md:text-base leading-relaxed mb-4">
-                <p className="flex items-start gap-2">
-                  <span className="text-white/90 mt-1">•</span>
-                  <span>Kochamy swoją pracę.</span>
-                </p>
-                <p className="flex items-start gap-2">
-                  <span className="text-white/90 mt-1">•</span>
-                  <span>Zadbamy o Ciebie ze świadomym zaangażowaniem.</span>
-                </p>
-              </div>
-            </div>
-            
-            <div className="pt-3 mt-3 border-t border-white/20 relative z-10">
-              <div className="flex items-center justify-between text-xs opacity-75">
-                <span>@oranzeria_wroclaw</span>
-                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </div>
-            </div>
-          </motion.div>
         </div>
       </div>
     </section>

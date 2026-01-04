@@ -73,40 +73,40 @@ const Bestsellers = () => {
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true, amount: 0.3 }}
                       transition={{ duration: 0.6 }}
-                      className={`w-full md:w-64 flex-shrink-0 ${isFirst ? 'md:order-1' : 'md:order-2'}`}
+                      className={`w-full md:w-80 lg:w-96 flex-shrink-0 ${isFirst ? 'md:order-1' : 'md:order-2'}`}
                     >
-                      <div className="bg-[#C86B46] rounded-xl p-5 md:p-6 text-white relative overflow-hidden h-full">
+                      <div className="bg-[#C86B46] rounded-xl p-6 md:p-8 text-white relative overflow-hidden">
                         {/* Decorative Pattern */}
                         <div className="absolute inset-0 opacity-10">
-                          <div className={`absolute top-0 ${isFirst ? 'right-0' : 'left-0'} w-24 h-24 bg-white/20 rounded-full ${isFirst ? '-mr-12' : '-ml-12'} -mt-12`}></div>
+                          <div className={`absolute top-0 ${isFirst ? 'right-0' : 'left-0'} w-32 h-32 bg-white/20 rounded-full ${isFirst ? '-mr-16' : '-ml-16'} -mt-16`}></div>
                         </div>
                         
                         <div className="relative z-10">
                           {/* Icon */}
-                          <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mb-4">
+                          <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mb-5">
                             {isFirst ? (
-                              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                               </svg>
                             ) : (
-                              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                               </svg>
                             )}
                           </div>
                           
-                          <h3 className="text-lg font-bold mb-3" style={{ fontFamily: 'Playfair Display, serif' }}>
+                          <h3 className="text-xl md:text-2xl font-bold mb-4" style={{ fontFamily: 'Playfair Display, serif' }}>
                             {isFirst ? 'Bezpieczeństwo' : 'Nasza pasja'}
                           </h3>
                           
                           {isFirst ? (
-                            <div className="space-y-2 text-sm leading-relaxed">
+                            <div className="space-y-3 text-sm md:text-base leading-relaxed">
                               <p className="opacity-95">Eliminujemy ryzyko powikłań.</p>
                               <p className="opacity-95">Nowoczesne i sprawdzone rozwiązania.</p>
-                              <p className="opacity-95">Szkolenia u najlepszych specjalistów.</p>
+                              <p className="opacity-95">Szkolenia u najlepszych specjalistów w Polsce i za granicą.</p>
                             </div>
                           ) : (
-                            <div className="space-y-2 text-sm leading-relaxed">
+                            <div className="space-y-3 text-sm md:text-base leading-relaxed">
                               <p className="opacity-95">Kochamy swoją pracę.</p>
                               <p className="opacity-95">Zadbamy o Ciebie ze świadomym zaangażowaniem.</p>
                             </div>
@@ -122,9 +122,9 @@ const Bestsellers = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.3 }}
                     transition={{ duration: 0.8, delay: index * 0.2 + 0.3 }}
-                    className={`flex-1 ${isFirst ? 'md:order-2' : 'md:order-1'}`}
+                    className={`flex-1 ${isFirst ? 'md:order-2' : 'md:order-1'} flex flex-col`}
                   >
-                    {/* Tag Badge */}
+                    {/* Tag Badge - Aligned with container top */}
                     <motion.span
                       initial={{ opacity: 0, scale: 0.8 }}
                       whileInView={{ opacity: 1, scale: 1 }}
